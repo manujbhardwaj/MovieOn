@@ -20,22 +20,12 @@ public class UserEntity {
     private String type;
     @Column(name = "username")
     private String username;
-    @Column(name = "password")
-    private String password;
+    @Column(name = "passwrd")
+    private String passwrd;
     @Column(name = "email")
     private String email;
-    @Column(name = "statusFlag")
-    private String statusFlag;
-
-    public UserEntity(String firstName, String lastName, String type, String username, String password, String email, String statusFlag) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.type = type;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.statusFlag = statusFlag;
-    }
+    @Column(name = "approved")
+    private boolean approved;
 
     public UserEntity() {
     }
@@ -80,12 +70,12 @@ public class UserEntity {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswrd() {
+        return passwrd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswrd(String passwrd) {
+        this.passwrd = passwrd;
     }
 
     public String getEmail() {
@@ -96,11 +86,21 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getStatusFlag() {
-        return statusFlag;
+    public boolean isApproved() {
+        return approved;
     }
 
-    public void setStatusFlag(String statusFlag) {
-        this.statusFlag = statusFlag;
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public UserEntity(String firstName, String lastName, String type, String username, String passwrd, String email, boolean approved) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.type = type;
+        this.username = username;
+        this.passwrd = passwrd;
+        this.email = email;
+        this.approved = approved;
     }
 }

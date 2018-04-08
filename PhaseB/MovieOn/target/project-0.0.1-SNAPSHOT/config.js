@@ -1,14 +1,14 @@
 (function () {
     angular
         .module("MovieOn")
-        .config(configuration)
+        .config(configuration);
     function configuration($routeProvider) {
         $routeProvider
-            .when("login", {
-                template: "view/login.view.client.js",
+            .when("/login", {
+                templateUrl: "view/login.view.client.html",
                 controller: "loginController",
-                controllerAs: model
+                controllerAs: "model"
             })
-            .otherwise({redirectTo:"login"})
+            .otherwise({redirectTo:"/login"})
     }
 })();
