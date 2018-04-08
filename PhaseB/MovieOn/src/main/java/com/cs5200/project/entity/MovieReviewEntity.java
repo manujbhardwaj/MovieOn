@@ -18,6 +18,10 @@ public class MovieReviewEntity {
     @Column(name = "rating")
     private String rating;
 
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "movie_movieReview_association"))
+    private MovieEntity movie;
+
     public MovieReviewEntity(String review, String rating) {
         this.review = review;
         this.rating = rating;
