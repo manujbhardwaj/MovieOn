@@ -1,0 +1,10 @@
+com\cs5200\project\controller\UserController.class
+com\cs5200\project\entity\UserEntity.class
+com\cs5200\project\ProjectApplication.class
+com\cs5200\project\service\UserService.class
+com\cs5200\project\controller\MovieController.class
+com\cs5200\project\repository\MovieRepository.class
+com\cs5200\project\ServletInitializer.class
+com\cs5200\project\service\MovieService.class
+com\cs5200\project\entity\MovieEntity.class
+com\cs5200\project\repository\UserRepository.class

@@ -1,0 +1,114 @@
+.navbar-default {
+    background-color: black;
+}
+body {
+    padding-top: 60px;
+    padding-bottom: 70px;
+}
+.panel-default{
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+.active-page{
+    background-color: dimgrey;
+}
+.glyphicon-option-vertical{
+    margin-top: 16px;
+    margin-right: 25px;
+}
+.btn{
+    margin-top: 10px;
+}
+a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none;
+    cursor: pointer;
+}
+.glyphicon{
+    color: white;
+}
+.glyphicon:hover{
+    color: grey;
+}
+.navbar-default .navbar-brand{
+    color: white;
+}
+.navbar-default .navbar-brand:hover{
+    color: grey;
+}
+.navbar-default .navbar-link{
+    color: white;
+}
+.navbar-default .navbar-link:hover{
+    color: grey;
+}
+
+div.collapse .nav-link a{
+    color: white;
+}
+div.collapse .nav-link a:hover{
+    color: black;
+}
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: black; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: grey;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+#main {
+    transition: margin-left .5s;
+}
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.user-grey{
+    color: darkslategrey; !important;
+}
+.button-down{
+    padding-bottom: 10px;
+}
+p.copyright {
+    position: absolute;
+    width: 100%;
+    color: #fff;
+    line-height: 30px;
+    font-size: 0.8em;
+    text-align: center;
+    bottom:0;
+}
+p.condition{
+    position: absolute;
+    font-size: 0.8em;
+}
+.form-center{
+    margin: auto;
+    width: 60%;
+    padding: 70px 0;
+}
