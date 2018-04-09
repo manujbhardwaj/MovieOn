@@ -23,22 +23,17 @@ public class UserController {
 
         if(u != null && BCrypt.checkpw(user.getPasswrd(), u.getPasswrd())){
 
-            if(u.getType().equals("buyer") && !u.isApproved()){
-
+            if(u.getType().equals("buyer") && !u.isApproved())
                 throw new Exception("Admin approval is pending.");
-
-            }
 
             session.setAttribute("user_session", u);
             session.setMaxInactiveInterval(600);
             return u;
 
         }
-        else{
-
+        else
             throw new Exception("Invalid Username and passwrd");
 
-        }
     }
 
     @GetMapping("loggedIn")
@@ -59,27 +54,19 @@ public class UserController {
 
     @PostMapping("register")
     public UserEntity registerUser(@RequestBody UserEntity user, HttpSession session) throws Exception {
-        System.out.println(user);
 
-        if(userService.findUserByUsername(user.getUsername()) != null){
-
+        if(userService.findUserByUsername(user.getUsername()) != null)
             throw new Exception("Username already registered");
-
-        }
 
         user.setPasswrd(BCrypt.hashpw(user.getPasswrd(), BCrypt.gensalt()));
         UserEntity u = userService.registerUser(user);
 
-        if(user.getType().equals("Professor")){
-
+        if(user.getType().equals("Seller"))
             throw new Exception("User registered successfully. Admin approval is pending.");
 
-        }
 
         session.setAttribute("user_session", u);
         session.setMaxInactiveInterval(600);
         return u;
-
     }
-
 }

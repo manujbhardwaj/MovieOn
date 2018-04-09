@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("profileController", profileController);
-    function profileController(currentUser) {
+    function profileController(currentUser, userService, $location) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
@@ -16,7 +16,7 @@
         vm.logout = logout;
 
         function logout() {
-            UserService.logout()
+            userService.logout()
                 .then(function (value) {
                     $location.url("/login");
                 }, function (reason) {
