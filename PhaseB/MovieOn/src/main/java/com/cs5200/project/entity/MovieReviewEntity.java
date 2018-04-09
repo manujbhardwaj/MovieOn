@@ -22,12 +22,13 @@ public class MovieReviewEntity {
     @JoinColumn(foreignKey = @ForeignKey(name = "movie_movieReview_association"))
     private MovieEntity movie;
 
-    public MovieReviewEntity(String review, String rating) {
-        this.review = review;
-        this.rating = rating;
+    public MovieReviewEntity() {
     }
 
-    public MovieReviewEntity() {
+    public MovieReviewEntity(String review, String rating, MovieEntity movie) {
+        this.review = review;
+        this.rating = rating;
+        this.movie = movie;
     }
 
     public int getId() {
@@ -52,5 +53,13 @@ public class MovieReviewEntity {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public MovieEntity getMovie() {
+        return movie;
+    }
+
+    public void setMovie(MovieEntity movie) {
+        this.movie = movie;
     }
 }

@@ -16,11 +16,11 @@ public class MovieWishListEntity {
     @Column(name = "wishlistDateTime")
     private String wishlistDateTime;
 
-    public MovieWishListEntity(String wishlistDateTime) {
-        this.wishlistDateTime = wishlistDateTime;
+    public MovieWishListEntity() {
     }
 
-    public MovieWishListEntity() {
+    public MovieWishListEntity(String wishlistDateTime) {
+        this.wishlistDateTime = wishlistDateTime;
     }
 
     public int getId() {

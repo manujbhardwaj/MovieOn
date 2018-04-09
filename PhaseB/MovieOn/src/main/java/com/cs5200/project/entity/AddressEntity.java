@@ -23,22 +23,12 @@ public class AddressEntity {
     private String state;
     @Column(name = "zip")
     private int zip;
-    @Column(name = "primary")
-    private boolean primary;
+    @Column(name = "primaryAddress")
+    private boolean primaryAddress;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "address_user_association"))
     private UserEntity user;
-
-    public AddressEntity(String street1, String street2, String city, String state, int zip, boolean primary, UserEntity user) {
-        this.street1 = street1;
-        this.street2 = street2;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.primary = primary;
-        this.user = user;
-    }
 
     public AddressEntity() {
     }
@@ -91,12 +81,12 @@ public class AddressEntity {
         this.zip = zip;
     }
 
-    public boolean isPrimary() {
-        return primary;
+    public boolean isPrimaryAddress() {
+        return primaryAddress;
     }
 
-    public void setPrimary(boolean primary) {
-        this.primary = primary;
+    public void setPrimaryAddress(boolean primaryAddress) {
+        this.primaryAddress = primaryAddress;
     }
 
     public UserEntity getUser() {
@@ -104,6 +94,16 @@ public class AddressEntity {
     }
 
     public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public AddressEntity(String street1, String street2, String city, String state, int zip, boolean primaryAddress, UserEntity user) {
+        this.street1 = street1;
+        this.street2 = street2;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.primaryAddress = primaryAddress;
         this.user = user;
     }
 }
