@@ -1,4 +1,9 @@
 package com.cs5200.project.repository;
 
-public class MovieRepository {
+import com.cs5200.project.entity.MovieEntity;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface MovieRepository extends CrudRepository<MovieEntity, Integer> {
 }
