@@ -30,6 +30,20 @@ public class UserEntity {
     public UserEntity() {
     }
 
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", type='" + type + '\'' +
+                ", username='" + username + '\'' +
+                ", passwrd='" + passwrd + '\'' +
+                ", email='" + email + '\'' +
+                ", approved=" + approved +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

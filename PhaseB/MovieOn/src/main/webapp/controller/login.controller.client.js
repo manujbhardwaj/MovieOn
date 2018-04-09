@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("loginController", loginController);
-    function loginController(userService) {
+    function loginController(userService, $location) {
         var vm = this;
 
         /*event handlers*/
@@ -43,6 +43,7 @@
             userService
                 .login(user)
                 .then(function (response) {
+                    console.log(response);
                     $location.url("/profile");
                 }, function (err) {
                     vm.error = err.data.message;

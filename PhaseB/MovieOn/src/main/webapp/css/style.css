@@ -14,6 +14,13 @@ body {
 .active-page{
     background-color: dimgrey;
 }
+.form-center2{
+    margin: auto;
+    width: 70%;
+}
+.registerLabel{
+    width: 8em;
+}
 .glyphicon-option-vertical{
     margin-top: 16px;
     margin-right: 25px;

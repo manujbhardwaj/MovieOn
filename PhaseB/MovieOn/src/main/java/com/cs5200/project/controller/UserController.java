@@ -3,12 +3,10 @@ package com.cs5200.project.controller;
 import com.cs5200.project.entity.UserEntity;
 import com.cs5200.project.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
-import org.omg.CORBA.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,6 +39,47 @@ public class UserController {
             throw new Exception("Invalid Username and passwrd");
 
         }
+    }
+
+    @GetMapping("loggedIn")
+    public UserEntity loggedIn(HttpSession session){
+
+        UserEntity u = (UserEntity) session.getAttribute("user_session");
+        return u == null ? new UserEntity() : u;
+
+    }
+
+    @PostMapping("logout")
+    public ResponseEntity logout(HttpSession session){
+
+        session.invalidate();
+        return new ResponseEntity<>("{}", HttpStatus.OK);
+
+    }
+
+    @PostMapping("register")
+    public UserEntity registerUser(@RequestBody UserEntity user, HttpSession session) throws Exception {
+        System.out.println(user);
+
+        if(userService.findUserByUsername(user.getUsername()) != null){
+
+            throw new Exception("Username already registered");
+
+        }
+
+        user.setPasswrd(BCrypt.hashpw(user.getPasswrd(), BCrypt.gensalt()));
+        UserEntity u = userService.registerUser(user);
+
+        if(user.getType().equals("Professor")){
+
+            throw new Exception("User registered successfully. Admin approval is pending.");
+
+        }
+
+        session.setAttribute("user_session", u);
+        session.setMaxInactiveInterval(600);
+        return u;
+
     }
 
 }
