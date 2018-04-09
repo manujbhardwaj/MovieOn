@@ -1,6 +1,9 @@
 package com.cs5200.project.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * MovieLike entity.
@@ -13,14 +16,27 @@ public class MovieLikeEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "likedDateTime")
-    private String likedDateTime;
-
-    public MovieLikeEntity(String likedDateTime) {
-        this.likedDateTime = likedDateTime;
-    }
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "buyer_movieLike_association"))
+    private UserEntity buyer;
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "movie_movieLike_association"))
+    private MovieEntity movie;
+    @Column(name = "likeDateTime", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Date likeDateTime;
 
     public MovieLikeEntity() {
+    }
+
+    @Override
+    public String toString() {
+        return "MovieLikeEntity{" +
+                "id=" + id +
+                ", buyer=" + buyer +
+                ", movie=" + movie +
+                ", likeDateTime=" + likeDateTime +
+                '}';
     }
 
     public int getId() {
@@ -31,12 +47,33 @@ public class MovieLikeEntity {
         this.id = id;
     }
 
-    public String getLikedDateTime() {
-        return likedDateTime;
+    public UserEntity getBuyer() {
+        return buyer;
     }
 
-    public void setLikedDateTime(String likedDateTime) {
-        this.likedDateTime = likedDateTime;
+    public void setBuyer(UserEntity buyer) {
+        this.buyer = buyer;
+    }
+
+    public MovieEntity getMovie() {
+        return movie;
+    }
+
+    public void setMovie(MovieEntity movie) {
+        this.movie = movie;
+    }
+
+    public Date getLikeDateTime() {
+        return likeDateTime;
+    }
+
+    public void setLikeDateTime(Date likeDateTime) {
+        this.likeDateTime = likeDateTime;
+    }
+
+    public MovieLikeEntity(UserEntity buyer, MovieEntity movie) {
+        this.buyer = buyer;
+        this.movie = movie;
     }
 }
 

@@ -9,26 +9,27 @@ import javax.persistence.*;
 @Table(name = "Movie")
 public class MovieEntity {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "omdbId")
-    private String omdbId;
-    @Column(name = "posterUrl")
-    private String posterUrl;
-    @Column(name = "title")
-    private String title;
-    @Column(name = "summary")
-    private String summary;
-
-    public MovieEntity(String omdbId, String posterUrl, String title, String summary) {
-        this.omdbId = omdbId;
-        this.posterUrl = posterUrl;
-        this.title = title;
-        this.summary = summary;
-    }
+    @Column(name = "backdropPath")
+    private String backdropPath;
+    @Column(name = "originalTitle")
+    private String originalTitle;
+    @Lob
+    @Column(name = "overview")
+    private String overview;
 
     public MovieEntity() {
+    }
+
+    @Override
+    public String toString() {
+        return "MovieEntity{" +
+                "id='" + id + '\'' +
+                ", backdropPath='" + backdropPath + '\'' +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", overview='" + overview + '\'' +
+                '}';
     }
 
     public int getId() {
@@ -39,35 +40,34 @@ public class MovieEntity {
         this.id = id;
     }
 
-    public String getOmdbId() {
-        return omdbId;
+    public String getBackdropPath() {
+        return backdropPath;
     }
 
-    public void setOmdbId(String omdbId) {
-        this.omdbId = omdbId;
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
     }
 
-    public String getPosterUrl() {
-        return posterUrl;
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
-    public void setPosterUrl(String posterUrl) {
-        this.posterUrl = posterUrl;
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
     }
 
-    public String getTitle() {
-        return title;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public MovieEntity(int id, String backdropPath, String originalTitle, String overview) {
+        this.id = id;
+        this.backdropPath = backdropPath;
+        this.originalTitle = originalTitle;
+        this.overview = overview;
     }
 }

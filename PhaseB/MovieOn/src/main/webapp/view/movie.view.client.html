@@ -1,0 +1,278 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-if="model.userId">
+            <a class="name" href="#!/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-text pull-right" ng-if="!model.userId">
+            <a class="name" href="#!/login">Login</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/home">Planet M</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#!/profile">Profile</a>
+    </div>
+    <div ng-show="model.user.type == 'Buyer'">
+        <a href="#!/like">
+            Likes
+            <span><i class="fa fa-thumbs-up"></i></span>
+        </a>
+        <a href="#!/bought">
+            Bought
+            <span><i class="fa fa-file-video-o"></i></span>
+        </a>
+        <a href="#!/wishlist">
+            Wishlist
+            <span><i class="fa fa-star"></i></span>
+        </a>
+        <a href="#!/fav">
+            Favorite Sellers
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Seller'">
+        <a href="#!/order">
+            Orders
+            <span><i class="fa fa-usd"></i></span>
+        </a>
+        <a href="#!/inventory">
+            Inventory
+            <span><i class="fa fa-table"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Admin'">
+        <a href="#!/users">
+            All Users
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+        <a href="#!/msgs">
+            Messages
+            <span><i class="fa fa-envelope"></i></span>
+        </a>
+        <a href="#!/orders">
+            All Orders
+            <span><i class="fa fa-shopping-basket"></i></span>
+        </a>
+    </div>
+    <div ng-show="!model.userId">
+        <a href="#!/login">Login</a>
+    </div>
+    <div ng-show="model.userId">
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid" id="main">
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <div class="panel panel-default">
+        <h2><strong>{{model.movie.title}}</strong></h2>
+        <div class="hidden-xs">
+            <span class="fa fa fa-video-camera fa-2x pull-right popularity"></span>
+            <h5 class="pull-right popu"><strong>Rating: {{model.movie.vote_average}}</strong></h5>
+        </div>
+    </div>
+
+    <div class="container-fluid row">
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <div class="row panel panel-default">
+                <div class="col-md-5 col-sm-5 col-xs-12 panel panel-default">
+                    <img class="img-responsive" ng-src={{model.movie.poster_path}}>​
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                    <h4 class="text-justify"><strong>{{model.movie.overview}}</strong></h4>
+                    <h5 class="shift-down"><strong>Run Time
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        : {{model.movie.runtime}} mins</strong></h5>
+                    <h5><strong>Release Date: {{model.movie.release_date}}</strong></h5>
+                    <span class="label label-default" ng-repeat="genre in model.movie.genres">#{{genre.name}}</span>
+
+                    <div class="row container-fluid" ng-if="!model.userId">
+                        <a class="imdb">
+                            <i class="fa fa-thumbs-o-up font-gap fa-2x" data-toggle="tooltip" title="Login to Like."></i>
+                            {{model.likes}} likes
+                        </a>
+                        <a class="imdb">
+                            <i class="fa fa-star-o font-gap fa-2x" data-toggle="tooltip" title="Login to add to wishlist."></i>
+                        </a>
+                        <div>
+                            <a class="imdb" href="{{model.movie.imdb_id}}" target="_blank">
+                                <i class="fa fa-imdb fa-3x"></i>
+                            </a>
+                            <button type="button" data-toggle="tooltip" title="Login to buy." class="btn btn-warning shift-further-up">Buy Movie</button>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="model.user.type === 'Seller'">
+                        <div class="col-md-4 col-sm-4 col-xs-4 shift-down" ng-if="model.movieCount || model.movieCount == 0">
+                            <input ng-model="model.count" type="number" class="form-control fixwidth" placeholder="#Copies">
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4 shift-down" ng-if="!model.movieCount && model.movieCount != 0">
+                            <input ng-model="model.num" type="number" class="form-control fixwidth" placeholder="#Copies">
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4" ng-if="model.movieCount || model.movieCount == 0">
+                            <button ng-click="model.updateMovie(model.count)"
+                                    type="button"
+                                    class="btn btn-warning shift-down"
+                                    data-toggle="modal"
+                                    data-target="#myModal"
+                                    data-backdrop="static"
+                                    data-keyboard="false">Update #Copies</button>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4" ng-if="!model.movieCount && model.movieCount != 0">
+                            <button ng-click="model.sellMovie(model.num)"
+                                    type="button"
+                                    class="btn btn-warning shift-down"
+                                    data-toggle="modal"
+                                    data-target="#myModal"
+                                    data-backdrop="static"
+                                    data-keyboard="false">Sell Movie</button>
+                        </div>
+                    </div>
+                    <div class="row container-fluid" ng-if="model.user.type === 'Buyer'">
+                        <a ng-if="!model.liked" class="imdb">
+                            <i class="fa fa-thumbs-o-up font-gap fa-2x" ng-click="model.likeMovie(model.movie)"></i>
+                            {{model.likes}} likes
+                        </a>
+                        <a ng-if="model.liked" class="imdb">
+                            <i class="fa fa-thumbs-o-up font-gap fa-2x blue" ng-click="model.unlikeMovie()"></i>
+                            {{model.likes}} likes
+                        </a>
+                        <a ng-if="!model.wishlist" class="imdb">
+                            <i class="fa fa-star-o font-gap fa-2x" ng-click="model.wishlistMovie()"></i>
+                        </a>
+                        <a ng-if="model.wishlist" class="imdb">
+                            <i class="fa fa-star-o font-gap fa-2x golden" ng-click="model.unWishlistMovie()"></i>
+                        </a>
+                        <div>
+                            <a class="imdb" href="{{model.movie.imdb_id}}">
+                                <i class="fa fa-imdb fa-3x"></i>
+                            </a>
+                            <button type="button" href="#!/movie/model.movieId/buy" class="btn btn-warning shift-further-up">Buy Movie</button>
+                        </div>
+                    </div>
+                    <h5 class="shift-down"><strong>Directed By: {{model.movieDirector}}</strong></h5>
+                    <h5 class="shift-down"><strong>Stars: </strong></h5>
+                    <h5 ng-repeat="actor in model.cast"><strong>{{actor.name}}</strong></h5>
+                </div>
+            </div>
+            <div class="row panel panel-default">
+                <div class="col-sm-6">
+                    <a ng-click="model.gotoMovieImages(model.movie.id)" class="thumbnail">
+                        <div class = "caption">
+                            <h4 class="text-center hideOverflow">Movie Stills and Posters</h4>
+                        </div>
+                        <img class="img-responsive" ng-src="{{model.movie.backdrop_path}}">
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a ng-click="model.gotoMovieVideos(model.movie.id)" class="thumbnail">
+                        <div class = "caption">
+                            <h4 class="text-center hideOverflow">Movie Trailers</h4>
+                        </div>
+                        <div class="flex-video youtube-widget">
+                            <iframe ng-src="{{model.doYouTrustUrl(model.movieVideo.key)}}" frameborder="0"></iframe>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <h2 class="row panel panel-default"><strong>Reviews</strong></h2>
+            <div ng-show="model.message" class="alert alert-danger" role="alert">
+                {{model.message}}
+            </div>
+            <li ng-repeat="review in model.movieReviews" class="list-group-item row">
+                <a class="text">
+                    <div class="col-sm-3">
+                        <h5 class="text-center"><strong>{{review.author}}</strong></h5>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-justify">{{review.content}}</p>
+                    </div>
+                </a>
+            </li>
+            <h2 class="row panel panel-default"><strong>Cast</strong></h2>
+            <div class="media panel panel-primary" ng-repeat="actor in model.fullCast">
+                <div class="media-left media-middle">
+
+                    <img class="media-object img-max2" ng-src="{{actor.profile_path}}">
+
+                </div>
+                <div class="media-body">
+                    <div class="text-center">
+                        <h4><strong>{{actor.name}}</strong></h4>
+                        <h5>As</h5>
+                        <h5><strong>{{actor.character}}</strong></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12 panel panel-default">
+            <h4 class="text-center"><strong>Similar Movies</strong></h4>
+            <div ng-repeat="movie in model.similarMovies">
+                <a href="#!/movie/movie.id" class="thumbnail">
+                    <img class="img-responsive" ng-src="{{movie.backdrop_path}}">
+                    <div class = "caption">
+                        <h4 class="text-center hideOverflow">{{movie.title}}</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Hello {{model.user.firstName}}</h4>
+            </div>
+            <div class="modal-body" ng-if="!model.movieCount && model.movieCount != 0">
+                <p>Congratulations!! You have successfully added this movie to your inventory.</p>
+            </div>
+            <div class="modal-body" ng-if="model.movieCount || model.movieCount == 0">
+                <p>Successfully updated the movie inventory.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="model.gotoSold()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© MANUJ BHARDWAJ 2017</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.type != 'Admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-flag"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#!/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-show="!model.userId"><a href="#!/login">Login</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-show="model.userId"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

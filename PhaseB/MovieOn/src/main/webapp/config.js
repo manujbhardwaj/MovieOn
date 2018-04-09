@@ -28,6 +28,18 @@
                 controllerAs: "model",
                 resolve: { currentUser: loggedIn}
             })
+            .when("/movie/:mid", {
+                templateUrl: "view/movie.view.client.html",
+                controller: "movieController",
+                controllerAs: "model",
+                resolve: { currentUser: loggedIn}
+            })
+            .when("/search/:sid", {
+                templateUrl: "view/search.view.client.html",
+                controller: "searchController",
+                controllerAs: "model",
+                resolve: { currentUser: loggedIn}
+            })
             .otherwise({redirectTo:"/login"});
 
         function loggedIn($q, userService, $location) {

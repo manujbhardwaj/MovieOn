@@ -18,4 +18,8 @@ public class UserService {
     public UserEntity registerUser(UserEntity user) {
         return userRepository.save(user);
     }
+
+    public UserEntity getUserById(int userId) {
+        return userRepository.findById(userId);
+    }
 }

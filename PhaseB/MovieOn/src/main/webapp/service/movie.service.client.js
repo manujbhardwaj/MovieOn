@@ -4,26 +4,38 @@
         .factory("movieService", movieService);
     function movieService($http) {
         var api = {
-            "getPopularMovies": getPopularMovies,
-            "getUpcomingMovies": getUpcomingMovies
+            "likeMovie" : likeMovie,
+            "unlikeMovie" : unlikeMovie,
+            "hasUserLikedMovie" : hasUserLikedMovie,
+            "hasUserWishlistMovie" : hasUserWishlistMovie,
+            "wishlistMovie" : wishlistMovie,
+            "unwishlistMovie" : unwishlistMovie
 
         };
         return api;
 
-        function getPopularMovies() {
-            var key = "68f5b13bd22adaac30e18222782d6b8c";
-            var urlBase = "https://api.themoviedb.org/3/movie/popular?api_key=API_KEY&language=en-US&page=1";
-
-            var url = urlBase.replace("API_KEY", key);
-            return $http.get(url);
+        function hasUserLikedMovie(userId, movieId) {
+            return $http.get("api/movie/" + movieId + "/user/" + userId + "/liked");
         }
 
-        function getUpcomingMovies() {
-            var key = "68f5b13bd22adaac30e18222782d6b8c";
-            var urlBase = "https://api.themoviedb.org/3/movie/upcoming?api_key=API_KEY&language=en-US&page=1";
+        function hasUserWishlistMovie(userId, movieId) {
+            return $http.get("api/movie/" + movieId + "/user/" + userId + "/wishlist");
+        }
 
-            var url = urlBase.replace("API_KEY", key);
-            return $http.get(url);
+        function likeMovie(userId, movie) {
+            return $http.post("api/movie/user/" + userId + "/like", movie);
+        }
+
+        function unlikeMovie(userId, movieId) {
+            return $http.put("api/movie/" + movieId + "/user/" + userId + "/unlike");
+        }
+
+        function wishlistMovie(userId, movie) {
+            return $http.post("api/movie/user/" + userId + "/wishlist", movie);
+        }
+
+        function unwishlistMovie(userId, movieId) {
+            return $http.put("api/movie/" + movieId + "/user/" + userId + "/unwishlist");
         }
     }
 })();

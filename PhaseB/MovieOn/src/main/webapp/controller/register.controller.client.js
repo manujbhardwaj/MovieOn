@@ -42,19 +42,10 @@
                 window.scrollTo(0, 0);
                 return;
             }
-            if(user.email == null) {
-                vm.error = "Email not correct";
-                window.scrollTo(0, 0);
-                return;
-            }
             if(user.passwrd != user.verifyPasswrd) {
                 vm.error = "Password Mismatch";
                 window.scrollTo(0, 0);
                 return;
-            }
-            if(!user.username || !user.passwrd || !user.verifyPasswrd) {
-                vm.error = "Please enter all the required(*) fields";
-                window.scrollTo(0, 0);
             }
             createUser(user);
         }

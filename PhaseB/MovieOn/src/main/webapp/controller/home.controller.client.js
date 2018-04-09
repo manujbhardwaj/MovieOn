@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("homeController", homeController);
-    function homeController(currentUser, movieService, userService) {
+    function homeController(currentUser, apiService, userService, $location) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
@@ -32,7 +32,7 @@
                 pause: false
             });
 
-            movieService
+            apiService
                 .getPopularMovies()
                 .then(function(response) {
                     var movies = response.data.results;
@@ -42,7 +42,7 @@
                     vm.movies = movies;
                 });
 
-            movieService
+            apiService
                 .getUpcomingMovies()
                 .then(function(response) {
                     var movies = response.data.results;
