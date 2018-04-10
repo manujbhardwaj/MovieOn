@@ -15,12 +15,20 @@ public class PhoneEntity {
     private int id;
     @Column(name = "phoneNo")
     private String phoneNo;
+    @Column(name = "type")
+    private String type;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "phone_user_association"))
     private UserEntity user;
 
     public PhoneEntity() {
+    }
+
+    public PhoneEntity(String phoneNo, String type, UserEntity user) {
+        this.phoneNo = phoneNo;
+        this.type = type;
+        this.user = user;
     }
 
     public int getId() {
@@ -31,12 +39,20 @@ public class PhoneEntity {
         this.id = id;
     }
 
-    public String getPhone() {
+    public String getPhoneNo() {
         return phoneNo;
     }
 
-    public void setPhone(String phone) {
-        this.phoneNo = phone;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public UserEntity getUser() {
@@ -44,11 +60,6 @@ public class PhoneEntity {
     }
 
     public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    public PhoneEntity(String phone, UserEntity user) {
-        this.phoneNo = phone;
         this.user = user;
     }
 }

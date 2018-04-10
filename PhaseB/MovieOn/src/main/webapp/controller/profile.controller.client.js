@@ -60,7 +60,7 @@
 
                 $scope.addPhone = function(phone) {
                     phoneService
-                        .addAddress(userId, phone)
+                        .addPhone(userId, phone)
                         .then(function (phone) {
                             if (phone)
                                 vm.message = "Phone successfully added";

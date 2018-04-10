@@ -170,7 +170,7 @@
                     </md-dialog-content>
                 </md-dialog>
             </script>
-            <a class="btn btn-success btn-block" ng-click="model.showPhoneDialog($event)">Add Address</a>
+            <a class="btn btn-success btn-block" ng-click="model.showPhoneDialog($event)">Add Phone</a>
             <script type="text/ng-template" id="phoneDialogContent.tmpl.html">
                 <md-dialog class="fullscreen-dialog" aria-label="Full Screen Dialog Test">
                     <md-toolbar>
@@ -191,7 +191,7 @@
                         <div layout="layout" layout-sm="column"></div>
                         <md-input-container class="md-block" flex="flex">
                             <label>Type</label>
-                            <input flex="flex" ng-model="phone.Type"/>
+                            <input flex="flex" ng-model="phone.type"/>
                         </md-input-container>
                         <md-input-container class="md-block" flex="flex">
                             <md-button class="md-primary md-raised" ng-click="addPhone(phone)">Add Phone</md-button>
