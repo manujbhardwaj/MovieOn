@@ -19,6 +19,12 @@ public class InventoryEntity {
     private int id;
     @Column(name = "copies")
     private int copies;
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "seller_inventory_association"))
+    private UserEntity seller;
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "movie_inventory_association"))
+    private MovieEntity movie;
     @Column(name = "createdDateTime", nullable = false, updatable = false)
     @CreationTimestamp
     private Date createdDateTime;
@@ -29,15 +35,19 @@ public class InventoryEntity {
     public InventoryEntity() {
     }
 
-    public InventoryEntity(int copies) {
+    public InventoryEntity(int copies, UserEntity seller, MovieEntity movie) {
         this.copies = copies;
+        this.seller = seller;
+        this.movie = movie;
     }
 
     @Override
     public String toString() {
         return "InventoryEntity{" +
                 "id=" + id +
-                ", copies='" + copies + '\'' +
+                ", copies=" + copies +
+                ", seller=" + seller +
+                ", movie=" + movie +
                 ", createdDateTime=" + createdDateTime +
                 ", updatedDateTime=" + updatedDateTime +
                 '}';
@@ -73,5 +83,21 @@ public class InventoryEntity {
 
     public void setUpdatedDateTime(Date updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
+    }
+
+    public UserEntity getSeller() {
+        return seller;
+    }
+
+    public void setSeller(UserEntity buyer) {
+        this.seller = buyer;
+    }
+
+    public MovieEntity getMovie() {
+        return movie;
+    }
+
+    public void setMovie(MovieEntity movie) {
+        this.movie = movie;
     }
 }

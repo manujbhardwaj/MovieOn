@@ -19,7 +19,7 @@
         vm.sellMovie = sellMovie;
         vm.wishlistMovie = wishlistMovie;
         vm.unWishlistMovie = unWishlistMovie;
-        vm.updateMovie = updateMovie;
+        vm.updateInventory = updateInventory;
         vm.logout = logout;
         vm.gotoSold = gotoSold;
 
@@ -38,6 +38,7 @@
                     if(vm.userId){
                         getUserLikedMovies();
                         getUserWishlistMovies();
+                        getMovieCount();
                     }
                 });
             openNav();
@@ -221,23 +222,25 @@
                 });
         }
 
-        function updateMovie(num) {
-            if(num < 0)
-                num = 0;
-            userService
-                .updateMovie(userId, vm.movieId, num)
+        function updateInventory(copies) {
+            if(copies < 1)
+                copies = 0;
+            vm.inventory.copies = copies;
+            movieService
+                .updateInventory(vm.inventory)
                 .then(function (response) {
-                    // alert("Item updated successfully");
+                    // alert("Items added successfully");
                     // $location.url('/home');
                 });
         }
 
-        function getMovieCount(movies) {
-            for(var i = 0; i < movies.length; i++){
-                if(movies[i].movie_id === vm.movieId)
-                    vm.movieCount = movies[i].num;
-            }
-            vm.count = vm.movieCount;
+        function getMovieCount() {
+            movieService
+                .getMovieCopies(vm.userId, vm.movieId)
+                .then(function (response) {
+                    console.log(response);
+                    vm.inventory = response.data;
+                });
         }
 
         function gotoSold() {

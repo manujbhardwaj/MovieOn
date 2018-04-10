@@ -49,6 +49,13 @@ public class MovieController {
 
     }
 
+    @PutMapping("inventory")
+    public InventoryEntity updateInventory(@RequestBody InventoryEntity inventory){
+
+        return inventoryService.updateInventory(inventory);
+
+    }
+
     @PutMapping("{movieId}/user/{userId}/unlike")
     public int unlikeMovie(@PathVariable int movieId, @PathVariable int userId){
 
@@ -62,6 +69,19 @@ public class MovieController {
     public boolean hasUserLikedMovie(@PathVariable int userId, @PathVariable int movieId){
 
         return movieLikeService.hasUserLikedMovie(userId, movieId);
+
+    }
+
+    @GetMapping("{movieId}/user/{userId}/copies")
+    public InventoryEntity getMovieCopies(@PathVariable int movieId, @PathVariable int userId){
+        System.out.println("manuj");
+        System.out.println(movieId);
+        System.out.println(userId);
+        InventoryEntity inventoryEntity = inventoryService.getMovieCopies(userId, movieId);
+
+        System.out.println(inventoryEntity);
+
+        return inventoryEntity;
 
     }
 

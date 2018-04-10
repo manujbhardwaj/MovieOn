@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InventoryRepository extends CrudRepository<InventoryEntity, Integer> {
+
+    InventoryEntity findBySellerIdAndMovieId(int userId, int movieId);
 }

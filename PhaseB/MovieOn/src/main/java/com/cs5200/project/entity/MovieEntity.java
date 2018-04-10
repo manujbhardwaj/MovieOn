@@ -11,9 +11,9 @@ public class MovieEntity {
     @Id
     @Column(name = "id")
     private int id;
-    @Column(name = "backdropPath")
+    @Column(name = "backdrop_path")
     private String backdropPath;
-    @Column(name = "originalTitle")
+    @Column(name = "original_title")
     private String originalTitle;
     @Lob
     @Column(name = "overview")

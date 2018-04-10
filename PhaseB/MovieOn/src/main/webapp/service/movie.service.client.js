@@ -10,7 +10,9 @@
             "hasUserWishlistMovie" : hasUserWishlistMovie,
             "wishlistMovie" : wishlistMovie,
             "unwishlistMovie" : unwishlistMovie,
-            "sellMovie": sellMovie
+            "sellMovie": sellMovie,
+            "getMovieCopies": getMovieCopies,
+            "updateInventory": updateInventory
 
         };
         return api;
@@ -19,9 +21,18 @@
             return $http.get("api/movie/" + movieId + "/user/" + userId + "/liked");
         }
 
+
+        function getMovieCopies(userId, movieId) {
+            return $http.get("api/movie/" + movieId + "/user/" + userId + "/copies");
+        }
+
         function sellMovie(userId, movie, copies) {
             console.log(movie)
             return $http.post("api/movie/user/" + userId + "/sell/copies/" + copies, movie);
+        }
+
+        function updateInventory(inventory) {
+            return $http.put("api/movie/inventory", inventory);
         }
 
         function hasUserWishlistMovie(userId, movieId) {

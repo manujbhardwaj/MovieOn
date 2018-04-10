@@ -15,6 +15,14 @@ public class InventoryService {
     private InventoryRepository inventoryRepository;
 
     public InventoryEntity userSellMovie(UserEntity user,  MovieEntity movie, int copies) {
-        return inventoryRepository.save(new InventoryEntity(copies));
+        return inventoryRepository.save(new InventoryEntity(copies, user, movie));
+    }
+
+    public InventoryEntity updateInventory(InventoryEntity inventory) {
+        return inventoryRepository.save(inventory);
+    }
+
+    public InventoryEntity getMovieCopies(int userId,  int movieId) {
+        return inventoryRepository.findBySellerIdAndMovieId(userId, movieId);
     }
 }
