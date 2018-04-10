@@ -34,6 +34,12 @@
                 controllerAs: "model",
                 resolve: { currentUser: loggedIn}
             })
+            .when("/userApprove", {
+                templateUrl: "view/userApprove.view.client.html",
+                controller: "userApproveController",
+                controllerAs: "model",
+                resolve: { currentUser: loggedIn}
+            })
             .when("/search/:sid", {
                 templateUrl: "view/search.view.client.html",
                 controller: "searchController",

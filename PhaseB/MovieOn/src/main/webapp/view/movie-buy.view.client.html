@@ -1,0 +1,157 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <p class="navbar-text pull-left align">
+            <a ng-click="model.goBack()" class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </p>
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-if="model.userId">
+            <a class="name" href="#/user">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-text pull-right" ng-if="!model.userId">
+            <a class="name" href="#/login">Login</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" ng-click="model.gotoHome()">Planet M</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/user">Profile</a>
+    </div>
+    <div ng-show="model.user.type == 'Buyer'">
+        <a href="#/like">
+            Likes
+            <span><i class="fa fa-thumbs-up"></i></span>
+        </a>
+        <a href="#/bought">
+            Bought
+            <span><i class="fa fa-file-video-o"></i></span>
+        </a>
+        <a href="#/wishlist">
+            Wishlist
+            <span><i class="fa fa-star"></i></span>
+        </a>
+        <a href="#/fav">
+            Favorite Sellers
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Seller'">
+        <a href="#/order">
+            Orders
+            <span><i class="fa fa-usd"></i></span>
+        </a>
+        <a href="#/inventory">
+            Inventory
+            <span><i class="fa fa-table"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Admin'">
+        <a href="#/users">
+            All Users
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+        <a href="#/msgs">
+            Messages
+            <span><i class="fa fa-envelope"></i></span>
+        </a>
+        <a href="#/orders">
+            All Orders
+            <span><i class="fa fa-shopping-basket"></i></span>
+        </a>
+    </div>
+    <div ng-show="!model.userId">
+        <a href="#/login">Login</a>
+    </div>
+    <div ng-show="model.userId">
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid" id="main">
+    <h3 class="panel panel-default">Sellers</h3>
+    <div class="list-group">
+        <div ng-show="model.message" class="alert alert-info" role="alert">
+            {{model.message}}
+        </div>
+        <li ng-repeat="seller in model.sellerList" class="list-group-item row center">
+            <div class="col-md-4 col-sm-4 col-xs-6 center">
+                <a ng-if="!seller.followed" class="imdb" style="float: left; margin-top: 15px">
+                    <i class="fa fa-heart-o fa-2x" ng-click="model.followSeller(seller._id, $index)"></i>
+                </a>
+                <a ng-if="seller.followed" class="imdb" style="float: left; margin-top: 15px">
+                    <i class="fa fa-heart fa-2x red" ng-click="model.unfollowSeller(seller._id, $index)"></i>
+                </a>
+                <h5><strong>Name: {{seller.firstName}} {{seller.lastName}}</strong></h5>
+                <h6>Known as: {{seller.username}}</h6>
+            </div>
+            <div class="col-md-4 col-sm-4 hidden-xs center">
+                <h5><strong>Email: {{seller.email}}</strong></h5>
+                <h6 ng-if="seller.phone">Phone: {{seller.phone}}</h6>
+                <h6 ng-if="!seller.phone">Phone: not available</h6>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6 center">
+                <button type="button"
+                        ng-click="model.buyMovie(seller._id)"
+                        class="btn btn-warning"
+                        data-toggle="modal"
+                        data-target="#myModal"
+                        data-backdrop="static"
+                        data-keyboard="false">
+                    Buy Movie
+                </button>
+            </div>
+        </li>
+    </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Hello {{model.user.firstName}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>Congratulations!! You have successfully purchased this movie.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="model.gotoBought()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© MANUJ BHARDWAJ 2017</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.type != 'Admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-flag"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a ng-click="model.contactAdmin()">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-show="!model.userId"><a href="#/login">Login</a></li>
+                <li ng-show="model.userId"><a href="#/user">Profile</a></li>
+                <li ng-show="model.userId"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("MovieOn", ["ngRoute"]);
+        .module("MovieOn", ["ngRoute", "ngTable"]);
 })();

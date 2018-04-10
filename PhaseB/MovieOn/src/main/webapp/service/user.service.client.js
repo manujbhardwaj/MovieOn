@@ -7,13 +7,20 @@
             "login": login,
             "register": register,
             "loggedIn": loggedIn,
-            "logout": logout
+            "logout": logout,
+            "findAllSeller": findAllSeller,
+            "approveOrReject": approveOrReject
         };
         return api;
 
         function login(user) {
-            console.log(user)
             return $http.post("/api/login", user);
+        }
+        function approveOrReject(seller) {
+            return $http.put("/api/seller/approve", seller);
+        }
+        function findAllSeller() {
+            return $http.get("/api/seller");
         }
         function loggedIn() {
             return $http.get("/api/loggedIn");

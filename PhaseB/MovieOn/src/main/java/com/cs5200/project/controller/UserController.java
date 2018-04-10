@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping("api")
@@ -44,6 +45,13 @@ public class UserController {
 
     }
 
+    @GetMapping("seller")
+    public List<UserEntity> findAllSeller(){
+        System.out.println("manuj done" );
+        return userService.findAllSeller();
+
+    }
+
     @PostMapping("logout")
     public ResponseEntity logout(HttpSession session){
 
@@ -68,5 +76,12 @@ public class UserController {
         session.setAttribute("user_session", u);
         session.setMaxInactiveInterval(600);
         return u;
+    }
+
+    @PutMapping("seller/approve")
+    public UserEntity approveRejectProf(@RequestBody UserEntity seller) {
+
+        return userService.approveRejectProf(seller);
+
     }
 }

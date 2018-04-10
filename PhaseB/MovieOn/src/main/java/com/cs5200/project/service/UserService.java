@@ -5,6 +5,8 @@ import com.cs5200.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -21,5 +23,13 @@ public class UserService {
 
     public UserEntity getUserById(int userId) {
         return userRepository.findById(userId);
+    }
+
+    public List<UserEntity> findAllSeller() {
+        return userRepository.findByType("Seller");
+    }
+
+    public UserEntity approveRejectProf(UserEntity seller) {
+        return userRepository.save(seller);
     }
 }

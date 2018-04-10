@@ -1,8 +1,8 @@
 (function () {
     angular
-        .module("PlagiarismDetector")
-        .controller("UserApproveController", userApproveController);
-    function userApproveController($routeParams, UploadService, NgTableParams, $filter, currentUser, $location, UserService) {
+        .module("MovieOn")
+        .controller("userApproveController", userApproveController);
+    function userApproveController($routeParams, NgTableParams, $filter, currentUser, $location, userService) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
@@ -18,16 +18,18 @@
         vm.approveOrReject = approveOrReject;
 
         function approveOrReject(seller) {
-            UserService.approveOrReject(seller)
+            userService.approveOrReject(seller)
                 .then(function (value) {
+                    console.log(value);
                     vm.message = "Request successfully processed."
                 }, function (reason) {
+                    console.log(reason);
                     vm.error = "There was an error. Please contact admin."
                 });
         }
 
         function logout() {
-            UserService.logout()
+            userService.logout()
                 .then(function (value) {
                     $location.url("/login");
                 }, function (reason) {
@@ -36,10 +38,10 @@
         }
 
         function init() {
-            UserService.findAllProf()
+            userService.findAllSeller()
                 .then(function (value) {
                     if(value.data.length == 0) {
-                        vm.message = "No Professors";
+                        vm.message = "No Sellers";
                     }
                     var data = value.data;
                     vm.tableParams = new NgTableParams({

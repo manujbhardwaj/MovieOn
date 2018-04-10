@@ -13,8 +13,6 @@
         /*event handlers*/
         vm.likeMovie = likeMovie;
         vm.unlikeMovie = unlikeMovie;
-        vm.gotoMovieVideos = gotoMovieVideos;
-        vm.gotoMovieImages = gotoMovieImages;
         vm.doYouTrustUrl = doYouTrustUrl;
         vm.openNav = openNav;
         vm.closeNav = closeNav;
@@ -165,14 +163,6 @@
             }
         }
 
-        function gotoMovieVideos() {
-            $location.url('/movie/'+vm.movieId+'/video');
-        }
-
-        function gotoMovieImages() {
-            $location.url('/movie/'+vm.movieId+'/image');
-        }
-
         function getUserLikedMovies() {
             movieService
                 .hasUserLikedMovie(vm.userId, vm.movieId)
@@ -181,25 +171,6 @@
                 }, function (reason) {
                     console.log(reason);
                 });
-        }
-
-        function updateMovie(num) {
-            if(num < 0)
-                num = 0;
-            userService
-                .updateMovie(userId, vm.movieId, num)
-                .then(function (response) {
-                    // alert("Item updated successfully");
-                    // $location.url('/home');
-                });
-        }
-
-        function getMovieCount(movies) {
-            for(var i = 0; i < movies.length; i++){
-                if(movies[i].movie_id === vm.movieId)
-                    vm.movieCount = movies[i].num;
-            }
-            vm.count = vm.movieCount;
         }
 
         function getUserWishlistMovies() {
@@ -248,6 +219,25 @@
                 }, function (reason) {
                     console.log(reason);
                 });
+        }
+
+        function updateMovie(num) {
+            if(num < 0)
+                num = 0;
+            userService
+                .updateMovie(userId, vm.movieId, num)
+                .then(function (response) {
+                    // alert("Item updated successfully");
+                    // $location.url('/home');
+                });
+        }
+
+        function getMovieCount(movies) {
+            for(var i = 0; i < movies.length; i++){
+                if(movies[i].movie_id === vm.movieId)
+                    vm.movieCount = movies[i].num;
+            }
+            vm.count = vm.movieCount;
         }
 
         function gotoSold() {
