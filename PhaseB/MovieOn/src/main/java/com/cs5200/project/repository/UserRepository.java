@@ -14,4 +14,5 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
     UserEntity findById(int userId);
 
     List<UserEntity> findByType(String type);
+
 }

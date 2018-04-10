@@ -115,12 +115,12 @@ public class MovieController {
 
     }
 
-    @GetMapping("{movieId}/inventory")
-    public List<InventoryEntity> getMovieDetails(@PathVariable int movieId){
-
-        return inventoryService.getMovieDetails(movieId);
-
-    }
+//    @GetMapping("{movieId}/inventory")
+//    public List<InventoryEntity> getMovieDetails(@PathVariable int movieId){
+//
+//        return inventoryService.getMovieDetails(movieId);
+//
+//    }
 
     @GetMapping("user/{userId}/fav")
     public List<FavSellerEntity> getFavSeller(@PathVariable int userId){

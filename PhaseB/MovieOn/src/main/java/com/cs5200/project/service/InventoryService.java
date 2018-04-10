@@ -32,9 +32,9 @@ public class InventoryService {
         return inventoryRepository.findBySellerId(userId);
     }
 
-    public List<InventoryFavSeller> getMovieDetails(int movieId) {
-        return inventoryRepository.getMovieDetails(movieId, userId);
-    }
+//    public List<InventoryFavSeller> getMovieDetails(int movieId) {
+//        return inventoryRepository.getMovieDetails(movieId, userId);
+//    }
 
 
 }

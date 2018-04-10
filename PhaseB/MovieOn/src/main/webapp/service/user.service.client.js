@@ -10,7 +10,8 @@
             "logout": logout,
             "findAllSeller": findAllSeller,
             "approveOrReject": approveOrReject,
-            "updateUser": updateUser
+            "updateUser": updateUser,
+            "getAllUsers": getAllUsers
         };
         return api;
 
@@ -34,6 +35,9 @@
         }
         function updateUser(user) {
             return $http.post("/api/update", user);
+        }
+        function getAllUsers() {
+            return $http.get("/api/user");
         }
     }
 })();

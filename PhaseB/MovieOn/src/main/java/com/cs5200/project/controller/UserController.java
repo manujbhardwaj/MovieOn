@@ -1,6 +1,5 @@
 package com.cs5200.project.controller;
 
-import com.cs5200.project.entity.AddressEntity;
 import com.cs5200.project.entity.UserEntity;
 import com.cs5200.project.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
@@ -48,8 +47,13 @@ public class UserController {
 
     @GetMapping("seller")
     public List<UserEntity> findAllSeller(){
-        System.out.println("manuj done" );
         return userService.findAllSeller();
+
+    }
+
+    @GetMapping("user")
+    public List<UserEntity> getAllUsers(){
+        return userService.getAllUsers();
 
     }
 

@@ -40,6 +40,12 @@
                 controllerAs: "model",
                 resolve: { currentUser: loggedIn}
             })
+            .when("/users", {
+                templateUrl: "view/users.view.client.html",
+                controller: "usersController",
+                controllerAs: "model",
+                resolve: { currentUser: loggedIn}
+            })
             .when("/userApprove", {
                 templateUrl: "view/userApprove.view.client.html",
                 controller: "userApproveController",
