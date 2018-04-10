@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("profileController", profileController);
-    function profileController(currentUser, userService, $location) {
+    function profileController(currentUser, userService, $location, $mdDialog) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
@@ -14,6 +14,26 @@
         vm.openNav = openNav;
         vm.closeNav = closeNav;
         vm.logout = logout;
+        vm.showDialog = showDialog;
+
+        function showDialog ($event) {
+            $mdDialog.show({
+                targetEvent: $event,
+                templateUrl: 'dialogContent.tmpl.html',
+                controller: DialogController
+            });
+
+            function DialogController($scope, $mdDialog, userService) {
+                $scope.closeDialog = function ()  {
+                    $mdDialog.hide();
+                }
+
+                $scope.addAddress = function(address) {
+                    console.log(address);
+                    $scope.closeDialog();
+                }
+            }
+        }
 
         function logout() {
             userService.logout()
