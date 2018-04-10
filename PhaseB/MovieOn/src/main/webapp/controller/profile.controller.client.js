@@ -118,7 +118,7 @@
                 window.scrollTo(0, 0);
                 return;
             }
-            UserService.updateUser(user)
+            userService.updateUser(user)
                 .then(function (usr) {
                     if(usr){
                         vm.message = "Profile successfully updated";
