@@ -134,11 +134,11 @@
                 });
         }
 
-        function sellMovie(num) {
-            if(num < 1)
-                num = 0;
-            UserService
-                .sellMovie(userId, vm.movieId, num)
+        function sellMovie(copies) {
+            if(copies < 1)
+                copies = 0;
+            movieService
+                .sellMovie(vm.userId, vm.movie, copies)
                 .then(function (response) {
                     // alert("Items added successfully");
                     // $location.url('/home');

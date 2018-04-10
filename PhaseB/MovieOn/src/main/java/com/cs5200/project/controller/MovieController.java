@@ -1,11 +1,9 @@
 package com.cs5200.project.controller;
 
+import com.cs5200.project.entity.InventoryEntity;
 import com.cs5200.project.entity.MovieEntity;
 import com.cs5200.project.entity.MovieWishlistEntity;
-import com.cs5200.project.service.MovieLikeService;
-import com.cs5200.project.service.MovieService;
-import com.cs5200.project.service.MovieWishlistService;
-import com.cs5200.project.service.UserService;
+import com.cs5200.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +25,9 @@ public class MovieController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private InventoryService inventoryService;
+
     @PostMapping("user/{userId}/like")
     public int likeMovie(@PathVariable int userId, @RequestBody MovieEntity movie){
 
@@ -38,10 +39,18 @@ public class MovieController {
 
     }
 
+    @PostMapping("user/{userId}/sell/copies/{copies}")
+    public InventoryEntity sellMovie(@PathVariable int userId, @PathVariable int copies, @RequestBody MovieEntity movie){
+        System.out.println(movie);
+
+        movieService.insertMovie(movie);
+
+        return inventoryService.userSellMovie(userService.getUserById(userId), movie, copies);
+
+    }
+
     @PutMapping("{movieId}/user/{userId}/unlike")
     public int unlikeMovie(@PathVariable int movieId, @PathVariable int userId){
-        System.out.println(movieId);
-        System.out.println(userId);
 
         movieLikeService.userUnlikeMovie(userId, movieId);
 

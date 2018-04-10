@@ -1,6 +1,10 @@
 package com.cs5200.project.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Inventory entity.
@@ -14,19 +18,29 @@ public class InventoryEntity {
     @Column(name = "id")
     private int id;
     @Column(name = "copies")
-    private String copies;
-    @Column(name = "createdDateTime")
-    private boolean createdDateTime;
-    @Column(name = "updatedDateTime")
-    private boolean updatedDateTime;
-
-    public InventoryEntity(String copies, boolean createdDateTime, boolean updatedDateTime) {
-        this.copies = copies;
-        this.createdDateTime = createdDateTime;
-        this.updatedDateTime = updatedDateTime;
-    }
+    private int copies;
+    @Column(name = "createdDateTime", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Date createdDateTime;
+    @Column(name = "updatedDateTime", nullable = false, updatable = false)
+    @UpdateTimestamp
+    private Date updatedDateTime;
 
     public InventoryEntity() {
+    }
+
+    public InventoryEntity(int copies) {
+        this.copies = copies;
+    }
+
+    @Override
+    public String toString() {
+        return "InventoryEntity{" +
+                "id=" + id +
+                ", copies='" + copies + '\'' +
+                ", createdDateTime=" + createdDateTime +
+                ", updatedDateTime=" + updatedDateTime +
+                '}';
     }
 
     public int getId() {
@@ -37,27 +51,27 @@ public class InventoryEntity {
         this.id = id;
     }
 
-    public String getCopies() {
+    public int getCopies() {
         return copies;
     }
 
-    public void setCopies(String copies) {
+    public void setCopies(int copies) {
         this.copies = copies;
     }
 
-    public boolean isCreatedDateTime() {
+    public Date getCreatedDateTime() {
         return createdDateTime;
     }
 
-    public void setCreatedDateTime(boolean createdDateTime) {
+    public void setCreatedDateTime(Date createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
 
-    public boolean isUpdatedDateTime() {
+    public Date getUpdatedDateTime() {
         return updatedDateTime;
     }
 
-    public void setUpdatedDateTime(boolean updatedDateTime) {
+    public void setUpdatedDateTime(Date updatedDateTime) {
         this.updatedDateTime = updatedDateTime;
     }
 }
