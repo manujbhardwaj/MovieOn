@@ -9,7 +9,8 @@
             "loggedIn": loggedIn,
             "logout": logout,
             "findAllSeller": findAllSeller,
-            "approveOrReject": approveOrReject
+            "approveOrReject": approveOrReject,
+            "updateUser": updateUser
         };
         return api;
 
@@ -29,8 +30,10 @@
             return $http.post("/api/logout");
         }
         function register(user) {
-            console.log(user);
             return $http.post("/api/register", user);
+        }
+        function updateUser(user) {
+            return $http.post("/api/update", user);
         }
     }
 })();

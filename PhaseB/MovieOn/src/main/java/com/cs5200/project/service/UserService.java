@@ -32,4 +32,6 @@ public class UserService {
     public UserEntity approveRejectProf(UserEntity seller) {
         return userRepository.save(seller);
     }
+
+    public UserEntity updateUser(UserEntity user) {return userRepository.save(user);}
 }

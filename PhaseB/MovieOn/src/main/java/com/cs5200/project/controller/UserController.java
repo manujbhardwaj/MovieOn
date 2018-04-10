@@ -73,10 +73,16 @@ public class UserController {
         if(user.getType().equals("Seller"))
             throw new Exception("User registered successfully. Admin approval is pending.");
 
-
         session.setAttribute("user_session", u);
         session.setMaxInactiveInterval(600);
         return u;
+    }
+
+    @PostMapping("update")
+    public UserEntity updateUser(@RequestBody UserEntity user) {
+
+        user.setPasswrd(BCrypt.hashpw(user.getPasswrd(), BCrypt.gensalt()));
+        return userService.updateUser(user);
     }
 
     @PutMapping("seller/approve")
