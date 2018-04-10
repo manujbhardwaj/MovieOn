@@ -13,8 +13,8 @@ public class PhoneEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "phoneNo")
+    private String phoneNo;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "phone_user_association"))
@@ -32,11 +32,11 @@ public class PhoneEntity {
     }
 
     public String getPhone() {
-        return phone;
+        return phoneNo;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phoneNo = phone;
     }
 
     public UserEntity getUser() {
@@ -48,7 +48,7 @@ public class PhoneEntity {
     }
 
     public PhoneEntity(String phone, UserEntity user) {
-        this.phone = phone;
+        this.phoneNo = phone;
         this.user = user;
     }
 }

@@ -14,17 +14,18 @@
         vm.openNav = openNav;
         vm.closeNav = closeNav;
         vm.logout = logout;
-        vm.showDialog = showDialog;
+        vm.showAddressDialog = showAddressDialog;
+        vm.showPhoneDialog = showPhoneDialog
 
-        function showDialog ($event) {
+        function showAddressDialog ($event) {
             $mdDialog.show({
                 targetEvent: $event,
-                templateUrl: 'dialogContent.tmpl.html',
+                templateUrl: 'addressDialogContent.tmpl.html',
                 locals:{userId: vm.userId},
-                controller: DialogController
+                controller: addressDialogController
             });
 
-            function DialogController($scope, $mdDialog, addressService, userId) {
+            function addressDialogController($scope, $mdDialog, addressService, userId) {
                 $scope.closeDialog = function ()  {
                     $mdDialog.hide();
                 };
@@ -37,6 +38,34 @@
                                 vm.message = "Address successfully added";
                             else
                                 vm.error = "Address not added";
+                        });
+                    $scope.closeDialog();
+                }
+            }
+        }
+
+
+        function showPhoneDialog ($event) {
+            $mdDialog.show({
+                targetEvent: $event,
+                templateUrl: 'phoneDialogContent.tmpl.html',
+                locals:{userId: vm.userId},
+                controller: phoneDialogController
+            });
+
+            function phoneDialogController($scope, $mdDialog, phoneService, userId) {
+                $scope.closeDialog = function ()  {
+                    $mdDialog.hide();
+                };
+
+                $scope.addPhone = function(phone) {
+                    phoneService
+                        .addAddress(userId, phone)
+                        .then(function (phone) {
+                            if (phone)
+                                vm.message = "Phone successfully added";
+                            else
+                                vm.error = "Phone not added";
                         });
                     $scope.closeDialog();
                 }
