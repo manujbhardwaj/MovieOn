@@ -13,16 +13,22 @@ public class PhoneEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "phone")
-    private String phone;
-    @Column(name = "primaryPhone")
-    private boolean primaryPhone;
+    @Column(name = "phoneNo")
+    private String phoneNo;
+    @Column(name = "type")
+    private String type;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "phone_user_association"))
     private UserEntity user;
 
     public PhoneEntity() {
+    }
+
+    public PhoneEntity(String phoneNo, String type, UserEntity user) {
+        this.phoneNo = phoneNo;
+        this.type = type;
+        this.user = user;
     }
 
     public int getId() {
@@ -33,20 +39,20 @@ public class PhoneEntity {
         this.id = id;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
-    public boolean isPrimaryPhone() {
-        return primaryPhone;
+    public String getType() {
+        return type;
     }
 
-    public void setPrimaryPhone(boolean primaryPhone) {
-        this.primaryPhone = primaryPhone;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public UserEntity getUser() {
@@ -54,12 +60,6 @@ public class PhoneEntity {
     }
 
     public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    public PhoneEntity(String phone, boolean primaryPhone, UserEntity user) {
-        this.phone = phone;
-        this.primaryPhone = primaryPhone;
         this.user = user;
     }
 }

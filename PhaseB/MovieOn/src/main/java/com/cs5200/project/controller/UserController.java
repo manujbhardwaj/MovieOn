@@ -1,5 +1,6 @@
 package com.cs5200.project.controller;
 
+import com.cs5200.project.entity.AddressEntity;
 import com.cs5200.project.entity.UserEntity;
 import com.cs5200.project.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;

@@ -13,24 +13,27 @@ public class AddressEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "street1")
-    private String street1;
-    @Column(name = "street2")
-    private String street2;
-    @Column(name = "city")
+    @Column(name = "streetAddress")
+    private String streetAddress;
     private String city;
     @Column(name = "state")
     private String state;
-    @Column(name = "zip")
-    private int zip;
-    @Column(name = "primaryAddress")
-    private boolean primaryAddress;
+    @Column(name = "postalCode")
+    private int postalCode;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "address_user_association"))
     private UserEntity user;
 
     public AddressEntity() {
+    }
+
+    public AddressEntity(String streetAddress, String city, String state, int postalCode, UserEntity user) {
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.user = user;
     }
 
     public int getId() {
@@ -41,20 +44,12 @@ public class AddressEntity {
         this.id = id;
     }
 
-    public String getStreet1() {
-        return street1;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public void setStreet1(String street1) {
-        this.street1 = street1;
-    }
-
-    public String getStreet2() {
-        return street2;
-    }
-
-    public void setStreet2(String street2) {
-        this.street2 = street2;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
 
     public String getCity() {
@@ -73,20 +68,12 @@ public class AddressEntity {
         this.state = state;
     }
 
-    public int getZip() {
-        return zip;
+    public int getPostalCode() {
+        return postalCode;
     }
 
-    public void setZip(int zip) {
-        this.zip = zip;
-    }
-
-    public boolean isPrimaryAddress() {
-        return primaryAddress;
-    }
-
-    public void setPrimaryAddress(boolean primaryAddress) {
-        this.primaryAddress = primaryAddress;
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
     }
 
     public UserEntity getUser() {
@@ -94,16 +81,6 @@ public class AddressEntity {
     }
 
     public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    public AddressEntity(String street1, String street2, String city, String state, int zip, boolean primaryAddress, UserEntity user) {
-        this.street1 = street1;
-        this.street2 = street2;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.primaryAddress = primaryAddress;
         this.user = user;
     }
 }
