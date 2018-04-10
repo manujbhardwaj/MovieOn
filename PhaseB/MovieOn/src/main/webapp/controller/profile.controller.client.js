@@ -20,16 +20,24 @@
             $mdDialog.show({
                 targetEvent: $event,
                 templateUrl: 'dialogContent.tmpl.html',
+                locals:{userId: vm.userId},
                 controller: DialogController
             });
 
-            function DialogController($scope, $mdDialog, userService) {
+            function DialogController($scope, $mdDialog, addressService, userId) {
                 $scope.closeDialog = function ()  {
                     $mdDialog.hide();
-                }
+                };
 
                 $scope.addAddress = function(address) {
-                    console.log(address);
+                    addressService
+                        .addAddress(userId, address)
+                        .then(function (address) {
+                            if (address)
+                                vm.message = "Address successfully added";
+                            else
+                                vm.error = "Address not added";
+                        });
                     $scope.closeDialog();
                 }
             }
