@@ -122,6 +122,13 @@ public class MovieController {
 
     }
 
+    @GetMapping("user/{userId}/fav")
+    public List<FavSellerEntity> getFavSeller(@PathVariable int userId){
+
+        return favSellerService.getFavSeller(userId);
+
+    }
+
     @GetMapping("user/{userId}/inventory")
     public List<InventoryEntity> getMovieInventory(@PathVariable int userId){
 

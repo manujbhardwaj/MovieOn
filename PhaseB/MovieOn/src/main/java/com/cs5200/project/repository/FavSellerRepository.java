@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface FavSellerRepository extends CrudRepository<FavSellerEntity, Integer> {
 
+    List<FavSellerEntity> findByBuyerId(int userId);
 }

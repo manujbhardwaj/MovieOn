@@ -42,19 +42,19 @@
             movieService
                 .getMovieDetails(vm.movieId)
                 .then(function(response){
+                    console.log(response.data);
                     if(response.length == 0)
                         vm.message = "No seller is selling this movie";
-                    else
+                    else{
+                        movieService
+                            .getFavSeller(vm.userId)
+                            .then(function(value){
+                                console.log(value.data);
+                                if(response.data.seller.id)
+                            });
                         vm.sellerList = response.data;
-                });
+                    }
 
-            movieService
-                .getFavSeller(vm.userId)
-                .then(function(response){
-                    if(response.length == 0)
-                        vm.message = "No seller is selling this movie";
-                    else
-                        vm.sellerList = response.data;
                 });
             openNav();
         }

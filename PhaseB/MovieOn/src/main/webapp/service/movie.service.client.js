@@ -15,7 +15,8 @@
             "updateInventory": updateInventory,
             "getMovieInventory": getMovieInventory,
             "getMovieDetails": getMovieDetails,
-            "favSeller": favSeller
+            "favSeller": favSeller,
+            "getFavSeller": getFavSeller
 
         };
         return api;
@@ -37,7 +38,7 @@
         }
 
         function getFavSeller(userId) {
-            return $http.get("api/movie/" +movieId+"/inventory");
+            return $http.get("api/movie/user/" +userId+"/fav");
         }
 
 
