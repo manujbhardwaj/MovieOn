@@ -47,6 +47,15 @@
                     else
                         vm.sellerList = response.data;
                 });
+
+            movieService
+                .getFavSeller(vm.userId)
+                .then(function(response){
+                    if(response.length == 0)
+                        vm.message = "No seller is selling this movie";
+                    else
+                        vm.sellerList = response.data;
+                });
             openNav();
         }
         init();

@@ -36,6 +36,10 @@
             return $http.get("api/movie/" +movieId+"/inventory");
         }
 
+        function getFavSeller(userId) {
+            return $http.get("api/movie/" +movieId+"/inventory");
+        }
+
 
         function getMovieCopies(userId, movieId) {
             return $http.get("api/movie/" + movieId + "/user/" + userId + "/copies");

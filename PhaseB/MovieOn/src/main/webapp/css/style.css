@@ -16,7 +16,7 @@
 .add-pad{
     min-width: 24px;
 }
-body {
+.mainDiv {
     padding-top: 60px;
     padding-bottom: 70px;
 }
