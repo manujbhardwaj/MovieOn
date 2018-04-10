@@ -15,8 +15,6 @@ public class PhoneEntity {
     private int id;
     @Column(name = "phone")
     private String phone;
-    @Column(name = "primaryPhone")
-    private boolean primaryPhone;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "phone_user_association"))
@@ -41,14 +39,6 @@ public class PhoneEntity {
         this.phone = phone;
     }
 
-    public boolean isPrimaryPhone() {
-        return primaryPhone;
-    }
-
-    public void setPrimaryPhone(boolean primaryPhone) {
-        this.primaryPhone = primaryPhone;
-    }
-
     public UserEntity getUser() {
         return user;
     }
@@ -57,9 +47,8 @@ public class PhoneEntity {
         this.user = user;
     }
 
-    public PhoneEntity(String phone, boolean primaryPhone, UserEntity user) {
+    public PhoneEntity(String phone, UserEntity user) {
         this.phone = phone;
-        this.primaryPhone = primaryPhone;
         this.user = user;
     }
 }
