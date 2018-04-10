@@ -13,17 +13,27 @@ public class FavSellerEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "review")
-    private String review;
-    @Column(name = "rating")
-    private String rating;
+    @Column(name = "buyerId")
+    private int buyerId;
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "seller_favSeller_association"))
+    private UserEntity seller;
 
     public FavSellerEntity() {
     }
 
-    public FavSellerEntity(String review, String rating) {
-        this.review = review;
-        this.rating = rating;
+    public FavSellerEntity(int buyerId, UserEntity seller) {
+        this.buyerId = buyerId;
+        this.seller = seller;
+    }
+
+    @Override
+    public String toString() {
+        return "FavSellerEntity{" +
+                "id=" + id +
+                ", buyerId=" + buyerId +
+                ", seller=" + seller +
+                '}';
     }
 
     public int getId() {
@@ -34,19 +44,19 @@ public class FavSellerEntity {
         this.id = id;
     }
 
-    public String getReview() {
-        return review;
+    public int getBuyerId() {
+        return buyerId;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setBuyerId(int buyerId) {
+        this.buyerId = buyerId;
     }
 
-    public String getRating() {
-        return rating;
+    public UserEntity getSeller() {
+        return seller;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setSeller(UserEntity seller) {
+        this.seller = seller;
     }
 }

@@ -34,6 +34,12 @@
                 controllerAs: "model",
                 resolve: { currentUser: loggedIn}
             })
+            .when("/movie/:mid/buy", {
+                templateUrl: "view/movie-buy.view.client.html",
+                controller: "movieBuyController",
+                controllerAs: "model",
+                resolve: { currentUser: loggedIn}
+            })
             .when("/userApprove", {
                 templateUrl: "view/userApprove.view.client.html",
                 controller: "userApproveController",
@@ -43,6 +49,12 @@
             .when("/search/:sid", {
                 templateUrl: "view/search.view.client.html",
                 controller: "searchController",
+                controllerAs: "model",
+                resolve: { currentUser: loggedIn}
+            })
+            .when("/inventory", {
+                templateUrl: "view/user-inventory.view.client.html",
+                controller: "inventoryController",
                 controllerAs: "model",
                 resolve: { currentUser: loggedIn}
             })

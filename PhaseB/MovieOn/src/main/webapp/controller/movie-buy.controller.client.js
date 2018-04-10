@@ -1,19 +1,17 @@
 
 (function () {
     angular
-        .module("WebAppMaker")
-        .controller("MovieBuyController", movieBuyController);
-    function movieBuyController($routeParams, $location, UserService, InventoryService, currentUser) {
+        .module("MovieOn")
+        .controller("movieBuyController", movieBuyController);
+    function movieBuyController($routeParams, $location, userService, currentUser, movieService) {
         var vm = this;
-        var movieId = $routeParams['mid'];
+        vm.movieId = $routeParams['mid'];
         if(currentUser){
-            var userId = currentUser._id;
-            vm.userId = userId;
+            vm.userId = currentUser.id;
+            vm.user = currentUser;
         }
-        vm.open = true;
 
         /*event handlers*/
-        vm.gotoHome = gotoHome;
         vm.goBack = goBack;
         vm.openNav = openNav;
         vm.closeNav = closeNav;
@@ -24,43 +22,37 @@
         vm.followSeller = followSeller;
         vm.unfollowSeller = unfollowSeller;
 
-        function followSeller(_id, index) {
-            UserService
-                .followSeller(userId, _id)
+        function followSeller(seller, index) {
+            movieService
+                .favSeller(vm.userId, seller)
                 .then(function (res) {
                     vm.sellerList[index].followed = true;
                 });
         }
 
         function unfollowSeller(_id, index) {
-            console.log(_id);
-            UserService
-                .unfollowSeller(userId, _id)
+            movieService
+                .unfavSeller(vm.userId, sellerId)
                 .then(function (res) {
                     vm.sellerList[index].followed = false;
                 });
         }
 
         function init() {
-            InventoryService
-                .getMovieDetails(movieId)
+            movieService
+                .getMovieDetails(vm.movieId)
                 .then(function(response){
                     if(response.length == 0)
                         vm.message = "No seller is selling this movie";
                     else
-                        getSellerInfo(response.userSell);
+                        vm.sellerList = response.data;
                 });
-
-            UserService
-                .findUserById(userId)
-                .then(function (user) {
-                    vm.user = user;
-                });
+            openNav();
         }
         init();
 
         function logout() {
-            UserService
+            userService
                 .logout()
                 .then(function(response) {
                     $location.url("/home");
@@ -78,30 +70,6 @@
                 });
         }
 
-        function getSellerInfo(sellers) {
-            UserService
-                .findUserSelling(movieId, sellers)
-                .then(function (sellerList) {
-                    if(sellerList.length === 0)
-                        vm.message = "No seller is selling this movie";
-                    else {
-                        for (var i = 0; i < sellerList.length; i++) {
-                            var found = false;
-                            for (var j = 0; j < vm.user.sellersFollowed.length; j++) {
-                                if (sellerList[i]._id === vm.user.sellersFollowed[j]._id) {
-                                    sellerList[i].followed = true;
-                                    found = true;
-                                    break;
-                                }
-                            }
-                            if (!found)
-                                sellerList[i].followed = false;
-                        }
-                        vm.sellerList = sellerList;
-                    }
-                });
-        }
-
         function openNav() {
             vm.open = false;
             document.getElementById("mySidenav").style.width = "250px";
@@ -116,10 +84,6 @@
             vm.open = true;
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("main").style.marginLeft = "0";
-        }
-
-        function gotoHome() {
-            $location.url('/home');
         }
 
         function gotoBought() {

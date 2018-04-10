@@ -4,9 +4,10 @@ import com.cs5200.project.entity.InventoryEntity;
 import com.cs5200.project.entity.MovieEntity;
 import com.cs5200.project.entity.UserEntity;
 import com.cs5200.project.repository.InventoryRepository;
-import com.cs5200.project.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class InventoryService {
@@ -25,4 +26,14 @@ public class InventoryService {
     public InventoryEntity getMovieCopies(int userId,  int movieId) {
         return inventoryRepository.findBySellerIdAndMovieId(userId, movieId);
     }
+
+    public List<InventoryEntity> getMovieInventory(int userId) {
+        return inventoryRepository.findBySellerId(userId);
+    }
+
+    public List<InventoryEntity> getMovieDetails(int movieId) {
+        return inventoryRepository.findByMovieId(movieId);
+    }
+
+
 }

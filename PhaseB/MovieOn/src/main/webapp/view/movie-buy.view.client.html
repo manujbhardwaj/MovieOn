@@ -20,7 +20,7 @@
             <a class="name" href="#/login">Login</a>
         </div>
         <div class="navbar-header">
-            <a class="navbar-brand" ng-click="model.gotoHome()">Planet M</a>
+            <a class="navbar-brand" href="#!/home">MovieOn</a>
         </div>
     </div>
 </nav>
@@ -88,7 +88,7 @@
         <li ng-repeat="seller in model.sellerList" class="list-group-item row center">
             <div class="col-md-4 col-sm-4 col-xs-6 center">
                 <a ng-if="!seller.followed" class="imdb" style="float: left; margin-top: 15px">
-                    <i class="fa fa-heart-o fa-2x" ng-click="model.followSeller(seller._id, $index)"></i>
+                    <i class="fa fa-heart-o fa-2x" ng-click="model.followSeller(seller.seller, $index)"></i>
                 </a>
                 <a ng-if="seller.followed" class="imdb" style="float: left; margin-top: 15px">
                     <i class="fa fa-heart fa-2x red" ng-click="model.unfollowSeller(seller._id, $index)"></i>

@@ -43,16 +43,6 @@
                 });
             openNav();
 
-            // inventoryService
-            //     .getMovieDetails(vm.movieId)
-            //     .then(function(response){
-            //         vm.likes = 0;
-            //         if(response.userLike)
-            //             for(var i = 0; i < response.userLike.length; i++){
-            //                 vm.likes = response.userLike.length;
-            //             }
-            //     });
-
             apiService
                 .getMovieCredits(vm.movieId)
                 .then(function(response) {
@@ -238,7 +228,6 @@
             movieService
                 .getMovieCopies(vm.userId, vm.movieId)
                 .then(function (response) {
-                    console.log(response);
                     vm.inventory = response.data;
                 });
         }

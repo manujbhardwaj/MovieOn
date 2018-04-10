@@ -15,7 +15,7 @@
             <a class="name" href="#!/login">Login</a>
         </div>
         <div class="navbar-header">
-            <a class="navbar-brand" href="#!/home">Planet M</a>
+            <a class="navbar-brand" href="#!/home">MovieOn</a>
         </div>
     </div>
 </nav>
@@ -160,7 +160,7 @@
                             <a class="imdb" href="{{model.movie.imdb_id}}">
                                 <i class="fa fa-imdb fa-3x"></i>
                             </a>
-                            <button type="button" href="#!/movie/model.movieId/buy" class="btn btn-warning shift-further-up">Buy Movie</button>
+                            <a type="button" href="#!/movie/{{model.movieId}}/buy" class="btn btn-warning shift-further-up">Buy Movie</a>
                         </div>
                     </div>
                     <h5 class="shift-down"><strong>Directed By: {{model.movieDirector}}</strong></h5>

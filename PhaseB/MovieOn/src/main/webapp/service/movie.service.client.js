@@ -12,13 +12,28 @@
             "unwishlistMovie" : unwishlistMovie,
             "sellMovie": sellMovie,
             "getMovieCopies": getMovieCopies,
-            "updateInventory": updateInventory
+            "updateInventory": updateInventory,
+            "getMovieInventory": getMovieInventory,
+            "getMovieDetails": getMovieDetails,
+            "favSeller": favSeller
 
         };
         return api;
 
         function hasUserLikedMovie(userId, movieId) {
             return $http.get("api/movie/" + movieId + "/user/" + userId + "/liked");
+        }
+
+        function favSeller(userId, seller) {
+            return $http.post("api/movie/user/" + userId + "/seller/fav", seller);
+        }
+
+        function getMovieInventory(userId) {
+            return $http.get("api/movie/user/" +userId+"/inventory");
+        }
+
+        function getMovieDetails(movieId) {
+            return $http.get("api/movie/" +movieId+"/inventory");
         }
 
 

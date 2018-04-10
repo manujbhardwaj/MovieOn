@@ -1,13 +1,13 @@
 package com.cs5200.project.controller;
 
-import com.cs5200.project.entity.InventoryEntity;
-import com.cs5200.project.entity.MovieEntity;
-import com.cs5200.project.entity.MovieWishlistEntity;
+import com.cs5200.project.entity.*;
 import com.cs5200.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/movie")
@@ -27,6 +27,9 @@ public class MovieController {
 
     @Autowired
     private InventoryService inventoryService;
+
+    @Autowired
+    private FavSellerService favSellerService;
 
     @PostMapping("user/{userId}/like")
     public int likeMovie(@PathVariable int userId, @RequestBody MovieEntity movie){
@@ -74,12 +77,7 @@ public class MovieController {
 
     @GetMapping("{movieId}/user/{userId}/copies")
     public InventoryEntity getMovieCopies(@PathVariable int movieId, @PathVariable int userId){
-        System.out.println("manuj");
-        System.out.println(movieId);
-        System.out.println(userId);
         InventoryEntity inventoryEntity = inventoryService.getMovieCopies(userId, movieId);
-
-        System.out.println(inventoryEntity);
 
         return inventoryEntity;
 
@@ -96,6 +94,12 @@ public class MovieController {
         return movieWishlistService.userWishlistMovie(userService.getUserById(userId), movie);
     }
 
+    @PostMapping("user/{userId}/seller/fav")
+    public FavSellerEntity favSeller(@PathVariable int userId, @RequestBody UserEntity seller){
+
+        return favSellerService.favSeller(userId, seller);
+    }
+
     @PutMapping("{movieId}/user/{userId}/unwishlist")
     public ResponseEntity<String> unwishlistMovie(@PathVariable int movieId, @PathVariable int userId){
 
@@ -108,6 +112,20 @@ public class MovieController {
     public boolean hasUserWishlistMovie(@PathVariable int userId, @PathVariable int movieId){
 
         return movieWishlistService.hasUserWishlistMovie(userId, movieId);
+
+    }
+
+    @GetMapping("{movieId}/inventory")
+    public List<InventoryEntity> getMovieDetails(@PathVariable int movieId){
+
+        return inventoryService.getMovieDetails(movieId);
+
+    }
+
+    @GetMapping("user/{userId}/inventory")
+    public List<InventoryEntity> getMovieInventory(@PathVariable int userId){
+
+        return inventoryService.getMovieInventory(userId);
 
     }
 }
