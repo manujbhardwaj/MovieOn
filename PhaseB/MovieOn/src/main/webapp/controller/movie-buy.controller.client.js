@@ -42,7 +42,7 @@
             movieService
                 .getMovieDetails(vm.movieId)
                 .then(function(response){
-                    if(response.length == 0)
+                    if(response.data.length === 0)
                         vm.message = "No seller is selling this movie";
                     else{
                         movieService

@@ -27,11 +27,11 @@
         });
 
         function init() {
-            if(vm.user.type === 'Buyer'){
+            if(vm.user && vm.user.type === 'Buyer'){
                 hasUserLikedMovie();
                 hasUserWishlistMovie();
             }
-            if(vm.user.type === 'Seller'){
+            if(vm.user && vm.user.type === 'Seller'){
                 getInventory();
             }
             apiService
