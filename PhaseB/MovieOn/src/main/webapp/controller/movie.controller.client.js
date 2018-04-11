@@ -19,7 +19,7 @@
         vm.sellMovie = sellMovie;
         vm.wishlistMovie = wishlistMovie;
         vm.unWishlistMovie = unWishlistMovie;
-        vm.updateInventory = updateInventory;
+        vm.updateInventoryForMovie = updateInventoryForMovie;
         vm.logout = logout;
         vm.gotoSold = gotoSold;
 
@@ -33,7 +33,7 @@
                 hasUserWishlistMovie();
             }
             if(vm.user && vm.user.type === 'Seller'){
-                getInventory();
+                getInventoryForMovie();
             }
             apiService
                 .getMovieDetails(vm.movieId)
@@ -172,21 +172,21 @@
                 });
         }
 
-        function updateInventory(copies) {
+        function updateInventoryForMovie(copies) {
             if(copies < 1)
                 copies = 0;
             vm.inventory.copies = copies;
             movieService
-                .updateInventory(vm.inventory)
+                .updateInventoryForMovie(vm.inventory)
                 .then(function (response) {
                     // alert("Items added successfully");
                     // $location.url('/home');
                 });
         }
 
-        function getInventory() {
+        function getInventoryForMovie () {
             movieService
-                .getInventory(vm.userId, vm.movieId)
+                .getInventoryForMovie (vm.userId, vm.movieId)
                 .then(function (response) {
                     vm.inventory = response.data;
                 });

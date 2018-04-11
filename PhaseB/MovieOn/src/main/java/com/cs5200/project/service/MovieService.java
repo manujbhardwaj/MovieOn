@@ -14,4 +14,8 @@ public class MovieService {
     public MovieEntity insertMovie(MovieEntity movie) {
         return movieRepository.save(movie);
     }
+
+    public MovieEntity getMovieById(int movieId) {
+        return movieRepository.findById(movieId);
+    }
 }

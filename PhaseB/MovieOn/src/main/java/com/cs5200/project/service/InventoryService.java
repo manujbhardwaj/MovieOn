@@ -19,12 +19,16 @@ public class InventoryService {
         return inventoryRepository.save(new InventoryEntity(copies, user, movie));
     }
 
-    public InventoryEntity updateInventory(InventoryEntity inventory) {
+    public InventoryEntity updateInventoryForMovie(InventoryEntity inventory) {
         return inventoryRepository.save(inventory);
     }
 
     public InventoryEntity getMovieCopies(int userId,  int movieId) {
         return inventoryRepository.findBySellerIdAndMovieId(userId, movieId);
+    }
+
+    public InventoryEntity updateCopies(int movieId,  int sellerId) {
+        return inventoryRepository.updateCopies(movieId, sellerId);
     }
 
     public List<InventoryEntity> getMovieInventory(int userId) {

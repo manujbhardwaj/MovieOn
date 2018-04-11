@@ -3,8 +3,6 @@ package com.cs5200.project.controller;
 import com.cs5200.project.entity.*;
 import com.cs5200.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +20,9 @@ public class MovieController {
     @Autowired
     private InventoryService inventoryService;
 
+    @Autowired
+    private TransactionService transactionService;
+
     @PostMapping("user/{userId}/sell/copies/{copies}")
     public InventoryEntity sellMovie(@PathVariable int userId, @PathVariable int copies, @RequestBody MovieEntity movie){
         System.out.println(movie);
@@ -33,9 +34,18 @@ public class MovieController {
     }
 
     @PutMapping("inventory")
-    public InventoryEntity updateInventory(@RequestBody InventoryEntity inventory){
+    public InventoryEntity updateInventoryForMovie(@RequestBody InventoryEntity inventory){
 
-        return inventoryService.updateInventory(inventory);
+        return inventoryService.updateInventoryForMovie(inventory);
+
+    }
+
+    @PutMapping("{movieId}/buyer/{buyerId}/seller/{sellerId}/buy")
+    public TransactionEntity buyMovie(@PathVariable int movieId, @PathVariable int buyerId, @PathVariable int sellerId){
+
+        inventoryService.updateCopies(movieId, sellerId);
+
+        return transactionService.buyMovie(movieService.getMovieById(movieId),userService.getUserById(buyerId), userService.getUserById(sellerId));
 
     }
 

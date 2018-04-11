@@ -79,7 +79,7 @@
         }
 
         function buyMovie(sellerId) {
-            userService
+            movieService
                 .buyMovie(userId, sellerId, movieId)
                 .then(function (response) {
                     // alert("Seller will contact you with further info");

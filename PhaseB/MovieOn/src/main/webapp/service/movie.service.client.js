@@ -5,9 +5,10 @@
     function movieService($http) {
         var api = {
             "sellMovie": sellMovie,
-            "getInventory": getInventory,
-            "updateInventory": updateInventory,
-            "getSellerInventory": getMovieInventory,
+            "buyMovie": buyMovie,
+            "getInventoryForMovie": getInventoryForMovie,
+            "updateInventoryForMovie": updateInventoryForMovie,
+            "getSellerInventory": getSellerInventory,
             "getAllSellerForMovie": getAllSellerForMovie
         };
         return api;
@@ -20,7 +21,7 @@
             return $http.get("api/movie/" +movieId+"/inventory");
         }
 
-        function getInventory(userId, movieId) {
+        function getInventoryForMovie(userId, movieId) {
             return $http.get("api/movie/" + movieId + "/user/" + userId + "/copies");
         }
 
@@ -28,7 +29,11 @@
             return $http.post("api/movie/user/" + userId + "/sell/copies/" + copies, movie);
         }
 
-        function updateInventory(inventory) {
+        function buyMovie(buyerId, sellerId, movieId) {
+            return $http.put("api/movie/"+movieId+"/buyer/" + buyerId + "/seller/"+sellerId+"/buy");
+        }
+
+        function updateInventoryForMovie(inventory) {
             return $http.put("api/movie/inventory", inventory);
         }
     }

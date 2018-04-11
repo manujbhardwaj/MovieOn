@@ -83,7 +83,7 @@
 
         <div class="carousel-inner">
             <div class="item" ng-class="{active:!$index}" ng-repeat="movie in model.upcomingMovies">
-                <img class="hm-img" ng-src={{movie.backdrop_path}}>
+                <img ng-src={{movie.backdrop_path}}>
                 <a class="carousel-caption home-image" href="#!/movie/{{movie.id}}">
                     <h4>{{movie.title}}</h4>
                 </a>
