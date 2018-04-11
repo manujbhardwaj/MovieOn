@@ -23,17 +23,7 @@
         }
 
         function init() {
-            movieLikeService
-                .getUserLike(vm.userId)
-                .then(function (value) {
-                    console.log(value);
-                    if(value.data.length == 0){
-                        vm.message = "You have not liked any movies";
-                    }
-                    vm.likeList = value.data;
-                }, function (reason) {
-
-                });
+            getUserLikes();
             openNav();
             $(window).width(function() {
                 if ($(this).width() <= 768) {
@@ -46,11 +36,25 @@
         }
         init();
 
-        function unlikeMovie(movieId, index) {
+        function unlikeMovie(movieId) {
             movieLikeService
-                .unlikeMovie(userId, movieId)
+                .unlikeMovie(vm.userId, movieId)
                 .then(function (res) {
-                    vm.movieList[index].data.liked = false;
+                    getUserLikes();
+                });
+        }
+
+        function getUserLikes() {
+            movieLikeService
+                .getUserLike(vm.userId)
+                .then(function (value) {
+                    console.log(value);
+                    if(value.data.length == 0){
+                        vm.message = "You have not liked any movies";
+                    }
+                    vm.likeList = value.data;
+                }, function (reason) {
+
                 });
         }
 
