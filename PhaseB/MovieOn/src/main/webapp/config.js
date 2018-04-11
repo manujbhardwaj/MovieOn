@@ -94,6 +94,12 @@
                 controllerAs: "model",
                 resolve: { currentUser: checkLoggedIn}
             })
+            .when("/fav", {
+                templateUrl: "view/user-fav.view.client.html",
+                controller: "userFavController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
             .otherwise({redirectTo:"/home"});
 
         function checkCurrentUser($q, userService, $location) {
