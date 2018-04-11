@@ -70,6 +70,15 @@ public class MovieController {
 
     }
 
+    @DeleteMapping("user/{userId}/seller/{sellerId}/unfav")
+    public ResponseEntity unfavSeller(@PathVariable int userId, @PathVariable int sellerId){
+
+        favSellerService.unfavSeller(userId, sellerId);
+
+        return new ResponseEntity<>("{}", HttpStatus.OK);
+
+    }
+
     @GetMapping("user/{userId}/inventory")
     public List<InventoryEntity> getMovieInventory(@PathVariable int userId){
 

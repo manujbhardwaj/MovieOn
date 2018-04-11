@@ -30,7 +30,7 @@
                 });
         }
 
-        function unfollowSeller(_id, index) {
+        function unfollowSeller(sellerId, index) {
             movieService
                 .unfavSeller(vm.userId, sellerId)
                 .then(function (res) {

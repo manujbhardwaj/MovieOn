@@ -10,12 +10,17 @@
             "getMovieInventory": getMovieInventory,
             "getMovieDetails": getMovieDetails,
             "favSeller": favSeller,
+            "unfavSeller": unfavSeller,
             "getFavSeller": getFavSeller
         };
         return api;
 
         function favSeller(userId, seller) {
             return $http.post("api/movie/user/" + userId + "/seller/fav", seller);
+        }
+
+        function unfavSeller(userId, sellerId) {
+            return $http.delete("api/movie/user/" + userId + "/seller/"+sellerId+"/unfav");
         }
 
         function getMovieInventory(userId) {

@@ -56,7 +56,7 @@
                 templateUrl: "view/movie-buy.view.client.html",
                 controller: "movieBuyController",
                 controllerAs: "model",
-                resolve: { currentUser: checkCurrentUser}
+                resolve: { currentUser: checkLoggedIn}
             })
             .when("/users", {
                 templateUrl: "view/users.view.client.html",

@@ -19,7 +19,7 @@
 
 <div id="mySidenav" class="sidenav">
     <div ng-show="model.userId">
-        <a class="active-page" href="#!/profile">Profile</a>
+        <a href="#!/profile">Profile</a>
     </div>
     <div ng-show="model.user.type == 'Buyer'">
         <a href="#!/like">
@@ -50,10 +50,6 @@
         </a>
     </div>
     <div ng-show="model.user.type == 'Admin'">
-        <a href="#!/userApprove">
-            Approve Sellers
-            <span><i class="fa fa-user-circle-o"></i></span>
-        </a>
         <a href="#!/users">
             All Users
             <span><i class="fa fa-user-circle-o"></i></span>
@@ -69,6 +65,7 @@
     </div>
     <div ng-show="!model.userId">
         <a href="#!/login">Login</a>
+        <a href="#!/register">Register</a>
     </div>
     <div ng-show="model.userId">
         <a ng-click="model.logout()">Logout</a>

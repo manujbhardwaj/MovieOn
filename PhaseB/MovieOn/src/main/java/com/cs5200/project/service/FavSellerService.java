@@ -18,6 +18,10 @@ public class FavSellerService {
         return favSellerRepository.save(new FavSellerEntity(userId, seller));
     }
 
+    public void unfavSeller(int userId, int sellerId) {
+        favSellerRepository.deleteByBuyerIdAndSellerId(userId, sellerId);
+    }
+
     public List<FavSellerEntity> getFavSeller(int userId) {
         return favSellerRepository.findByBuyerId(userId);
     }
