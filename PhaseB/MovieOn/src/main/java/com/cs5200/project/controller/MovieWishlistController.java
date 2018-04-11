@@ -45,4 +45,11 @@ public class MovieWishlistController {
 
     }
 
+    @GetMapping("user/{userId}/wishlist")
+    public List<MovieWishlistEntity> getUserWishlist(@PathVariable int userId){
+
+        return movieWishlistService.getUserWishlist(userId);
+
+    }
+
 }

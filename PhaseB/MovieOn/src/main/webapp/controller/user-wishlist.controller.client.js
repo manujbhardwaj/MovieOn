@@ -1,12 +1,12 @@
 (function () {
     angular
-        .module("WebAppMaker")
-        .controller("UserWishlistController", userWishlistController);
-    function userWishlistController(UserService, MovieService, $location, loggedIn) {
+        .module("MovieOn")
+        .controller("userWishlistController", userWishlistController);
+    function userWishlistController(userService, movieWishlistService, $location, loggedIn) {
         var vm = this;
         if(loggedIn){
-            var userId = loggedIn._id;
-            vm.userId = userId;
+            vm.userId = loggedIn.id;
+            vm.user = loggedIn;
         }
 
         /*event handlers*/
@@ -23,18 +23,8 @@
         }
 
         function init() {
-            UserService
-                .findUserById(userId)
-                .then(function (user) {
-                    vm.user = user;
-                    if(user.moviesWishlist.length == 0)
-                        vm.message = "You have no wishlist items";
-                    else
-                        getMovies(user.moviesWishlist);
-                });
-
+            getUserWishlist();
             openNav();
-
             $(window).width(function() {
                 if ($(this).width() <= 768) {
                     closeNav();
@@ -46,16 +36,16 @@
         }
         init();
 
-        function unWishlistMovie(movieId, index) {
-            UserService
-                .unWishListMovie(userId, movieId)
+        function unWishlistMovie(movieId) {
+            movieWishlistService
+                .unWishListMovie(vm.userId, movieId)
                 .then(function (res) {
-                    vm.movieList[index].data.wishlist = false;
+                    getUserWishlist();
                 });
         }
 
         function logout() {
-            UserService
+            userService
                 .logout()
                 .then(function(response) {
                     $location.url("/home");
@@ -64,19 +54,18 @@
                 });
         }
 
-        function getMovies(movies) {
-            var movieList = [];
-            for(var i = 0; i < movies.length; i++){
-                MovieService
-                    .getMovieDetails(movies[i])
-                    .then(function(response) {
-                        response.data.backdrop_path = 'https://image.tmdb.org/t/p/w780'+response.data.backdrop_path;
-                        response.data.poster_path = 'https://image.tmdb.org/t/p/w780'+response.data.poster_path;
-                        response.data.wishlist = true;
-                        movieList.push(response);
-                    });
-            }
-            vm.movieList = movieList;
+        function getUserWishlist() {
+            movieWishlistService
+                .getUserWishlist(vm.userId)
+                .then(function (value) {
+                    console.log(value);
+                    if(value.data.length === 0){
+                        vm.message = "You have not wishlisted any movies";
+                    }
+                    vm.wishList = value.data;
+                }, function (reason) {
+                    vm.error = "Failed to retrieve wishListed movies"
+                });
         }
 
         function openNav() {

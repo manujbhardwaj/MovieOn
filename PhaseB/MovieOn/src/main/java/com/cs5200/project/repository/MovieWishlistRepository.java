@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface MovieWishlistRepository extends CrudRepository<MovieWishlistEntity, Integer> {
 
@@ -12,4 +14,6 @@ public interface MovieWishlistRepository extends CrudRepository<MovieWishlistEnt
     void deleteByBuyerIdAndMovieId(int userId, int movieId);
 
     boolean existsByBuyerIdAndMovieId(int userId, int movieId);
+
+    List<MovieWishlistEntity> findByBuyerId(int userId);
 }

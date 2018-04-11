@@ -82,6 +82,12 @@
                 controllerAs: "model",
                 resolve: { loggedIn: checkLoggedIn }
             })
+            .when("/wishlist", {
+                templateUrl: "view/user-wishlist.view.client.html",
+                controller: "userWishlistController",
+                controllerAs: "model",
+                resolve: { loggedIn: checkLoggedIn }
+            })
             .when("/inventory", {
                 templateUrl: "view/user-inventory.view.client.html",
                 controller: "inventoryController",

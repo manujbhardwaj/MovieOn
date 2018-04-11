@@ -24,8 +24,6 @@ public class MovieLikeService {
     }
 
     public void userUnlikeMovie(int userId, int movieId) {
-        System.out.println(userId);
-        System.out.println(movieId);
 
         movieLikeRepository.deleteByBuyerIdAndMovieId(userId, movieId);
     }

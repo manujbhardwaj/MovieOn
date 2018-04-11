@@ -19,5 +19,6 @@ public interface MovieLikeRepository extends CrudRepository<MovieLikeEntity, Int
     void deleteByBuyerIdAndMovieId(int userId, int movieId);
 
     boolean existsByBuyerIdAndMovieId(int userId, int movieId);
+
     List<MovieLikeEntity> findByBuyerId(int userId);
 }

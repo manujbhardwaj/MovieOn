@@ -9,6 +9,8 @@ import com.cs5200.project.repository.MovieWishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieWishlistService {
 
@@ -17,6 +19,10 @@ public class MovieWishlistService {
 
     public MovieWishlistEntity userWishlistMovie(UserEntity user, MovieEntity movie) {
         return movieWishlistRepository.save(new MovieWishlistEntity(user, movie));
+    }
+
+    public List<MovieWishlistEntity> getUserWishlist (int userId) {
+        return movieWishlistRepository.findByBuyerId(userId);
     }
 
     public void userUnwishlistMovie(int userId, int movieId) {

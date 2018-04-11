@@ -48,13 +48,12 @@
             movieLikeService
                 .getUserLike(vm.userId)
                 .then(function (value) {
-                    console.log(value);
-                    if(value.data.length == 0){
+                    if(value.data.length === 0){
                         vm.message = "You have not liked any movies";
                     }
                     vm.likeList = value.data;
                 }, function (reason) {
-
+                    vm.error = "Failed to retrieve liked movies"
                 });
         }
 
