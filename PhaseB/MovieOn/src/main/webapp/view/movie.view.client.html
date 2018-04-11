@@ -203,7 +203,7 @@
         <div class="col-md-4 col-sm-12 col-xs-12 panel panel-default">
             <h4 class="text-center"><strong>Similar Movies</strong></h4>
             <div ng-repeat="movie in model.similarMovies">
-                <a href="#!/movie/movie.id" class="thumbnail">
+                <a href="#!/movie/{{movie.id}}" class="thumbnail">
                     <img class="img-responsive" ng-src="{{movie.backdrop_path}}">
                     <div class = "caption">
                         <h4 class="text-center hideOverflow">{{movie.title}}</h4>

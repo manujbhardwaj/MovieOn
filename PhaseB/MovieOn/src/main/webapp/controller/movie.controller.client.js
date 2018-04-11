@@ -2,7 +2,8 @@
     angular
         .module("MovieOn")
         .controller("movieController", movieController);
-    function movieController($routeParams, $location, $sce, movieService, userService, currentUser, apiService) {
+    function movieController($routeParams, $location, $sce, movieService, movieLikeService, movieWishlistService,
+                             userService, currentUser, apiService) {
         var vm = this;
         vm.movieId = $routeParams['mid'];
         if(currentUser){
@@ -81,7 +82,7 @@
         init();
 
         function hasUserLikedMovie() {
-            movieService
+            movieLikeService
                 .hasUserLikedMovie(vm.userId, vm.movieId)
                 .then(function (value) {
                     vm.liked = value.data;
@@ -91,7 +92,7 @@
         }
 
         function hasUserWishlistMovie() {
-            movieService
+            movieWishlistService
                 .hasUserWishlistMovie(vm.userId, vm.movieId)
                 .then(function (value) {
                     vm.wishlist = value.data;
@@ -101,7 +102,7 @@
         }
 
         function likeMovie() {
-            movieService
+            movieLikeService
                 .likeMovie(vm.userId, vm.movie)
                 .then(function (res) {
                     vm.likes = res.data;
@@ -110,7 +111,7 @@
         }
 
         function unlikeMovie() {
-            movieService
+            movieLikeService
                 .unlikeMovie(vm.userId, vm.movieId)
                 .then(function (res) {
                     vm.likes = res.data;
@@ -119,7 +120,7 @@
         }
 
         function wishlistMovie() {
-            movieService
+            movieWishlistService
                 .wishlistMovie(vm.userId, vm.movie)
                 .then(function (res) {
                     vm.wishlist = true;
@@ -129,7 +130,7 @@
         }
 
         function unWishlistMovie() {
-            movieService
+            movieWishlistService
                 .unwishlistMovie(vm.userId, vm.movieId)
                 .then(function (res) {
                     vm.wishlist = false;

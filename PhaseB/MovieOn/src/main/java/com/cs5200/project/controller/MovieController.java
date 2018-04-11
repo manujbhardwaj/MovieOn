@@ -17,12 +17,6 @@ public class MovieController {
     private MovieService movieService;
 
     @Autowired
-    private MovieLikeService movieLikeService;
-
-    @Autowired
-    private MovieWishlistService movieWishlistService;
-
-    @Autowired
     private UserService userService;
 
     @Autowired
@@ -30,19 +24,6 @@ public class MovieController {
 
     @Autowired
     private FavSellerService favSellerService;
-
-    @PostMapping("user/{userId}/like")
-    public int likeMovie(@PathVariable int userId, @RequestBody MovieEntity movie){
-
-        System.out.println(movie);
-
-        movieService.insertMovie(movie);
-
-        movieLikeService.userLikeMovie(userService.getUserById(userId), movie);
-
-        return movieLikeService.getLikeCountForMovie(movie.getId());
-
-    }
 
     @PostMapping("user/{userId}/sell/copies/{copies}")
     public InventoryEntity sellMovie(@PathVariable int userId, @PathVariable int copies, @RequestBody MovieEntity movie){
@@ -61,22 +42,6 @@ public class MovieController {
 
     }
 
-    @PutMapping("{movieId}/user/{userId}/unlike")
-    public int unlikeMovie(@PathVariable int movieId, @PathVariable int userId){
-
-        movieLikeService.userUnlikeMovie(userId, movieId);
-
-        return movieLikeService.getLikeCountForMovie(movieId);
-
-    }
-
-    @GetMapping("{movieId}/user/{userId}/liked")
-    public boolean hasUserLikedMovie(@PathVariable int userId, @PathVariable int movieId){
-
-        return movieLikeService.hasUserLikedMovie(userId, movieId);
-
-    }
-
     @GetMapping("{movieId}/user/{userId}/copies")
     public InventoryEntity getMovieCopies(@PathVariable int movieId, @PathVariable int userId){
         InventoryEntity inventoryEntity = inventoryService.getMovieCopies(userId, movieId);
@@ -85,49 +50,16 @@ public class MovieController {
 
     }
 
-
-
-
-    @PostMapping("user/{userId}/wishlist")
-    public MovieWishlistEntity wishlistMovie(@PathVariable int userId, @RequestBody MovieEntity movie){
-
-        movieService.insertMovie(movie);
-
-        return movieWishlistService.userWishlistMovie(userService.getUserById(userId), movie);
-    }
-
     @PostMapping("user/{userId}/seller/fav")
     public FavSellerEntity favSeller(@PathVariable int userId, @RequestBody UserEntity seller){
 
         return favSellerService.favSeller(userId, seller);
     }
 
-    @PutMapping("{movieId}/user/{userId}/unwishlist")
-    public ResponseEntity<String> unwishlistMovie(@PathVariable int movieId, @PathVariable int userId){
-
-        movieWishlistService.userUnwishlistMovie(userId, movieId);
-
-        return new ResponseEntity<>("{}", HttpStatus.OK);
-    }
-
-    @GetMapping("{movieId}/user/{userId}/wishlist")
-    public boolean hasUserWishlistMovie(@PathVariable int userId, @PathVariable int movieId){
-
-        return movieWishlistService.hasUserWishlistMovie(userId, movieId);
-
-    }
-
     @GetMapping("{movieId}/inventory")
     public List<InventoryEntity> getMovieDetails(@PathVariable int movieId){
 
         return inventoryService.getMovieDetails(movieId);
-
-    }
-
-    @GetMapping("user/{userId}/like")
-    public List<MovieLikeEntity> getUserLike(@PathVariable int userId){
-
-        return movieLikeService.getUserLike(userId);
 
     }
 

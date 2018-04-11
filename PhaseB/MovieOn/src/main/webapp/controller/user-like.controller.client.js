@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("userLikeController", userLikeController);
-    function userLikeController(userService, movieService, $location, loggedIn) {
+    function userLikeController(userService, movieLikeService, $location, loggedIn) {
         var vm = this;
         if(loggedIn){
             vm.userId = loggedIn.id;
@@ -23,7 +23,7 @@
         }
 
         function init() {
-            movieService
+            movieLikeService
                 .getUserLike(vm.userId)
                 .then(function (value) {
                     console.log(value);
@@ -47,7 +47,7 @@
         init();
 
         function unlikeMovie(movieId, index) {
-            UserService
+            movieLikeService
                 .unlikeMovie(userId, movieId)
                 .then(function (res) {
                     vm.movieList[index].data.liked = false;
@@ -55,28 +55,13 @@
         }
 
         function logout() {
-            UserService
+            userService
                 .logout()
                 .then(function(response) {
                     $location.url("/home");
                 }, function (err) {
                     vm.error = "Problem";
                 });
-        }
-
-        function getMovies(movies) {
-            var movieList = [];
-            for(var i = 0; i < movies.length; i++){
-                MovieService
-                    .getMovieDetails(movies[i])
-                    .then(function(response) {
-                        response.data.backdrop_path = 'https://image.tmdb.org/t/p/w780'+response.data.backdrop_path;
-                        response.data.poster_path = 'https://image.tmdb.org/t/p/w780'+response.data.poster_path;
-                        response.data.liked = true;
-                        movieList.push(response);
-                    });
-            }
-            vm.movieList = movieList;
         }
 
         function openNav() {
