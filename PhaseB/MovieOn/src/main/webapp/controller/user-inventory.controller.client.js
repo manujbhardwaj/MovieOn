@@ -59,7 +59,7 @@
 
         function getMovies() {
             movieService
-                .getMovieInventory(vm.userId)
+                .getSellerInventory(vm.userId)
                 .then(function (value) {
                     vm.movieList = value.data;
                 }, function (reason) {

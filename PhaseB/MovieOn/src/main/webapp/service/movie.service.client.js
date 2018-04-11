@@ -7,12 +7,12 @@
             "sellMovie": sellMovie,
             "getInventory": getInventory,
             "updateInventory": updateInventory,
-            "getMovieInventory": getMovieInventory,
+            "getSellerInventory": getMovieInventory,
             "getAllSellerForMovie": getAllSellerForMovie
         };
         return api;
 
-        function getMovieInventory(userId) {
+        function getSellerInventory (userId) {
             return $http.get("api/movie/user/" +userId+"/inventory");
         }
 
