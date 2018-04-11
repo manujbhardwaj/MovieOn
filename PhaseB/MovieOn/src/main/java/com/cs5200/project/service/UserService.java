@@ -29,6 +29,10 @@ public class UserService {
         return userRepository.findByType("Seller");
     }
 
+    public List<UserEntity> getAllUsers() {
+        return (List<UserEntity>)userRepository.findAll();
+    }
+
     public UserEntity approveRejectProf(UserEntity seller) {
         return userRepository.save(seller);
     }

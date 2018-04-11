@@ -1,12 +1,12 @@
 (function () {
     angular
-        .module("WebAppMaker")
-        .controller("UsersController", usersController);
-    function usersController(UserService, $location, loggedIn) {
+        .module("MovieOn")
+        .controller("usersController", usersController);
+    function usersController(userService, $location, currentUser) {
         var vm = this;
-        if(loggedIn){
-            var userId = loggedIn._id;
-            vm.userId = userId;
+        if(currentUser){
+            vm.userId = currentUser.id;
+            vm.user = currentUser;
         }
 
         /*event handlers*/
@@ -17,21 +17,14 @@
         vm.logout = logout;
 
         function init() {
-            UserService
+            userService
                 .getAllUsers()
                 .then(function (users) {
-                    if(users.length == 0)
+                    if(users.length === 0)
                         vm.message = "No users in database";
                     else{
-                        users.sort(compare);
-                        vm.users = users;
+                        vm.users = users.data;
                     }
-                });
-
-            UserService
-                .findUserById(userId)
-                .then(function (user) {
-                    vm.user = user;
                 });
             openNav();
             $(window).width(function() {
@@ -46,7 +39,7 @@
         init();
 
         function logout() {
-            UserService
+            userService
                 .logout()
                 .then(function(response) {
                     $location.url("/home");
@@ -69,14 +62,6 @@
 
         function gotoHome() {
             $location.url('/home');
-        }
-
-        function compare(a, b) {
-            if (a.username > b.username)
-                return 1;
-            if (a.username < b.username)
-                return -1;
-            return 0;
         }
 
         function getUserInfo(buyerId) {

@@ -8,32 +8,24 @@
             "register": register,
             "loggedIn": loggedIn,
             "logout": logout,
-            "findAllSeller": findAllSeller,
-            "approveOrReject": approveOrReject,
             "updateUser": updateUser
         };
         return api;
 
         function login(user) {
-            return $http.post("/api/login", user);
-        }
-        function approveOrReject(seller) {
-            return $http.put("/api/seller/approve", seller);
-        }
-        function findAllSeller() {
-            return $http.get("/api/seller");
+            return $http.post("/api/user/login", user);
         }
         function loggedIn() {
-            return $http.get("/api/loggedIn");
+            return $http.get("/api/user/loggedIn");
         }
         function logout() {
-            return $http.post("/api/logout");
+            return $http.post("/api/user/logout");
         }
         function register(user) {
-            return $http.post("/api/register", user);
+            return $http.post("/api/user/register", user);
         }
         function updateUser(user) {
-            return $http.post("/api/update", user);
+            return $http.post("/api/user/update", user);
         }
     }
 })();

@@ -13,10 +13,8 @@ public class PhoneEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "phoneNo")
-    private String phoneNo;
-    @Column(name = "type")
-    private String type;
+    @Column(name = "number")
+    private String number;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "phone_user_association"))
@@ -25,10 +23,18 @@ public class PhoneEntity {
     public PhoneEntity() {
     }
 
-    public PhoneEntity(String phoneNo, String type, UserEntity user) {
-        this.phoneNo = phoneNo;
-        this.type = type;
+    public PhoneEntity(String number, UserEntity user) {
+        this.number = number;
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "PhoneEntity{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", user=" + user +
+                '}';
     }
 
     public int getId() {
@@ -39,20 +45,12 @@ public class PhoneEntity {
         this.id = id;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getNumber() {
+        return number;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public UserEntity getUser() {

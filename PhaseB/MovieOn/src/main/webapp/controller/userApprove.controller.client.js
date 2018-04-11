@@ -2,14 +2,12 @@
     angular
         .module("MovieOn")
         .controller("userApproveController", userApproveController);
-    function userApproveController($routeParams, NgTableParams, $filter, currentUser, $location, userService) {
+    function userApproveController($routeParams, NgTableParams, currentUser, $location, userService, adminService) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
             vm.user = currentUser;
         }
-        vm.hwId = $routeParams['hwid'];
-        vm.courseId = $routeParams['cid'];
 
         /*event handlers*/
         vm.openNav = openNav;
@@ -18,12 +16,11 @@
         vm.approveOrReject = approveOrReject;
 
         function approveOrReject(seller) {
-            userService.approveOrReject(seller)
+            adminService
+                .approveOrReject(seller)
                 .then(function (value) {
-                    console.log(value);
                     vm.message = "Request successfully processed."
                 }, function (reason) {
-                    console.log(reason);
                     vm.error = "There was an error. Please contact admin."
                 });
         }
@@ -38,7 +35,8 @@
         }
 
         function init() {
-            userService.findAllSeller()
+            adminService
+                .findAllSeller()
                 .then(function (value) {
                     if(value.data.length == 0) {
                         vm.message = "No Sellers";

@@ -1,0 +1,128 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#!/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/home">MovieOn</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a class="active-page" href="#!/user">Profile</a>
+    </div>
+    <div ng-show="model.user.type == 'Buyer'">
+        <a href="#!/like">
+            Likes
+            <span><i class="fa fa-thumbs-up"></i></span>
+        </a>
+        <a href="#!/bought">
+            Bought
+            <span><i class="fa fa-file-video-o"></i></span>
+        </a>
+        <a href="#!/wishlist">
+            Wishlist
+            <span><i class="fa fa-star"></i></span>
+        </a>
+        <a href="#!/fav">
+            Favorite Sellers
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Seller'">
+        <a href="#!/order">
+            Orders
+            <span><i class="fa fa-usd"></i></span>
+        </a>
+        <a href="#!/inventory">
+            Inventory
+            <span><i class="fa fa-table"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Admin'">
+        <a href="#!/users">
+            All Users
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+        <a href="#!/msgs">
+            Messages
+            <span><i class="fa fa-envelope"></i></span>
+        </a>
+        <a href="#!/orders">
+            All Orders
+            <span><i class="fa fa-shopping-basket"></i></span>
+        </a>
+    </div>
+    <div ng-show="!model.userId">
+        <a href="#!/login">Login</a>
+    </div>
+    <div ng-show="model.userId">
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+
+<div class="form-center2">
+    <div class="container-fluid panel panel-default" id="main">
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
+        <div ng-show="model.message" class="alert alert-success" role="alert">
+            {{model.message}}
+        </div>
+        <form>
+            <label><h4><strong>Phone</strong></h4></label>
+            <div class="input-group">
+                <span class="input-group-addon fixed-width">
+                    <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                    <label class="registerLabel">Number</label>
+                </span>
+                <input ng-model="model.phone.number" type="text" class="form-control" placeholder="Number" aria-describedby="basic-addon1">
+            </div>
+            <br>
+            <div ng-if="model.phoneId == 'new'">
+                <a class="btn btn-success btn-block"
+                   ng-click="model.addPhone(model.phone)">Add Phone</a>
+            </div>
+            <div ng-if="model.phoneId != 'new'">
+                <a class="btn btn-success btn-block"
+                   ng-click="model.updatePhone(model.phone)">Update Phone</a>
+            </div>
+
+            <a class="btn btn-danger btn-block" href="#!/profile">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#!/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a>Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

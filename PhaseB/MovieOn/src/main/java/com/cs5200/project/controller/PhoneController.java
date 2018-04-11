@@ -6,6 +6,8 @@ import com.cs5200.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/phone")
 public class PhoneController {
@@ -20,5 +22,15 @@ public class PhoneController {
     public PhoneEntity addAddress (@PathVariable int userId, @RequestBody PhoneEntity phone){
         phone.setUser(userService.getUserById(userId));
         return phoneService.addPhone(phone);
+    }
+
+    @GetMapping("user/{userId}")
+    public List<PhoneEntity> getUserPhone (@PathVariable int userId){
+        return phoneService.getUserPhone(userId);
+    }
+
+    @GetMapping("{phoneId}")
+    public PhoneEntity getPhoneById (@PathVariable int phoneId){
+        return phoneService.getPhoneById(phoneId);
     }
 }

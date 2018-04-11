@@ -34,6 +34,4 @@ public class InventoryService {
     public List<InventoryEntity> getMovieDetails(int movieId) {
         return inventoryRepository.findByMovieId(movieId);
     }
-
-
 }

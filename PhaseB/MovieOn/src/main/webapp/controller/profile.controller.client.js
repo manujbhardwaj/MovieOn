@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("profileController", profileController);
-    function profileController(currentUser, userService, addressService, $location) {
+    function profileController(currentUser, userService, addressService, $location, phoneService) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
@@ -15,6 +15,7 @@
         vm.closeNav = closeNav;
         vm.logout = logout;
         vm.updateAddress = updateAddress;
+        vm.updatePhone = updatePhone;
 
         function init() {
             openNav();
@@ -29,8 +30,15 @@
             addressService
                 .getUserAddress(vm.userId)
                 .then(function (value) {
-                    console.log(value);
                     vm.addresses = value.data;
+                }, function (reason) {
+                    console.log(reason);
+                });
+
+            phoneService
+                .getUserPhone(vm.userId)
+                .then(function (value) {
+                    vm.phones = value.data;
                 }, function (reason) {
                     console.log(reason);
                 });
@@ -39,6 +47,10 @@
 
         function updateAddress(addressId) {
             $location.url("/address/" + addressId);
+        }
+
+        function updatePhone(phoneId) {
+            $location.url("/phone/" + phoneId);
         }
 
         function logout() {

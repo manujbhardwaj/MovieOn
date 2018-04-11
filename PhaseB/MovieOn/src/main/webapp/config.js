@@ -8,77 +8,89 @@
                 templateUrl: "view/login.view.client.html",
                 controller: "loginController",
                 controllerAs: "model",
-                resolve: { currentUser: loggedIn}
+                resolve: { currentUser: checkCurrentUser}
             })
             .when("/register", {
                 templateUrl: "view/register.view.client.html",
                 controller: "registerController",
                 controllerAs: "model",
-                resolve: { currentUser: checkLoggedIn}
+                resolve: { currentUser: checkCurrentUser}
             })
             .when("/profile", {
                 templateUrl: "view/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model",
-                resolve: { currentUser: loggedIn}
+                resolve: { currentUser: checkLoggedIn}
             })
             .when("/home", {
                 templateUrl: "view/home.view.client.html",
                 controller: "homeController",
                 controllerAs: "model",
-                resolve: { currentUser: checkLoggedIn}
+                resolve: { currentUser: checkCurrentUser}
             })
             .when("/movie/:mid", {
                 templateUrl: "view/movie.view.client.html",
                 controller: "movieController",
                 controllerAs: "model",
-                resolve: { currentUser: checkLoggedIn}
+                resolve: { currentUser: checkCurrentUser}
             })
             .when("/contactAdmin", {
                 templateUrl: "view/contactAdmin.view.client.html",
                 controller: "contactAdminController",
                 controllerAs: "model",
-                resolve: { currentUser: checkLoggedIn}
+                resolve: { currentUser: checkCurrentUser}
             })
             .when("/address/:aid", {
                 templateUrl: "view/address.view.client.html",
                 controller: "addressController",
                 controllerAs: "model",
-                resolve: { currentUser: loggedIn}
+                resolve: { currentUser: checkLoggedIn}
+            })
+            .when("/phone/:pid", {
+                templateUrl: "view/phone.view.client.html",
+                controller: "phoneController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
             })
             .when("/movie/:mid/buy", {
                 templateUrl: "view/movie-buy.view.client.html",
                 controller: "movieBuyController",
                 controllerAs: "model",
-                resolve: { currentUser: loggedIn}
+                resolve: { currentUser: checkCurrentUser}
+            })
+            .when("/users", {
+                templateUrl: "view/users.view.client.html",
+                controller: "usersController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
             })
             .when("/userApprove", {
                 templateUrl: "view/userApprove.view.client.html",
                 controller: "userApproveController",
                 controllerAs: "model",
-                resolve: { currentUser: loggedIn}
+                resolve: { currentUser: checkLoggedIn}
             })
             .when("/search/:sid", {
                 templateUrl: "view/search.view.client.html",
                 controller: "searchController",
                 controllerAs: "model",
-                resolve: { currentUser: checkLoggedIn}
+                resolve: { currentUser: checkCurrentUser}
             })
             .when("/like", {
                 templateUrl: "view/user-like.view.client.html",
                 controller: "userLikeController",
                 controllerAs: "model",
-                resolve: { loggedIn: loggedIn }
+                resolve: { loggedIn: checkLoggedIn }
             })
             .when("/inventory", {
                 templateUrl: "view/user-inventory.view.client.html",
                 controller: "inventoryController",
                 controllerAs: "model",
-                resolve: { currentUser: loggedIn}
+                resolve: { currentUser: checkLoggedIn}
             })
             .otherwise({redirectTo:"/home"});
 
-        function loggedIn($q, userService, $location) {
+        function checkCurrentUser($q, userService, $location) {
             var deferred = $q.defer();
             userService
                 .loggedIn()
@@ -88,11 +100,10 @@
                         deferred.resolve(user);
                     } else {
                         deferred.resolve(null);
-                        $location.url('/login');
                     }
                 }, function (err) {
                     deferred.reject();
-                    $location.url('/login');
+                    $location.url('/home');
                 });
             return deferred.promise;
         }
@@ -105,9 +116,9 @@
                     var user = response.data;
                     if (user.id != 0) {
                         deferred.resolve(user);
-                        $location.url('/profile');
                     } else {
-                        deferred.resolve(null);
+                        deferred.reject();
+                        $location.url('/login');
                     }
                 }, function (err) {
                     deferred.reject();

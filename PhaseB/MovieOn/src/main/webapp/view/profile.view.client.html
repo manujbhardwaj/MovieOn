@@ -143,6 +143,20 @@
                     </div>
                 </div>
             </div>
+            <div ng-repeat="phone in model.phones">
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon glyphicon-eye-open user-grey"></span>
+                        <label class="registerLabel">Phone {{$index + 1}}</label>
+                    </span>
+
+                    <div class="form-horizontal">
+                        <input value="{{phone.number}}" type="text" class="form-control" aria-describedby="basic-addon1" readonly>
+                        <button class="btn btn-success btn-block" ng-click="model.updatePhone(phone.id)" type="button">Update Phone</button>
+                    </div>
+                </div>
+            </div>
 
             <a class="btn btn-success btn-block"
                ng-click="model.update(model.user)">Update</a>

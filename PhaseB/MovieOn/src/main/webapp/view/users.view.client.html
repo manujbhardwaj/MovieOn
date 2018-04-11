@@ -81,13 +81,9 @@
     </div>
     <div class="panel panel-primary container-fluid" ng-repeat="user in model.users">
         <a ng-click="model.getUserInfo(user._id)" class="text">
-            <h4 ng-if="user.facebook.id" class="hideOverflow">Username: Facebook User</h4>
-            <h4 ng-if="user.google.id" class="hideOverflow">Username: Google User</h4>
-            <h4 ng-if="!user.google.id && !user.facebook.id" class="hideOverflow">Username: {{user.username}}</h4>
+            <h4 class="hideOverflow">Username: {{user.username}}</h4>
             <h5 class="hideOverflow">User Type: {{user.type}}</h5>
             <h5 class="hideOverflow">Name: {{user.firstName}} {{user.lastName}}</h5>
-            <h5 ng-if="user.deleteFlag" class="hideOverflow red">Status: Deleted</h5>
-            <h5 ng-if="!user.deleteFlag" class="hideOverflow">Status: Not deleted</h5>
         </a>
     </div>
 </div>

@@ -5,6 +5,8 @@ import com.cs5200.project.repository.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PhoneService {
 
@@ -13,5 +15,13 @@ public class PhoneService {
 
     public PhoneEntity addPhone(PhoneEntity phone) {
         return phoneRepository.save(phone);
+    }
+
+    public List<PhoneEntity> getUserPhone(int userId) {
+        return phoneRepository.findByUserId(userId);
+    }
+
+    public PhoneEntity getPhoneById(int phoneId) {
+        return phoneRepository.findById(phoneId);
     }
 }

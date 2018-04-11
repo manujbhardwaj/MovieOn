@@ -1,6 +1,5 @@
 package com.cs5200.project.controller;
 
-import com.cs5200.project.entity.AddressEntity;
 import com.cs5200.project.entity.UserEntity;
 import com.cs5200.project.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
@@ -13,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/user")
 public class UserController {
 
     @Autowired
@@ -46,13 +45,6 @@ public class UserController {
 
     }
 
-    @GetMapping("seller")
-    public List<UserEntity> findAllSeller(){
-        System.out.println("manuj done" );
-        return userService.findAllSeller();
-
-    }
-
     @PostMapping("logout")
     public ResponseEntity logout(HttpSession session){
 
@@ -79,16 +71,11 @@ public class UserController {
     }
 
     @PostMapping("update")
-    public UserEntity updateUser(@RequestBody UserEntity user) {
+    public UserEntity updateUser(@RequestBody UserEntity user, HttpSession session) {
 
         user.setPasswrd(BCrypt.hashpw(user.getPasswrd(), BCrypt.gensalt()));
+        session.setAttribute("user_session", user);
+        session.setMaxInactiveInterval(600);
         return userService.updateUser(user);
-    }
-
-    @PutMapping("seller/approve")
-    public UserEntity approveRejectProf(@RequestBody UserEntity seller) {
-
-        return userService.approveRejectProf(seller);
-
     }
 }
