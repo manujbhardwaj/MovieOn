@@ -3,7 +3,7 @@
     angular
         .module("MovieOn")
         .controller("movieBuyController", movieBuyController);
-    function movieBuyController($routeParams, $location, userService, currentUser, movieService) {
+    function movieBuyController($routeParams, $location, userService, currentUser, movieService, favSellerService) {
         var vm = this;
         vm.movieId = $routeParams['mid'];
         if(currentUser){
@@ -23,7 +23,7 @@
         vm.unfollowSeller = unfollowSeller;
 
         function followSeller(seller, index) {
-            movieService
+            favSellerService
                 .favSeller(vm.userId, seller)
                 .then(function (res) {
                     vm.sellerList[index].followed = true;
@@ -31,7 +31,7 @@
         }
 
         function unfollowSeller(sellerId, index) {
-            movieService
+            favSellerService
                 .unfavSeller(vm.userId, sellerId)
                 .then(function (res) {
                     vm.sellerList[index].followed = false;
@@ -40,12 +40,12 @@
 
         function init() {
             movieService
-                .getMovieDetails(vm.movieId)
+                .getAllSellerForMovie(vm.movieId)
                 .then(function(response){
                     if(response.data.length === 0)
                         vm.message = "No seller is selling this movie";
                     else{
-                        movieService
+                        favSellerService
                             .getFavSeller(vm.userId)
                             .then(function(value){
                                 for (var i = 0; i < response.data.length; i++) {
@@ -79,7 +79,7 @@
         }
 
         function buyMovie(sellerId) {
-            UserService
+            userService
                 .buyMovie(userId, sellerId, movieId)
                 .then(function (response) {
                     // alert("Seller will contact you with further info");

@@ -22,9 +22,6 @@ public class MovieController {
     @Autowired
     private InventoryService inventoryService;
 
-    @Autowired
-    private FavSellerService favSellerService;
-
     @PostMapping("user/{userId}/sell/copies/{copies}")
     public InventoryEntity sellMovie(@PathVariable int userId, @PathVariable int copies, @RequestBody MovieEntity movie){
         System.out.println(movie);
@@ -50,34 +47,14 @@ public class MovieController {
 
     }
 
-    @PostMapping("user/{userId}/seller/fav")
-    public FavSellerEntity favSeller(@PathVariable int userId, @RequestBody UserEntity seller){
-
-        return favSellerService.favSeller(userId, seller);
-    }
 
     @GetMapping("{movieId}/inventory")
-    public List<InventoryEntity> getMovieDetails(@PathVariable int movieId){
+    public List<InventoryEntity> getAllSellerForMovie (@PathVariable int movieId){
 
-        return inventoryService.getMovieDetails(movieId);
-
-    }
-
-    @GetMapping("user/{userId}/fav")
-    public List<FavSellerEntity> getFavSeller(@PathVariable int userId){
-
-        return favSellerService.getFavSeller(userId);
+        return inventoryService.getAllSellerForMovie (movieId);
 
     }
 
-    @DeleteMapping("user/{userId}/seller/{sellerId}/unfav")
-    public ResponseEntity unfavSeller(@PathVariable int userId, @PathVariable int sellerId){
-
-        favSellerService.unfavSeller(userId, sellerId);
-
-        return new ResponseEntity<>("{}", HttpStatus.OK);
-
-    }
 
     @GetMapping("user/{userId}/inventory")
     public List<InventoryEntity> getMovieInventory(@PathVariable int userId){

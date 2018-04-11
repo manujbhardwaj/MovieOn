@@ -31,7 +31,7 @@ public class InventoryService {
         return inventoryRepository.findBySellerId(userId);
     }
 
-    public List<InventoryEntity> getMovieDetails(int movieId) {
+    public List<InventoryEntity> getAllSellerForMovie (int movieId) {
         return inventoryRepository.findByMovieId(movieId);
     }
 }
