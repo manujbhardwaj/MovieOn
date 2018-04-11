@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("searchController", searchController);
-    function searchController($routeParams, $location, movieService, userService, currentUser) {
+    function searchController($routeParams, $location, apiService, userService, currentUser) {
         var vm = this;
         vm.searchTerm = $routeParams['sid'];
         if(currentUser){
@@ -16,7 +16,7 @@
         vm.logout = logout;
 
         function init() {
-            movieService
+            apiService
                 .searchTitle(vm.searchTerm)
                 .then(function (response) {
                     if(response.data.results.length === 0)

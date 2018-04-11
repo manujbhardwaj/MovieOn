@@ -81,73 +81,57 @@
             {{model.message}}
         </div>
         <form>
-            <label><h4><strong>Profile</strong></h4></label>
+            <label><h4><strong>Address</strong></h4></label>
             <div class="input-group">
                 <span class="input-group-addon fixed-width">
                     <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
-                    <label class="registerLabel">Username</label>
+                    <label class="registerLabel">Street 1</label>
                 </span>
-                <input ng-model="model.user.username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" readonly>
+                <input ng-model="model.address.street1" type="text" class="form-control" placeholder="Street 1" aria-describedby="basic-addon1">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon fixed-width">
-                    <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
-                    <label class="registerLabel">First Name</label>
+                    <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                    <label class="registerLabel">Street 2</label>
                 </span>
-                <input ng-model="model.user.firstName" type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
+                <input ng-model="model.address.street2" type="text" class="form-control" placeholder="Street 2" aria-describedby="basic-addon1">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon fixed-width">
-                    <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
-                    <label class="registerLabel">Last Name</label>
+                    <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                    <label class="registerLabel">City</label>
                 </span>
-                <input ng-model="model.user.lastName" type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
+                <input ng-model="model.address.city" type="text" class="form-control" placeholder="City" aria-describedby="basic-addon1">
             </div>
             <br>
             <div class="input-group">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon glyphicon-envelope user-grey"></span>
-                    <label class="registerLabel">Email</label>
+                <span class="input-group-addon fixed-width">
+                    <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                    <label class="registerLabel">State</label>
                 </span>
-                <input ng-model="model.user.email" type="email" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1">
-            </div>
-            <br/>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon glyphicon-eye-open user-grey"></span>
-                    <label class="registerLabel">Password</label>
-                </span>
-                <input ng-model="model.user.passwrd" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                <input ng-model="model.address.state" type="text" class="form-control" placeholder="State" aria-describedby="basic-addon1">
             </div>
             <br>
             <div class="input-group">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon glyphicon-eye-open user-grey"></span>
-                    <label class="registerLabel">Verify Password</label>
+                <span class="input-group-addon fixed-width">
+                    <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                    <label class="registerLabel">Zip</label>
                 </span>
-                <input ng-model="model.user.verifyPasswrd" type="password" class="form-control" placeholder="Verify Password" aria-describedby="basic-addon1">
+                <input ng-model="model.address.zip" type="number" class="form-control" placeholder="Zip" aria-describedby="basic-addon1">
             </div>
-            <div ng-repeat="address in model.addresses">
-                <br>
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon glyphicon-eye-open user-grey"></span>
-                        <label class="registerLabel">Address {{$index + 1}}</label>
-                    </span>
-
-                    <div class="form-horizontal">
-                        <input value="{{address.street1}} {{address.street2}} {{address.city}} {{address.state}} {{address.zip}}" type="text" class="form-control" aria-describedby="basic-addon1" readonly>
-                        <button class="btn btn-success btn-block" ng-click="model.updateAddress(address.id)" type="button">Update Address</button>
-                    </div>
-                </div>
+            <br>
+            <div ng-if="model.addressId == 'new'">
+                <a class="btn btn-success btn-block"
+                   ng-click="model.addAddress(model.address)">Add Address</a>
+            </div>
+            <div ng-if="model.addressId != 'new'">
+                <a class="btn btn-success btn-block"
+                   ng-click="model.updateAddress(model.address)">Update Address</a>
             </div>
 
-            <a class="btn btn-success btn-block"
-               ng-click="model.update(model.user)">Update</a>
-            <a class="btn btn-info btn-block" href="#!/address/new">Add Address</a>
-            <a class="btn btn-info btn-block" href="#!/phone/new">Add Phone</a>
+            <a class="btn btn-danger btn-block" href="#!/profile">Cancel</a>
         </form>
     </div>
 </div>

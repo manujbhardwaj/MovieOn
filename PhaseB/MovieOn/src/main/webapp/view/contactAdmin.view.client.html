@@ -1,0 +1,200 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#!/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-text pull-right" ng-if="!model.userId">
+            <a class="name" href="#!/login">Login</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/home">MovieOn</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#!/profile">Profile</a>
+    </div>
+    <div ng-show="model.user.type == 'Buyer'">
+        <a href="#!/like">
+            Likes
+            <span><i class="fa fa-thumbs-up"></i></span>
+        </a>
+        <a href="#!/bought">
+            Bought
+            <span><i class="fa fa-file-video-o"></i></span>
+        </a>
+        <a href="#!/wishlist">
+            Wishlist
+            <span><i class="fa fa-star"></i></span>
+        </a>
+        <a href="#1/fav">
+            Favorite Sellers
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Seller'">
+        <a href="#!/order">
+            Orders
+            <span><i class="fa fa-usd"></i></span>
+        </a>
+        <a href="#!/inventory">
+            Inventory
+            <span><i class="fa fa-table"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Admin'">
+        <a href="#!/users">
+            All Users
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+        <a href="#!/msgs">
+            Messages
+            <span><i class="fa fa-envelope"></i></span>
+        </a>
+        <a href="#!/orders">
+            All Orders
+            <span><i class="fa fa-shopping-basket"></i></span>
+        </a>
+    </div>
+    <div ng-show="!model.userId">
+        <a href="#!/login">Login</a>
+        <a href="#!/register">Register</a>
+    </div>
+    <div ng-show="model.userId">
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid" id="main">
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <div ng-show="model.message" class="alert alert-success" role="alert">
+        {{model.message}}
+    </div>
+
+    <form>
+        <label>Form</label>
+        <div ng-if="model.userId">
+            <div ng-if="model.user.facebook.id">
+                <div class="input-group">
+                        <span class="input-group-addon fixed-width">
+                            <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                            <span>Username</span>
+                        </span>
+                    <input ng-model="model.user.username" type="text" class="form-control" placeholder="Facebook user" aria-describedby="basic-addon1" readonly>
+                </div>
+                <br>
+            </div>
+            <div ng-if="model.user.google.id">
+                <div class="input-group">
+                        <span class="input-group-addon fixed-width">
+                            <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                            <span>Username</span>
+                        </span>
+                    <input ng-model="model.user.username" type="text" class="form-control" placeholder="Facebook user" aria-describedby="basic-addon1" readonly>
+                </div>
+                <br>
+            </div>
+            <div ng-if="!model.user.facebook.id && !model.user.google.id">
+                <div class="input-group">
+                        <span class="input-group-addon fixed-width">
+                            <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                            <span>Username</span>
+                        </span>
+                    <input ng-model="model.user.username" type="text" class="form-control" placeholder="Facebook user" aria-describedby="basic-addon1" readonly>
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
+                <span>First Name</span>
+            </span>
+            <input ng-model="model.user.firstName" type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
+                <span>Last Name</span>
+            </span>
+            <input ng-model="model.user.lastName" type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-envelope user-grey"></span>
+                <span>Email</span>
+            </span>
+            <input ng-model="model.user.email" type="text" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-phone user-grey"></span>
+                <span>Phone</span>
+            </span>
+            <input ng-model="model.user.phone" type="number" class="form-control" placeholder="Contact Number" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group button-down">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
+                <span>Description</span>
+            </span>
+            <textarea ng-model="model.user.description" type="text" class="form-control"
+                      rows="4" placeholder="Description"></textarea>
+        </div>
+    </form>
+    <a class="btn btn-success btn-block"
+       ng-click="model.contactAdmin(model.user)"
+       data-toggle="modal"
+       data-target="#myModal"
+       data-backdrop="static"
+       data-keyboard="false">Submit</a>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Hello {{model.user.firstName}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>Message sent. Admin will contact you soon.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="model.gotoHome()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-show="!model.userId"><a href="#!/login">Login</a></li>
+                <li ng-show="!model.userId"><a href="#!/register">Register</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-show="model.userId"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

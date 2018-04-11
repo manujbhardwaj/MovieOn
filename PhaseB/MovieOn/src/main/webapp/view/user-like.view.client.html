@@ -8,24 +8,20 @@
                 <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
             </div>
         </a>
-        <div class="navbar-text pull-right" ng-if="model.userId">
-            <a class="name" href="#!/profile">Hi {{model.user.firstName}}</a>
-        </div>
-        <div class="navbar-text pull-right" ng-if="!model.userId">
-            <a class="name" href="#!/login">Login</a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/user">Hi {{model.user.firstName}}</a>
         </div>
         <div class="navbar-header">
-            <a class="navbar-brand" href="#!/home">MovieOn</a>
+            <a class="navbar-brand" ng-click="model.gotoHome()">Planet M</a>
         </div>
     </div>
 </nav>
-
 <div id="mySidenav" class="sidenav">
     <div ng-show="model.userId">
         <a href="#/user">Profile</a>
     </div>
     <div ng-show="model.user.type == 'Buyer'">
-        <a href="#/like">
+        <a class="active-page" href="#/like">
             Likes
             <span><i class="fa fa-thumbs-up"></i></span>
         </a>
@@ -67,45 +63,47 @@
         </a>
     </div>
     <div ng-show="!model.userId">
-        <a href="#!/login">Login</a>
-        <a href="#!/register">Register</a>
+        <a href="#/login">Login</a>
     </div>
     <div ng-show="model.userId">
         <a ng-click="model.logout()">Logout</a>
     </div>
 </div>
-
-
-<div class="container-fluid content" id="main">
-    <form class="input-group" ng-submit="model.searchTitle(model.searchTerm)">
-        <input ng-model="model.searchTerm" type="text" class="form-control search" placeholder="Search for movies...">
-        <span href="#!/search/model.searchTerm" class="input-group-addon glyphicon glyphicon-search"></span>
-    </form>
-
-    <div ng-show="model.error" class="alert alert-danger content" role="alert">
+<div class="container-fluid" id="main">
+    <h5><strong>Likes</strong></h5>
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-
-    <div class="row content">
-        <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="movie in model.movies">
-            <a href="#!/movie/movie.id" class="thumbnail">
-                <img class="img-responsive img" ng-src="{{movie.backdrop_path}}">
-                <div class = "caption">
-                    <h4 class="text-center hideOverflow">{{movie.title}}</h4>
-                </div>
+    <div ng-show="model.message" class="alert alert-success" role="alert">
+        {{model.message}}
+    </div>
+    <div class="media panel panel-primary" ng-repeat="movie in model.movieList">
+        {{movie}}
+        <div class="media-left media-middle">
+            <a ng-click="model.getMovieDetails(movie.movie.id)">
+                <img class="media-object img-max" ng-src="{{movie.movie.backdrop_path}}">
+            </a>
+        </div>
+        <div class="media-body">
+            <a ng-click="model.getMovieDetails(movie.data.id)" class="text">
+                <h4 class="media-heading buy-button gap hideOverflow">{{movie.data.title}}</h4>
+            </a>
+            <a class="imdb">
+                <i class="fa fa-thumbs-up fa-2x blue buy-button" ng-click="model.unlikeMovie(movie.data.id, $index)"></i>
             </a>
         </div>
     </div>
 </div>
+
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <p class="copyright hidden-xs">© MANUJ BHARDWAJ 2017</p>
         <div class="dropdown navbar-text pull-left" ng-if="model.user.type != 'Admin'">
             <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-flag"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#!/contactAdmin">Contact Admin</a></li>
+                <li><a ng-click="model.contactAdmin()">Contact Admin</a></li>
             </ul>
         </div>
         <div class="dropdown navbar-text pull-right">
@@ -113,9 +111,7 @@
                 <span class="glyphicon glyphicon-user"></span>
             </a>
             <ul class="dropdown-menu">
-                <li ng-show="!model.userId"><a href="#!/login">Login</a></li>
-                <li ng-show="!model.userId"><a href="#!/register">Register</a></li>
-                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+                <li ng-show="model.userId"><a href="#/user">Profile</a></li>
                 <li ng-show="model.userId"><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div>

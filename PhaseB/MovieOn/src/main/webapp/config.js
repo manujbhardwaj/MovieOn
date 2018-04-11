@@ -26,11 +26,23 @@
                 templateUrl: "view/home.view.client.html",
                 controller: "homeController",
                 controllerAs: "model",
-                resolve: { currentUser: loggedIn}
+                resolve: { currentUser: checkLoggedIn}
             })
             .when("/movie/:mid", {
                 templateUrl: "view/movie.view.client.html",
                 controller: "movieController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
+            .when("/contactAdmin", {
+                templateUrl: "view/contactAdmin.view.client.html",
+                controller: "contactAdminController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
+            .when("/address/:aid", {
+                templateUrl: "view/address.view.client.html",
+                controller: "addressController",
                 controllerAs: "model",
                 resolve: { currentUser: loggedIn}
             })
@@ -50,7 +62,13 @@
                 templateUrl: "view/search.view.client.html",
                 controller: "searchController",
                 controllerAs: "model",
-                resolve: { currentUser: loggedIn}
+                resolve: { currentUser: checkLoggedIn}
+            })
+            .when("/like", {
+                templateUrl: "view/user-like.view.client.html",
+                controller: "userLikeController",
+                controllerAs: "model",
+                resolve: { loggedIn: loggedIn }
             })
             .when("/inventory", {
                 templateUrl: "view/user-inventory.view.client.html",
@@ -58,7 +76,7 @@
                 controllerAs: "model",
                 resolve: { currentUser: loggedIn}
             })
-            .otherwise({redirectTo:"/login"});
+            .otherwise({redirectTo:"/home"});
 
         function loggedIn($q, userService, $location) {
             var deferred = $q.defer();

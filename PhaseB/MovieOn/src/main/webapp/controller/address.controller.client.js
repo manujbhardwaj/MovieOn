@@ -1,20 +1,20 @@
 (function () {
     angular
         .module("MovieOn")
-        .controller("profileController", profileController);
-    function profileController(currentUser, userService, addressService, $location) {
+        .controller("addressController", addressController);
+    function addressController(currentUser, userService, addressService, $location, $routeParams) {
         var vm = this;
+        vm.addressId = $routeParams['aid'];
         if(currentUser){
             vm.userId = currentUser.id;
             vm.user = currentUser;
         }
 
         /*event handlers*/
-        vm.update = update;
         vm.openNav = openNav;
         vm.closeNav = closeNav;
         vm.logout = logout;
-        vm.updateAddress = updateAddress;
+        vm.addAddress = addAddress;
 
         function init() {
             openNav();
@@ -26,20 +26,19 @@
                     openNav();
                 }
             });
-            addressService
-                .getUserAddress(vm.userId)
-                .then(function (value) {
-                    console.log(value);
-                    vm.addresses = value.data;
-                }, function (reason) {
-                    console.log(reason);
-                });
+            if(vm.addressId !== 'new'){
+                console.log(vm.addressId);
+                addressService
+                    .getAddressById(vm.addressId)
+                    .then(function (value) {
+                        console.log(value);
+                        vm.address = value.data;
+                    }, function (reason) {
+
+                    });
+            }
         }
         init();
-
-        function updateAddress(addressId) {
-            $location.url("/address/" + addressId);
-        }
 
         function logout() {
             userService.logout()
@@ -62,28 +61,19 @@
             document.getElementById("main").style.marginLeft = "0";
         }
 
-        function update(user) {
-            if(user.email == null) {
-                vm.error = "Email not correct";
-                window.scrollTo(0, 0);
-                return;
-            }
-            if((user.passwrd || user.verifyPasswrd) && user.passwrd !== user.verifyPasswrd){
-                vm.error = "Password don't match";
-                vm.message = null;
-                window.scrollTo(0, 0);
-                return;
-            }
-            userService.updateUser(user)
-                .then(function (usr) {
-                    if(usr){
-                        vm.message = "Profile successfully updated";
+        function addAddress(address) {
+            addressService
+                .addAddress(vm.userId, address)
+                .then(function (address) {
+                    if (address){
+                        vm.message = "Address successfully added";
                         vm.error = null;
                         window.scrollTo(0, 0);
                     }
                     else{
-                        vm.error = "Unable to update Profile";
-                        vm.message = null;
+                        vm.error = "Address not added";
+                        vm.error = null;
+                        window.scrollTo(0, 0);
                     }
                 });
         }

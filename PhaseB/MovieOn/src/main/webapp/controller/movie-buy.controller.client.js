@@ -42,19 +42,27 @@
             movieService
                 .getMovieDetails(vm.movieId)
                 .then(function(response){
-                    console.log(response.data);
                     if(response.length == 0)
                         vm.message = "No seller is selling this movie";
                     else{
                         movieService
                             .getFavSeller(vm.userId)
                             .then(function(value){
-                                console.log(value.data);
-                                if(response.data.seller.id)
+                                for (var i = 0; i < response.data.length; i++) {
+                                    var found = false;
+                                    for (var j = 0; j < value.data.length; j++) {
+                                        if (response.data[i].seller.id === value.data[j].seller.id) {
+                                            response.data[i].followed = true;
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!found)
+                                        response.data[i].followed = false;
+                                }
                             });
-                        vm.sellerList = response.data;
+                            vm.sellerList = response.data;
                     }
-
                 });
             openNav();
         }

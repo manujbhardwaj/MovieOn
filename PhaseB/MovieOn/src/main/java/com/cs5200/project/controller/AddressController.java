@@ -6,6 +6,8 @@ import com.cs5200.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/address")
 public class AddressController {
@@ -20,5 +22,16 @@ public class AddressController {
     public AddressEntity addAddress (@PathVariable int userId, @RequestBody AddressEntity address){
         address.setUser(userService.getUserById(userId));
         return addressService.addAddress(address);
+    }
+
+    @GetMapping("user/{userId}")
+    public List<AddressEntity> getUserAddress (@PathVariable int userId){
+        return addressService.getUserAddress(userId);
+    }
+
+    @GetMapping("{addressId}")
+    public AddressEntity getAddressById (@PathVariable int addressId){
+        System.out.println(addressId);
+        return addressService.getAddressById(addressId);
     }
 }

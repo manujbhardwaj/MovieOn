@@ -34,6 +34,8 @@ public class MovieController {
     @PostMapping("user/{userId}/like")
     public int likeMovie(@PathVariable int userId, @RequestBody MovieEntity movie){
 
+        System.out.println(movie);
+
         movieService.insertMovie(movie);
 
         movieLikeService.userLikeMovie(userService.getUserById(userId), movie);
@@ -119,6 +121,13 @@ public class MovieController {
     public List<InventoryEntity> getMovieDetails(@PathVariable int movieId){
 
         return inventoryService.getMovieDetails(movieId);
+
+    }
+
+    @GetMapping("user/{userId}/like")
+    public List<MovieLikeEntity> getUserLike(@PathVariable int userId){
+
+        return movieLikeService.getUserLike(userId);
 
     }
 

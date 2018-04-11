@@ -22,52 +22,53 @@
 
 <div id="mySidenav" class="sidenav">
     <div ng-show="model.userId">
-        <a href="#!/profile">Profile</a>
+        <a href="#/user">Profile</a>
     </div>
     <div ng-show="model.user.type == 'Buyer'">
-        <a href="#!/like">
+        <a href="#/like">
             Likes
             <span><i class="fa fa-thumbs-up"></i></span>
         </a>
-        <a href="#!/bought">
+        <a href="#/bought">
             Bought
             <span><i class="fa fa-file-video-o"></i></span>
         </a>
-        <a href="#!/wishlist">
+        <a href="#/wishlist">
             Wishlist
             <span><i class="fa fa-star"></i></span>
         </a>
-        <a href="#!/fav">
+        <a href="#/fav">
             Favorite Sellers
             <span><i class="fa fa-user-circle-o"></i></span>
         </a>
     </div>
     <div ng-show="model.user.type == 'Seller'">
-        <a href="#!/order">
+        <a href="#/order">
             Orders
             <span><i class="fa fa-usd"></i></span>
         </a>
-        <a href="#!/inventory">
+        <a href="#/inventory">
             Inventory
             <span><i class="fa fa-table"></i></span>
         </a>
     </div>
     <div ng-show="model.user.type == 'Admin'">
-        <a href="#!/users">
+        <a href="#/users">
             All Users
             <span><i class="fa fa-user-circle-o"></i></span>
         </a>
-        <a href="#!/msgs">
+        <a href="#/msgs">
             Messages
             <span><i class="fa fa-envelope"></i></span>
         </a>
-        <a href="#!/orders">
+        <a href="#/orders">
             All Orders
             <span><i class="fa fa-shopping-basket"></i></span>
         </a>
     </div>
     <div ng-show="!model.userId">
         <a href="#!/login">Login</a>
+        <a href="#!/register">Register</a>
     </div>
     <div ng-show="model.userId">
         <a ng-click="model.logout()">Logout</a>
@@ -270,6 +271,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li ng-show="!model.userId"><a href="#!/login">Login</a></li>
+                <li ng-show="!model.userId"><a href="#!/register">Register</a></li>
                 <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
                 <li ng-show="model.userId"><a ng-click="model.logout()">Logout</a></li>
             </ul>

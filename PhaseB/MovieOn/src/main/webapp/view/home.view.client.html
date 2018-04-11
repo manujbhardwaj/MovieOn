@@ -9,13 +9,13 @@
             </div>
         </a>
         <div class="navbar-text pull-right" ng-if="model.userId">
-            <a class="name" href="#/user">Hi {{model.user.firstName}}</a>
+            <a class="name" href="#!/profile">Hi {{model.user.firstName}}</a>
         </div>
         <div class="navbar-text pull-right" ng-if="!model.userId">
-            <a class="name" href="#/login">Login</a>
+            <a class="name" href="#!/login">Login</a>
         </div>
         <div class="navbar-header">
-            <a class="navbar-brand" ng-click="model.gotoHome()">MovieOn</a>
+            <a class="navbar-brand" href="#!/home">MovieOn</a>
         </div>
     </div>
 </nav>
@@ -68,6 +68,7 @@
     </div>
     <div ng-show="!model.userId">
         <a href="#!/login">Login</a>
+        <a href="#!/register">Register</a>
     </div>
     <div ng-show="model.userId">
         <a ng-click="model.logout()">Logout</a>
@@ -83,7 +84,7 @@
         <div class="carousel-inner">
             <div class="item" ng-class="{active:!$index}" ng-repeat="movie in model.upcomingMovies">
                 <img class="hm-img" ng-src={{movie.backdrop_path}}>
-                <a class="carousel-caption home-image" ng-click="model.getMovieDetails(movie.id)">
+                <a class="carousel-caption home-image" href="#!/movie/{{movie.id}}">
                     <h4>{{movie.title}}</h4>
                 </a>
             </div>
@@ -113,7 +114,7 @@
 
         <div class="row content">
             <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="movie in model.movies">
-                <a ng-click="model.getMovieDetails(movie.id)" class="thumbnail">
+                <a href="#!/movie/{{movie.id}}" class="thumbnail">
                     <img class="img-responsive img" ng-src="{{movie.backdrop_path}}">
                     <div class = "caption">
                         <h4 class="text-center hideOverflow">{{movie.title}}</h4>
@@ -132,7 +133,7 @@
                 <span class="glyphicon glyphicon-flag"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a ng-click="model.contactAdmin()">Contact Admin</a></li>
+                <li><a href="#!/contactAdmin">Contact Admin</a></li>
             </ul>
         </div>
         <div class="dropdown navbar-text pull-right">
@@ -140,8 +141,9 @@
                 <span class="glyphicon glyphicon-user"></span>
             </a>
             <ul class="dropdown-menu">
-                <li ng-show="!model.userId"><a href="#/login">Login</a></li>
-                <li ng-show="model.userId"><a href="#/user">Profile</a></li>
+                <li ng-show="!model.userId"><a href="#!/login">Login</a></li>
+                <li ng-show="!model.userId"><a href="#!/register">Register</a></li>
+                <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
                 <li ng-show="model.userId"><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div>

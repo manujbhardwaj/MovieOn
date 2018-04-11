@@ -19,7 +19,7 @@
                     openNav();
                 }
             });
-            closeNav();
+            openNav();
         }
         init();
 

@@ -16,13 +16,18 @@
             "getMovieInventory": getMovieInventory,
             "getMovieDetails": getMovieDetails,
             "favSeller": favSeller,
-            "getFavSeller": getFavSeller
+            "getFavSeller": getFavSeller,
+            "getUserLike": getUserLike
 
         };
         return api;
 
         function hasUserLikedMovie(userId, movieId) {
             return $http.get("api/movie/" + movieId + "/user/" + userId + "/liked");
+        }
+
+        function getUserLike(userId) {
+            return $http.get("api/movie/user/" + userId + "/like");
         }
 
         function favSeller(userId, seller) {
@@ -60,6 +65,7 @@
         }
 
         function likeMovie(userId, movie) {
+            console.log(movie);
             return $http.post("api/movie/user/" + userId + "/like", movie);
         }
 

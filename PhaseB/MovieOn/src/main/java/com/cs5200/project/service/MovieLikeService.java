@@ -7,6 +7,8 @@ import com.cs5200.project.repository.MovieLikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieLikeService {
 
@@ -15,6 +17,10 @@ public class MovieLikeService {
 
     public MovieLikeEntity userLikeMovie(UserEntity user, MovieEntity movie) {
         return movieLikeRepository.save(new MovieLikeEntity(user, movie));
+    }
+
+    public List<MovieLikeEntity> getUserLike(int userId) {
+        return movieLikeRepository.findByBuyerId(userId);
     }
 
     public void userUnlikeMovie(int userId, int movieId) {
