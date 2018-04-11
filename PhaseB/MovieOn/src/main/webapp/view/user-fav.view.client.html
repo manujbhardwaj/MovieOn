@@ -78,14 +78,14 @@
     <div ng-show="model.message" class="alert alert-success" role="alert">
         {{model.message}}
     </div>
-    <div class="media panel panel-primary" ng-if="seller.fav"  ng-repeat="seller in model.sellerList">
+    <div class="media panel panel-primary"  ng-repeat="seller in model.sellerList">
         <div class="media-body">
-            <h4 class="media-heading buy-button gap hideOverflow">Name: {{seller.firstName}} {{seller.lastName}}</h4>
-            <h5 class="media-heading buy-button gap hideOverflow">Email: {{seller.email}}</h5>
-            <h5 ng-if="seller.phone" class="media-heading buy-button gap hideOverflow">Phone: {{seller.phone}}</h5>
-            <h5 ng-if="!seller.phone" class="media-heading buy-button gap hideOverflow">Phone: Not available</h5>
+            <h4 class="media-heading buy-button gap hideOverflow">Name: {{seller.seller.firstName}} {{seller.seller.lastName}}</h4>
+            <h5 class="media-heading buy-button gap hideOverflow">Email: {{seller.seller.email}}</h5>
+            <h5 ng-if="seller.seller.phone" class="media-heading buy-button gap hideOverflow">Phone: {{seller.seller.phone}}</h5>
+            <h5 ng-if="!seller.seller.phone" class="media-heading buy-button gap hideOverflow">Phone: Not available</h5>
             <a class="imdb">
-                <i class="fa fa-heart fa-2x red buy-button" style="padding-bottom: 10px" ng-click="model.unfollowSeller(seller._id, $index)"></i>
+                <i class="fa fa-heart fa-2x red buy-button" style="padding-bottom: 10px" ng-click="model.unfollowSeller(seller.seller.id)"></i>
             </a>
         </div>
     </div>
