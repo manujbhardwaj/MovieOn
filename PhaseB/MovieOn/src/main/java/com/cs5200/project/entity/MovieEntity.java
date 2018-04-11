@@ -14,7 +14,7 @@ public class MovieEntity {
     @Column(name = "backdrop_path")
     private String backdrop_path;
     @Column(name = "original_title")
-    private String originalTitle;
+    private String original_title;
     @Lob
     @Column(name = "overview")
     private String overview;
@@ -22,21 +22,21 @@ public class MovieEntity {
     public MovieEntity() {
     }
 
+    public MovieEntity(int id, String backdrop_path, String original_title, String overview) {
+        this.id = id;
+        this.backdrop_path = backdrop_path;
+        this.original_title = original_title;
+        this.overview = overview;
+    }
+
     @Override
     public String toString() {
         return "MovieEntity{" +
                 "id=" + id +
                 ", backdrop_path='" + backdrop_path + '\'' +
-                ", originalTitle='" + originalTitle + '\'' +
+                ", original_title='" + original_title + '\'' +
                 ", overview='" + overview + '\'' +
                 '}';
-    }
-
-    public MovieEntity(int id, String backdrop_path, String originalTitle, String overview) {
-        this.id = id;
-        this.backdrop_path = backdrop_path;
-        this.originalTitle = originalTitle;
-        this.overview = overview;
     }
 
     public int getId() {
@@ -55,12 +55,12 @@ public class MovieEntity {
         this.backdrop_path = backdrop_path;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getOriginal_title() {
+        return original_title;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setOriginal_title(String original_title) {
+        this.original_title = original_title;
     }
 
     public String getOverview() {

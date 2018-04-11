@@ -11,7 +11,7 @@
             "wishlistMovie" : wishlistMovie,
             "unwishlistMovie" : unwishlistMovie,
             "sellMovie": sellMovie,
-            "getMovieCopies": getMovieCopies,
+            "getInventory": getInventory,
             "updateInventory": updateInventory,
             "getMovieInventory": getMovieInventory,
             "getMovieDetails": getMovieDetails,
@@ -47,7 +47,7 @@
         }
 
 
-        function getMovieCopies(userId, movieId) {
+        function getInventory(userId, movieId) {
             return $http.get("api/movie/" + movieId + "/user/" + userId + "/copies");
         }
 

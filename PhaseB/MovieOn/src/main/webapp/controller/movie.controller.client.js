@@ -13,7 +13,6 @@
         /*event handlers*/
         vm.likeMovie = likeMovie;
         vm.unlikeMovie = unlikeMovie;
-        vm.doYouTrustUrl = doYouTrustUrl;
         vm.openNav = openNav;
         vm.closeNav = closeNav;
         vm.sellMovie = sellMovie;
@@ -28,21 +27,20 @@
         });
 
         function init() {
+            if(vm.user.type === 'Buyer'){
+                hasUserLikedMovie();
+                hasUserWishlistMovie();
+            }
+            if(vm.user.type === 'Seller'){
+                getInventory();
+            }
             apiService
                 .getMovieDetails(vm.movieId)
                 .then(function(response) {
                     response.data.backdrop_path = 'https://image.tmdb.org/t/p/w780'+response.data.backdrop_path;
                     response.data.poster_path = 'https://image.tmdb.org/t/p/w780'+response.data.poster_path;
-                    response.data.imdb_id = 'http://www.imdb.com/title/'+response.data.imdb_id;
                     vm.movie = response.data;
-                    if(vm.userId){
-                        getUserLikedMovies();
-                        getUserWishlistMovies();
-                        getMovieCount();
-                    }
                 });
-            openNav();
-
             apiService
                 .getMovieCredits(vm.movieId)
                 .then(function(response) {
@@ -60,36 +58,11 @@
                         cast.push(response.data.cast[i]);
                     }
                     for(var i = 0; i < response.data.crew.length; i++){
-                        if(response.data.crew[i].job == 'Director')
+                        if(response.data.crew[i].job === 'Director')
                             vm.movieDirector = response.data.crew[i].name;
                     }
                     vm.cast = cast;
                 });
-
-            apiService
-                .getMovieImages(vm.movieId)
-                .then(function(response) {
-                    vm.movieImages = response.data;
-                });
-
-            apiService
-                .getMovieVideos(vm.movieId)
-                .then(function(response) {
-                    var found = false;
-                    for(var i = 0; i < response.data.results.length; i++){
-                        if(response.data.results[i].type === 'Trailer'){
-                            response.data.results[i].key = 'https://www.youtube.com/embed/'+response.data.results[i].key;
-                            vm.movieVideo = response.data.results[i];
-                            found = true;
-                            break;
-                        }
-                    }
-                    if(!found){
-                        response.data.results[0].key = 'https://www.youtube.com/embed/'+response.data.results[0].key;
-                        vm.movieVideo = response.data.results[0];
-                    }
-                });
-
             apiService
                 .getSimilarMovies(vm.movieId)
                 .then(function(response) {
@@ -103,58 +76,11 @@
                     }
                     vm.similarMovies = response.data.results;
                 });
-
-            apiService
-                .getMovieReviews(vm.movieId)
-                .then(function(response) {
-                    if(response.data.results.length == 0)
-                        vm.message = "This movie has no reviews.";
-                    else
-                        vm.movieReviews = response.data.results;
-                });
+            openNav();
         }
         init();
 
-        function logout() {
-            userService
-                .logout()
-                .then(function(response) {
-                    $location.url("/home");
-                }, function (err) {
-                    vm.error = "Problem";
-                });
-        }
-
-        function sellMovie(copies) {
-            if(copies < 1)
-                copies = 0;
-            movieService
-                .sellMovie(vm.userId, vm.movie, copies)
-                .then(function (response) {
-                    // alert("Items added successfully");
-                    // $location.url('/home');
-                });
-        }
-
-        function openNav() {
-            vm.open = false;
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-        }
-
-        function closeNav() {
-            vm.open = true;
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-        }
-
-        function doYouTrustUrl(url) {
-            if(url){
-                return $sce.trustAsResourceUrl(url);
-            }
-        }
-
-        function getUserLikedMovies() {
+        function hasUserLikedMovie() {
             movieService
                 .hasUserLikedMovie(vm.userId, vm.movieId)
                 .then(function (value) {
@@ -164,11 +90,11 @@
                 });
         }
 
-        function getUserWishlistMovies() {
+        function hasUserWishlistMovie() {
             movieService
                 .hasUserWishlistMovie(vm.userId, vm.movieId)
                 .then(function (value) {
-                    vm.liked = value.data;
+                    vm.wishlist = value.data;
                 }, function (reason) {
                     console.log(reason);
                 });
@@ -212,6 +138,39 @@
                 });
         }
 
+        function logout() {
+            userService
+                .logout()
+                .then(function(response) {
+                    $location.url("/home");
+                }, function (err) {
+                    vm.error = "Problem";
+                });
+        }
+
+        function openNav() {
+            vm.open = false;
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            vm.open = true;
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+        function sellMovie(copies) {
+            if(copies < 1)
+                copies = 0;
+            movieService
+                .sellMovie(vm.userId, vm.movie, copies)
+                .then(function (response) {
+                    // alert("Items added successfully");
+                    // $location.url('/home');
+                });
+        }
+
         function updateInventory(copies) {
             if(copies < 1)
                 copies = 0;
@@ -224,9 +183,9 @@
                 });
         }
 
-        function getMovieCount() {
+        function getInventory() {
             movieService
-                .getMovieCopies(vm.userId, vm.movieId)
+                .getInventory(vm.userId, vm.movieId)
                 .then(function (response) {
                     vm.inventory = response.data;
                 });

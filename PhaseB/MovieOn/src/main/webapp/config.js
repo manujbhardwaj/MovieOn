@@ -20,7 +20,7 @@
                 templateUrl: "view/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model",
-                resolve: { currentUser: checkLoggedIn}
+                resolve: { currentUser: checkCurrentUser}
             })
             .when("/home", {
                 templateUrl: "view/home.view.client.html",

@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("usersController", usersController);
-    function usersController(userService, $location, currentUser) {
+    function usersController(adminService, $location, currentUser) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
@@ -17,7 +17,7 @@
         vm.logout = logout;
 
         function init() {
-            userService
+            adminService
                 .getAllUsers()
                 .then(function (users) {
                     if(users.length === 0)

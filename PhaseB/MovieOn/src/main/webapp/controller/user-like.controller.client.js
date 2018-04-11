@@ -27,7 +27,10 @@
                 .getUserLike(vm.userId)
                 .then(function (value) {
                     console.log(value);
-                    vm.movieList = value.data;
+                    if(value.data.length == 0){
+                        vm.message = "You have not liked any movies";
+                    }
+                    vm.likeList = value.data;
                 }, function (reason) {
 
                 });
