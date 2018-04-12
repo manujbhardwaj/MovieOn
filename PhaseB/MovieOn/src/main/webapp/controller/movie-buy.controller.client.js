@@ -80,7 +80,7 @@
 
         function buyMovie(sellerId) {
             movieService
-                .buyMovie(userId, sellerId, movieId)
+                .buyMovie(vm.userId, sellerId, vm.movieId)
                 .then(function (response) {
                     // alert("Seller will contact you with further info");
                     // $location.url('/home');

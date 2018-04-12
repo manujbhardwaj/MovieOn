@@ -16,7 +16,6 @@
         </div>
     </div>
 </nav>
-
 <div id="mySidenav" class="sidenav">
     <div ng-show="model.userId">
         <a href="#!/profile">Profile</a>
@@ -50,10 +49,6 @@
         </a>
     </div>
     <div ng-show="model.user.type == 'Admin'">
-        <a href="#!/userApprove">
-            Approve Sellers
-            <span><i class="fa fa-user-circle-o"></i></span>
-        </a>
         <a href="#!/users">
             All Users
             <span><i class="fa fa-user-circle-o"></i></span>
@@ -75,25 +70,43 @@
         <a ng-click="model.logout()">Logout</a>
     </div>
 </div>
-
 <div class="container-fluid" id="main">
-    <h5><strong>Users</strong></h5>
+    <h5><strong>Movies Bought</strong></h5>
     <div ng-show="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
     <div ng-show="model.message" class="alert alert-success" role="alert">
         {{model.message}}
     </div>
-    <div class="panel panel-primary container-fluid" ng-repeat="user in model.users">
-        <a ng-click="model.getUserInfo(user._id)" class="text">
-            <h4 class="hideOverflow">Username: {{user.username}}</h4>
-            <h5 class="hideOverflow">User Type: {{user.type}}</h5>
-            <h5 class="hideOverflow">Name: {{user.firstName}} {{user.lastName}}</h5>
-        </a>
+    <div class="media panel panel-primary" ng-repeat="movie in model.movieList" >
+        <div class="media-left media-middle">
+            <a ng-click="model.getMovieDetails(movie.data.id)">
+                <img class="media-object img-max" ng-src="{{movie.data.backdrop_path}}">
+            </a>
+        </div>
+        <div class="media-body">
+            <a ng-click="model.getMovieDetails(movie.data.id)" class="text">
+                <h4 ng-click="model.getMovieDetails(movie.data.id)" class="hideOverflow">Movie: {{movie.data.title}}</h4>
+            </a>
+            <a ng-click="model.getUserInfo(model.sellerList[$index]._seller._id)" class="text">
+                <h5 class="hideOverflow">Seller: {{model.sellerList[$index]._seller.username}}</h5>
+                <h5 class="hideOverflow">Date: {{model.orders[$index].dateCreated}}</h5>
+            </a>
+        </div>
     </div>
 </div>
+
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
+        <p class="copyright hidden-xs">© MANUJ BHARDWAJ 2017</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.type != 'Admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-flag"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#!/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
         <div class="dropdown navbar-text pull-right">
             <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-user"></span>

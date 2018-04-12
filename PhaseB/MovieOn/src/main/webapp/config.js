@@ -100,6 +100,18 @@
                 controllerAs: "model",
                 resolve: { currentUser: checkLoggedIn}
             })
+            .when("/bought", {
+                templateUrl: "view/user-bought.view.client.html",
+                controller: "userBoughtController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
+            .when("/order", {
+                templateUrl: "view/user-sold.view.client.html",
+                controller: "userSoldController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
             .otherwise({redirectTo:"/home"});
 
         function checkCurrentUser($q, userService, $location) {

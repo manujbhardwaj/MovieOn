@@ -23,4 +23,16 @@ public class TransactionService {
 
     }
 
+    public List<TransactionEntity> getBought (int userId){
+
+        return transactionRepository.findByBuyerId(userId);
+
+    }
+
+    public List<TransactionEntity> getSold (int userId){
+
+        return transactionRepository.findBySellerId(userId);
+
+    }
+
 }

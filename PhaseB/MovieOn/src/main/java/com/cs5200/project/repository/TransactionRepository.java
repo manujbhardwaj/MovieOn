@@ -10,4 +10,8 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends CrudRepository<TransactionEntity, Integer> {
 
+    List<TransactionEntity> findByBuyerId(int userId);
+
+    List<TransactionEntity> findBySellerId(int userId);
+
 }

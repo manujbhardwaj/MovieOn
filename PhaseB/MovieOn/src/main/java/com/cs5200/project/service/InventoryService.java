@@ -27,8 +27,8 @@ public class InventoryService {
         return inventoryRepository.findBySellerIdAndMovieId(userId, movieId);
     }
 
-    public InventoryEntity updateCopies(int movieId,  int sellerId) {
-        return inventoryRepository.updateCopies(movieId, sellerId);
+    public void updateCopies(int movieId,  int sellerId) {
+        inventoryRepository.updateCopies(movieId, sellerId);
     }
 
     public List<InventoryEntity> getMovieInventory(int userId) {
