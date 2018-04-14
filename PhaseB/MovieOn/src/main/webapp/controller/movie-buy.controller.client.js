@@ -61,6 +61,7 @@
                                         response.data[i].followed = false;
                                 }
                             });
+                            console.log(response.data);
                             vm.sellerList = response.data;
                     }
                 });

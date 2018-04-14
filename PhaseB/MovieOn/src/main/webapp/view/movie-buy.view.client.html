@@ -93,12 +93,12 @@
                 <a ng-if="seller.followed" class="imdb" style="float: left; margin-top: 15px">
                     <i class="fa fa-heart fa-2x red" ng-click="model.unfollowSeller(seller.seller.id, $index)"></i>
                 </a>
-                <h5><strong>Name: {{seller.firstName}} {{seller.lastName}}</strong></h5>
-                <h6>Known as: {{seller.username}}</h6>
+                <h5><strong>Name: {{seller.seller.firstName}} {{seller.seller.lastName}}</strong></h5>
+                <h6>Known as: {{seller.seller.username}}</h6>
             </div>
             <div class="col-md-4 col-sm-4 hidden-xs center">
-                <h5><strong>Email: {{seller.email}}</strong></h5>
-                <h6 ng-if="seller.phone">Phone: {{seller.phone}}</h6>
+                <h5><strong>Email: {{seller.seller.email}}</strong></h5>
+                <h6 ng-if="seller.phone">Phone: {{seller.seller.phone}}</h6>
                 <h6 ng-if="!seller.phone">Phone: not available</h6>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-6 center">
