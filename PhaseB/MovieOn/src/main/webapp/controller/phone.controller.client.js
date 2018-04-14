@@ -15,6 +15,7 @@
         vm.closeNav = closeNav;
         vm.logout = logout;
         vm.addPhone= addPhone;
+        vm.updatePhone = updatePhone;
 
         function init() {
             openNav();
@@ -26,12 +27,10 @@
                     openNav();
                 }
             });
-            console.log(vm.phoneId);
             if(vm.phoneId !== 'new'){
                 phoneService
                     .getPhoneById(vm.phoneId)
                     .then(function (value) {
-                        console.log(value);
                         vm.phone = value.data;
                     }, function (reason) {
 
@@ -72,6 +71,20 @@
                     vm.error = "Error in adding phone";
                     vm.error = null;
                     window.scrollTo(0, 0);
+                });
+        }
+
+        function updatePhone(phone) {
+            phoneService
+                .updatePhone(phone)
+                .then(function (phone) {
+                    if(phone){
+                        $location.url("/profile");
+                    }
+                    else{
+                        vm.error = "Unable to update phone";
+                        vm.message = null;
+                    }
                 });
         }
     }

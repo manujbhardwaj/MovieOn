@@ -24,4 +24,6 @@ public class PhoneService {
     public PhoneEntity getPhoneById(int phoneId) {
         return phoneRepository.findById(phoneId);
     }
+
+    public PhoneEntity updatePhone (PhoneEntity phone) {return phoneRepository.save(phone);}
 }

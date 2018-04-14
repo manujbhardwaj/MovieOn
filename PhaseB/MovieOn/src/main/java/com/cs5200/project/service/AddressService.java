@@ -24,4 +24,6 @@ public class AddressService {
     public AddressEntity getAddressById(int addressId) {
         return addressRepository.findById(addressId);
     }
+
+    public AddressEntity updateAddress (AddressEntity address) {return addressRepository.save(address);}
 }

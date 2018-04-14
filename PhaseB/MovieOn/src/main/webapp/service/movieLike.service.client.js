@@ -20,7 +20,6 @@
         }
 
         function likeMovie(userId, movie) {
-            console.log(movie);
             return $http.post("api/movieLike/user/" + userId + "/like", movie);
         }
 

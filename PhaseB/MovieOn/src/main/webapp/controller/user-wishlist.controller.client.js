@@ -58,7 +58,6 @@
             movieWishlistService
                 .getUserWishlist(vm.userId)
                 .then(function (value) {
-                    console.log(value);
                     if(value.data.length === 0){
                         vm.message = "You have not wishlisted any movies";
                     }

@@ -2,8 +2,8 @@
     angular
         .module("MovieOn")
         .controller("movieController", movieController);
-    function movieController($routeParams, $location, $sce, movieService, movieLikeService, movieWishlistService,
-                             userService, currentUser, apiService) {
+    function movieController($routeParams, $location, movieService, movieLikeService, movieWishlistService,
+                             movieReviewService, userService, currentUser, apiService) {
         var vm = this;
         vm.movieId = $routeParams['mid'];
         if(currentUser){
@@ -20,6 +20,7 @@
         vm.wishlistMovie = wishlistMovie;
         vm.unWishlistMovie = unWishlistMovie;
         vm.updateInventoryForMovie = updateInventoryForMovie;
+        vm.postReview = postReview;
         vm.logout = logout;
         vm.gotoSold = gotoSold;
 
@@ -77,9 +78,22 @@
                     }
                     vm.similarMovies = response.data.results;
                 });
-            openNav();
+            movieReviewService
+                .getReviewForMovie (vm.movieId)
+                .then(function (response) {
+                    vm.reviews = response.data;
+                });
+            getReview();
         }
         init();
+
+        function getReview(){
+            movieReviewService
+                .getReviewForMovie (vm.movieId)
+                .then(function (response) {
+                    vm.reviews = response.data;
+                });
+        }
 
         function hasUserLikedMovie() {
             movieLikeService
@@ -87,7 +101,6 @@
                 .then(function (value) {
                     vm.liked = value.data;
                 }, function (reason) {
-                    console.log(reason);
                 });
         }
 
@@ -97,7 +110,6 @@
                 .then(function (value) {
                     vm.wishlist = value.data;
                 }, function (reason) {
-                    console.log(reason);
                 });
         }
 
@@ -125,7 +137,6 @@
                 .then(function (res) {
                     vm.wishlist = true;
                 }, function (reason) {
-                    console.log(reason);
                 });
         }
 
@@ -135,7 +146,18 @@
                 .then(function (res) {
                     vm.wishlist = false;
                 }, function (reason) {
-                    console.log(reason);
+                });
+        }
+
+        function postReview() {
+            var movieReview =
+                {"review" : vm.review,
+                    "movie": vm.movie};
+            movieReviewService
+                .postReview(vm.userId, movieReview)
+                .then(function (res) {
+                    getReview();
+                    vm.review = null;
                 });
         }
 

@@ -62,7 +62,7 @@ public class UserController {
         user.setPasswrd(BCrypt.hashpw(user.getPasswrd(), BCrypt.gensalt()));
         UserEntity u = userService.registerUser(user);
 
-        if(user.getType().equals("Seller"))
+        if(user.getType().equals("Seller") || user.getType().equals("Critic"))
             throw new Exception("User registered successfully. Admin approval is pending.");
 
         session.setAttribute("user_session", u);

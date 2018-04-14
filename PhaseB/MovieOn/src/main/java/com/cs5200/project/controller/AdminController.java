@@ -20,8 +20,8 @@ public class AdminController {
     private AdminNoteService adminNoteService;
 
     @GetMapping("seller")
-    public List<UserEntity> findAllSeller(){
-        return userService.findAllSeller();
+    public List<UserEntity> findAllSellerCritic(){
+        return userService.findAllSellerCritic();
 
     }
 

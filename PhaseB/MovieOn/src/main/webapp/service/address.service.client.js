@@ -6,13 +6,18 @@
         var api = {
             "addAddress": addAddress,
             "getUserAddress": getUserAddress,
-            "getAddressById": getAddressById
+            "getAddressById": getAddressById,
+            "updateAddress": updateAddress
 
         };
         return api;
 
         function addAddress(userId, address) {
             return $http.post("/api/address/user/" + userId + "/add", address);
+        }
+
+        function updateAddress(address) {
+            return $http.post("/api/address/update", address);
         }
 
         function getUserAddress(userId) {

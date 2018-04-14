@@ -34,7 +34,6 @@
         }
 
         function updateInventoryForMovie(inventory) {
-            console.log(inventory);
             return $http.put("api/movie/inventory", inventory);
         }
     }

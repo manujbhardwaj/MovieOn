@@ -1,6 +1,9 @@
 package com.cs5200.project.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * MovieReview entity.
@@ -13,21 +16,25 @@ public class MovieReviewEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
+    @Lob
     @Column(name = "review")
     private String review;
-    @Column(name = "rating")
-    private String rating;
-
-    @ManyToOne
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "critic_movieReview_association"))
+    private UserEntity critic;
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "movie_movieReview_association"))
     private MovieEntity movie;
+    @Column(name = "reviewDateTime", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Date reviewDateTime;
 
     public MovieReviewEntity() {
     }
 
-    public MovieReviewEntity(String review, String rating, MovieEntity movie) {
+    public MovieReviewEntity(String review, UserEntity critic, MovieEntity movie) {
         this.review = review;
-        this.rating = rating;
+        this.critic = critic;
         this.movie = movie;
     }
 
@@ -47,12 +54,12 @@ public class MovieReviewEntity {
         this.review = review;
     }
 
-    public String getRating() {
-        return rating;
+    public UserEntity getCritic() {
+        return critic;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setCritic(UserEntity critic) {
+        this.critic = critic;
     }
 
     public MovieEntity getMovie() {
@@ -61,5 +68,13 @@ public class MovieReviewEntity {
 
     public void setMovie(MovieEntity movie) {
         this.movie = movie;
+    }
+
+    public Date getLikeDateTime() {
+        return reviewDateTime;
+    }
+
+    public void setLikeDateTime(Date likeDateTime) {
+        this.reviewDateTime = likeDateTime;
     }
 }

@@ -31,7 +31,11 @@ public class AddressController {
 
     @GetMapping("{addressId}")
     public AddressEntity getAddressById (@PathVariable int addressId){
-        System.out.println(addressId);
         return addressService.getAddressById(addressId);
+    }
+
+    @PostMapping("/update")
+    public AddressEntity updateAddress (@RequestBody AddressEntity address){
+        return addressService.updateAddress(address);
     }
 }

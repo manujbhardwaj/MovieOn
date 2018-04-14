@@ -32,7 +32,6 @@
                 .then(function (value) {
                     vm.addresses = value.data;
                 }, function (reason) {
-                    console.log(reason);
                 });
 
             phoneService

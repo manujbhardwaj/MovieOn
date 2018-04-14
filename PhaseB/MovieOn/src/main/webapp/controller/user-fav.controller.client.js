@@ -36,7 +36,6 @@
             favSellerService
                 .getFavSeller(vm.userId)
                 .then(function (value) {
-                    console.log(value.data);
                     if(value.data.length === 0){
                         vm.message = "You have no favorite sellers.";
                     }

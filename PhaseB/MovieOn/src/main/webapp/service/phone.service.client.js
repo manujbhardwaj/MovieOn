@@ -6,13 +6,18 @@
         var api = {
             "addPhone": addPhone,
             "getUserPhone": getUserPhone,
-            "getPhoneById": getPhoneById
+            "getPhoneById": getPhoneById,
+            "updatePhone": updatePhone
 
         };
         return api;
 
         function addPhone(userId, phone) {
             return $http.post("/api/phone/user/" + userId + "/add/", phone);
+        }
+
+        function updatePhone(phone) {
+            return $http.post("/api/phone/update", phone);
         }
 
         function getUserPhone(userId) {

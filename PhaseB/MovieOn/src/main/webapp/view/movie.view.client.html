@@ -165,6 +165,12 @@
             <div ng-show="model.message" class="alert alert-danger" role="alert">
                 {{model.message}}
             </div>
+            <div ng-repeat="rev in model.reviews">
+                <div class="panel panel-default">
+                    <strong>{{rev.critic.firstName}} {{rev.critic.lastName}}:</strong><br>
+                    {{rev.review}}
+                </div>
+            </div>
             <li ng-repeat="review in model.movieReviews" class="list-group-item row">
                 <a class="text">
                     <div class="col-sm-3">
@@ -175,6 +181,13 @@
                     </div>
                 </a>
             </li>
+            <div ng-if="model.user.type == 'Critic'" class = "form-group">
+                <form ng-submit="model.postReview()">
+                    <label>Add Review</label>
+                    <textarea ng-model="model.review" class="form-control" rows="5" placeholder="Add Review"></textarea>
+                    <button class="btn btn-warning">Post Review</button>
+                </form>
+            </div>
             <h2 class="row panel panel-default"><strong>Cast</strong></h2>
             <div class="media panel panel-primary" ng-repeat="actor in model.fullCast">
                 <div class="media-left media-middle">

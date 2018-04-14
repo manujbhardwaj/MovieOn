@@ -15,6 +15,7 @@
         vm.closeNav = closeNav;
         vm.logout = logout;
         vm.addAddress = addAddress;
+        vm.updateAddress = updateAddress;
 
         function init() {
             openNav();
@@ -27,14 +28,12 @@
                 }
             });
             if(vm.addressId !== 'new'){
-                console.log(vm.addressId);
                 addressService
                     .getAddressById(vm.addressId)
                     .then(function (value) {
-                        console.log(value);
                         vm.address = value.data;
                     }, function (reason) {
-
+                        vm.error = "Address not found."
                     });
             }
         }
@@ -74,6 +73,20 @@
                         vm.error = "Address not added";
                         vm.error = null;
                         window.scrollTo(0, 0);
+                    }
+                });
+        }
+
+        function updateAddress(address) {
+            addressService
+                .updateAddress(address)
+                .then(function (address) {
+                    if(address){
+                        $location.url("/profile");
+                    }
+                    else{
+                        vm.error = "Unable to update address";
+                        vm.message = null;
                     }
                 });
         }

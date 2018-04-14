@@ -20,7 +20,7 @@
                 templateUrl: "view/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model",
-                resolve: { currentUser: checkCurrentUser}
+                resolve: { currentUser: checkLoggedIn}
             })
             .when("/home", {
                 templateUrl: "view/home.view.client.html",
@@ -55,12 +55,6 @@
             .when("/movie/:mid/buy", {
                 templateUrl: "view/movie-buy.view.client.html",
                 controller: "movieBuyController",
-                controllerAs: "model",
-                resolve: { currentUser: checkLoggedIn}
-            })
-            .when("/users", {
-                templateUrl: "view/users.view.client.html",
-                controller: "usersController",
                 controllerAs: "model",
                 resolve: { currentUser: checkLoggedIn}
             })
@@ -142,7 +136,7 @@
                         deferred.resolve(user);
                     } else {
                         deferred.reject();
-                        $location.url('/login');
+                        $location.url('/home');
                     }
                 }, function (err) {
                     deferred.reject();

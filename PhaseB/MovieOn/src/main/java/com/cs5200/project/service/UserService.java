@@ -25,8 +25,8 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    public List<UserEntity> findAllSeller() {
-        return userRepository.findByType("Seller");
+    public List<UserEntity> findAllSellerCritic() {
+        return userRepository.findByType("Seller", "Critic");
     }
 
     public List<UserEntity> getAllUsers() {

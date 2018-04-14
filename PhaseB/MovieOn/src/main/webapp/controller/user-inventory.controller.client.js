@@ -58,7 +58,6 @@
             movieService
                 .getSellerInventory(vm.userId)
                 .then(function (value) {
-                    console.log(value.data);
                     vm.movieList = value.data;
                 }, function (reason) {
 

@@ -33,4 +33,9 @@ public class PhoneController {
     public PhoneEntity getPhoneById (@PathVariable int phoneId){
         return phoneService.getPhoneById(phoneId);
     }
+
+    @PostMapping("/update")
+    public PhoneEntity updatePhone (@RequestBody PhoneEntity phone){
+        return phoneService.updatePhone(phone);
+    }
 }

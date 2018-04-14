@@ -16,7 +16,6 @@
         </div>
     </div>
 </nav>
-
 <div id="mySidenav" class="sidenav">
     <div ng-show="model.userId">
         <a href="#!/profile">Profile</a>
@@ -51,20 +50,8 @@
     </div>
     <div ng-show="model.user.type == 'Admin'">
         <a href="#!/userApprove">
-            Approve Sellers
+            Approve Users
             <span><i class="fa fa-user-circle-o"></i></span>
-        </a>
-        <a href="#!/users">
-            All Users
-            <span><i class="fa fa-user-circle-o"></i></span>
-        </a>
-        <a href="#!/msgs">
-            Messages
-            <span><i class="fa fa-envelope"></i></span>
-        </a>
-        <a href="#!/orders">
-            All Orders
-            <span><i class="fa fa-shopping-basket"></i></span>
         </a>
     </div>
     <div ng-show="!model.userId">
@@ -82,10 +69,10 @@
     <div ng-show="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <h4 class="panel panel-default">Professors</h4>
+    <h4 class="panel panel-default">Users</h4>
     <table ng-table="model.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
         <tr ng-repeat="row in $data">
-            <td data-title="'Professor Id'" filter="{ 'id': 'number'}" sortable="'id'" class="center">
+            <td data-title="'User Id'" filter="{ 'id': 'number'}" sortable="'id'" class="center">
                 {{row.id}}
             </td>
             <td data-title="'First Name'" filter="{ 'firstName': 'text'}" sortable="'firstName'" class="center">
@@ -96,6 +83,9 @@
             </td>
             <td data-title="'Email'" filter="{ 'email': 'text'}" sortable="'email'" class="center">
                 {{row.email}}
+            </td>
+            <td data-title="'Type'" filter="{ 'type': 'text'}" sortable="'type'" class="center">
+                {{row.type}}
             </td>
             <td data-title="'Approve?Reject'" class="center">
                 <label class="switch">

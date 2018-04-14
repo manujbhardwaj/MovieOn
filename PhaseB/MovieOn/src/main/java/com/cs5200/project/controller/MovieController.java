@@ -25,7 +25,6 @@ public class MovieController {
 
     @PostMapping("user/{userId}/sell/copies/{copies}")
     public InventoryEntity sellMovie(@PathVariable int userId, @PathVariable int copies, @RequestBody MovieEntity movie){
-        System.out.println(movie);
 
         movieService.insertMovie(movie);
 
