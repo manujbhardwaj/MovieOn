@@ -106,6 +106,12 @@
                 controllerAs: "model",
                 resolve: { currentUser: checkLoggedIn}
             })
+            .when("/sellerReview/:srid", {
+                templateUrl: "view/user-review.view.client.html",
+                controller: "sellerReviewController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
             .otherwise({redirectTo:"/home"});
 
         function checkCurrentUser($q, userService, $location) {
