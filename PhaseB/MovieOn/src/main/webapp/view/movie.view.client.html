@@ -116,30 +116,22 @@
                         </div>
                     </div>
                     <div class="row" ng-if="model.user.type === 'Seller'">
-                        <div class="col-md-4 col-sm-4 col-xs-4 shift-down" ng-if="model.inventory">
-                            <input ng-model="model.inventory.copies" type="number" class="form-control fixwidth" placeholder="#Copies">
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4 shift-down" ng-if="!model.inventory">
-                            <input ng-model="model.num" type="number" class="form-control fixwidth" placeholder="#Copies">
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4" ng-if="model.inventory">
-                            <button ng-click="model.updateInventoryForMovie(model.inventory.copies)"
-                                    type="button"
-                                    class="btn btn-warning shift-down"
-                                    data-toggle="modal"
-                                    data-target="#myModal"
-                                    data-backdrop="static"
-                                    data-keyboard="false">Update #Copies</button>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4" ng-if="!model.inventory">
-                            <button ng-click="model.sellMovie(model.num)"
-                                    type="button"
-                                    class="btn btn-warning shift-down"
-                                    data-toggle="modal"
-                                    data-target="#myModal"
-                                    data-backdrop="static"
-                                    data-keyboard="false">Sell Movie</button>
-                        </div>
+                        <form ng-if="model.inventory" ng-submit="model.updateInventoryForMovie()">
+                            <div class="col-md-4 col-sm-4 col-xs-4 shift-down">
+                                <input ng-model="model.inventory.copies" type="number" min="0" class="form-control fixwidth" placeholder="#Copies">
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <button class="btn btn-warning  shift-down">Update #Copies</button>
+                            </div>
+                        </form>
+                        <form ng-if="!model.inventory" ng-click="model.sellMovie(num)">
+                            <div class="col-md-4 col-sm-4 col-xs-4 shift-down" >
+                                <input ng-model="num" type="number" min="0" class="form-control fixwidth" placeholder="#Copies">
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <button class="btn btn-warning shift-down">Sell Movie</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="row container-fluid" ng-if="model.user.type === 'Buyer'">
                         <a ng-if="!model.liked" class="imdb">

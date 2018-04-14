@@ -22,6 +22,7 @@ public interface InventoryRepository extends CrudRepository<InventoryEntity, Int
 
     List<InventoryEntity> findBySellerId(int userId);
 
+    @Query("select i from InventoryEntity i where copies > 0 and movie_id = ?1")
     List<InventoryEntity> findByMovieId(int movieId);
 
 }

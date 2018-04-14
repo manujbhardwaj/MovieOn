@@ -15,7 +15,7 @@
         vm.closeNav = closeNav;
         vm.getMovieDetails = getMovieDetails;
         vm.logout = logout;
-        vm.updateMovie = updateMovie;
+        vm.updateInventoryForMovie = updateInventoryForMovie;
         vm.contactAdmin = contactAdmin;
 
         function contactAdmin() {
@@ -36,19 +36,16 @@
         }
         init();
 
-        function updateMovie(num, movieId) {
-            if(num < 0)
-                num = 0;
-            UserService
-                .updateMovie(userId, movieId, num)
+        function updateInventoryForMovie(movie) {
+            movieService
+                .updateInventoryForMovie(movie)
                 .then(function (response) {
-                    // alert("Item updated successfully");
-                    // $location.url('/home');
+                    vm.message = "Inventory successfully updated."
                 });
         }
 
         function logout() {
-            UserService
+            userService
                 .logout()
                 .then(function(response) {
                     $location.url("/home");
@@ -61,6 +58,7 @@
             movieService
                 .getSellerInventory(vm.userId)
                 .then(function (value) {
+                    console.log(value.data);
                     vm.movieList = value.data;
                 }, function (reason) {
 

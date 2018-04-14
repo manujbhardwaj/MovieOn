@@ -18,6 +18,7 @@
             transactionService
                 .getSold(vm.userId)
                 .then(function (bought) {
+                    console.log(bought.data);
                     if(bought.data.length === 0)
                         vm.message = "You have no orders";
                     else{

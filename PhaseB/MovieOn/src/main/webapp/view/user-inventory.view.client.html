@@ -79,48 +79,28 @@
         {{model.message}}
     </div>
     <div class="media panel panel-primary" ng-repeat="movie in model.movieList" >
-        <div class="media-left media-middle">
-            <a ng-click="model.getMovieDetails(movie.data.id)">
-                <img class="media-object img-max" ng-src="{{movie.data.backdrop_path}}">
-            </a>
-        </div>
-        <div class="media-body">
-            <a ng-click="model.getMovieDetails(movie.data.id)" class="text">
-                <h4 ng-click="model.getMovieDetails(movie.data.id)" class="hideOverflow">Movie: {{movie.data.title}}</h4>
-            </a>
-            <a ng-click="model.getUserInfo(model.userList[$index]._id)" class="text">
-                <div class="input-group">
-                    <input ng-model="model.user.moviesSold[$index].num" type="number" class="form-control fixwidth" placeholder="#Copies">
-                    <span class="pull-left buy-button">
-                        <button ng-click="model.updateMovie(model.user.moviesSold[$index].num, movie.data.id)"
-                                class="btn btn-warning no-margin"
-                                type="button"
-                                data-toggle="modal"
-                                data-target="#myModal"
-                                data-backdrop="static"
-                                data-keyboard="false">Update #Copies</button>
+        <form ng-submit="model.updateInventoryForMovie(movie)">
+            <div class="media-left media-middle">
+                <a href="#!/movie/{{movie.movie.id}}">
+                    <img class="media-object img-max" ng-src="{{movie.movie.backdrop_path}}">
+                </a>
+            </div>
+            <div class="media-body">
+                <a href="#!/movie/{{movie.movie.id}}" class="text">
+                    <h4 href="#!/movie/{{movie.movie.id}}" class="hideOverflow">Movie: {{movie.movie.original_title}}</h4>
+                </a>
+                <div class="text">
+                    <div class="input-group">
+                        <input ng-model="movie.copies" type="number" min ="0" class="form-control fixwidth" placeholder="#Copies">
+                        <span class="pull-left buy-button">
+                        <button class="btn btn-warning no-margin">Update #Copies</button>
                     </span>
+                    </div>
                 </div>
-            </a>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Hello {{model.user.firstName}}</h4>
-            </div>
-            <p>Successfully updated the movie inventory.</p>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="model.gotoSold()">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>

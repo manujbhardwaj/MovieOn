@@ -162,25 +162,18 @@
         }
 
         function sellMovie(copies) {
-            if(copies < 1)
-                copies = 0;
             movieService
                 .sellMovie(vm.userId, vm.movie, copies)
                 .then(function (response) {
-                    // alert("Items added successfully");
-                    // $location.url('/home');
+                    $location.url('/inventory');
                 });
         }
 
-        function updateInventoryForMovie(copies) {
-            if(copies < 1)
-                copies = 0;
-            vm.inventory.copies = copies;
+        function updateInventoryForMovie() {
             movieService
                 .updateInventoryForMovie(vm.inventory)
                 .then(function (response) {
-                    // alert("Items added successfully");
-                    // $location.url('/home');
+                    $location.url('/inventory');
                 });
         }
 

@@ -80,18 +80,18 @@
     </div>
     <div class="media panel panel-primary" ng-repeat="movie in model.movieList" >
         <div class="media-left media-middle">
-            <a ng-click="model.getMovieDetails(movie.data.id)">
-                <img class="media-object img-max" ng-src="{{movie.data.backdrop_path}}">
+            <a href="#!/movie/{{movie.movie.id}}">
+                <img class="media-object img-max" ng-src="{{movie.movie.backdrop_path}}">
             </a>
         </div>
         <div class="media-body">
-            <a ng-click="model.getMovieDetails(movie.data.id)" class="text">
-                <h4 ng-click="model.getMovieDetails(movie.data.id)" class="hideOverflow">Movie: {{movie.data.title}}</h4>
+            <a href="#!/movie/{{movie.movie.id}}" class="text">
+                <h4 href="#!/movie/{{movie.movie.id}}"" class="hideOverflow">Movie: {{movie.movie.original_title}}</h4>
             </a>
-            <a ng-click="model.getUserInfo(model.sellerList[$index]._seller._id)" class="text">
-                <h5 class="hideOverflow">Seller: {{model.sellerList[$index]._seller.username}}</h5>
-                <h5 class="hideOverflow">Date: {{model.orders[$index].dateCreated}}</h5>
-            </a>
+            <div class="text">
+                <h5 class="hideOverflow">Seller: {{movie.seller.firstName}} {{movie.seller.lastName}}</h5>
+                <h5 class="hideOverflow">Date: {{movie.transactionDateTime}}</h5>
+            </div>
         </div>
     </div>
 </div>
