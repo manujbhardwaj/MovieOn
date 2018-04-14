@@ -82,8 +82,6 @@
         <div class="media-body">
             <h4 class="media-heading buy-button gap hideOverflow">Name: {{seller.seller.firstName}} {{seller.seller.lastName}}</h4>
             <h5 class="media-heading buy-button gap hideOverflow">Email: {{seller.seller.email}}</h5>
-            <h5 ng-if="seller.seller.phone" class="media-heading buy-button gap hideOverflow">Phone: {{seller.seller.phone}}</h5>
-            <h5 ng-if="!seller.seller.phone" class="media-heading buy-button gap hideOverflow">Phone: Not available</h5>
             <a class="imdb">
                 <i class="fa fa-heart fa-2x red buy-button" style="padding-bottom: 10px" ng-click="model.unfollowSeller(seller.seller.id)"></i>
             </a>
