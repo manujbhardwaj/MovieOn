@@ -14,9 +14,57 @@
     </div>
 </nav>
 <div id="mySidenav" class="sidenav">
-    <div>
-        <a href="#!/login" class="active-page">Login</a>
+    <div ng-show="model.userId">
+        <a href="#!/profile">Profile</a>
+    </div>
+    <div ng-show="model.user.type == 'Buyer'">
+        <a href="#!/like">
+            Likes
+            <span><i class="fa fa-thumbs-up"></i></span>
+        </a>
+        <a href="#!/bought">
+            Bought
+            <span><i class="fa fa-file-video-o"></i></span>
+        </a>
+        <a href="#!/wishlist">
+            Wishlist
+            <span><i class="fa fa-star"></i></span>
+        </a>
+        <a href="#!/fav">
+            Favorite Sellers
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+        <a href="#!/buyerReview">
+            Reviews
+            <span><i class="fa fa-table"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Seller'">
+        <a href="#!/order">
+            Orders
+            <span><i class="fa fa-usd"></i></span>
+        </a>
+        <a href="#!/inventory">
+            Inventory
+            <span><i class="fa fa-table"></i></span>
+        </a>
+        <a href="#!/sellerReview">
+            Reviews
+            <span><i class="fa fa-table"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Admin'">
+        <a href="#!/userApprove">
+            Approve Users
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+    </div>
+    <div ng-show="!model.userId">
+        <a href="#!/login">Login</a>
         <a href="#!/register">Register</a>
+    </div>
+    <div ng-show="model.userId">
+        <a ng-click="model.logout()">Logout</a>
     </div>
 </div>
 <div class="form-center">

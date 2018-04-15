@@ -24,7 +24,7 @@ public class UserController {
 
         if(u != null && BCrypt.checkpw(user.getPasswrd(), u.getPasswrd())){
 
-            if(u.getType().equals("buyer") && !u.isApproved())
+            if((u.getType().equals("Seller") || u.getType().equals("Critic")) && !u.isApproved())
                 throw new Exception("Admin approval is pending.");
 
             session.setAttribute("user_session", u);

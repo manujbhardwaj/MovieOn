@@ -58,6 +58,8 @@
             movieService
                 .getSellerInventory(vm.userId)
                 .then(function (value) {
+                    if(value.data.length === 0)
+                        vm.message = "No movies added to inventory."
                     vm.movieList = value.data;
                 }, function (reason) {
 

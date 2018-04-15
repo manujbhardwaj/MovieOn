@@ -50,6 +50,8 @@
             sellerReviewService
                 .getSellerReview (vm.userId)
                 .then(function (response) {
+                    if(response.data.length === 0)
+                        vm.message = "No reviews for you.";
                     vm.sellerReviews = response.data;
                 });
         }

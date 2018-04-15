@@ -37,6 +37,10 @@
             Favorite Sellers
             <span><i class="fa fa-user-circle-o"></i></span>
         </a>
+        <a href="#!/buyerReview">
+            Reviews
+            <span><i class="fa fa-table"></i></span>
+        </a>
     </div>
     <div ng-show="model.user.type == 'Seller'">
         <a href="#!/order">
@@ -47,19 +51,15 @@
             Inventory
             <span><i class="fa fa-table"></i></span>
         </a>
+        <a href="#!/sellerReview">
+            Reviews
+            <span><i class="fa fa-table"></i></span>
+        </a>
     </div>
     <div ng-show="model.user.type == 'Admin'">
-        <a href="#!/users">
-            All Users
+        <a href="#!/userApprove">
+            Approve Users
             <span><i class="fa fa-user-circle-o"></i></span>
-        </a>
-        <a href="#!/msgs">
-            Messages
-            <span><i class="fa fa-envelope"></i></span>
-        </a>
-        <a href="#!/orders">
-            All Orders
-            <span><i class="fa fa-shopping-basket"></i></span>
         </a>
     </div>
     <div ng-show="!model.userId">
@@ -73,6 +73,12 @@
 
 <div class="container-fluid" id="main">
     <h4><strong>Reviews received</strong></h4>
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <div ng-show="model.message" class="alert alert-success" role="alert">
+        {{model.message}}
+    </div>
     <div class="panel panel-primary" ng-repeat="review in model.sellerReviews">
         <a class="text">
                 <h5><strong>Buyer: {{review.buyer.firstName}} {{review.buyer.firstName}}</strong></h5>
