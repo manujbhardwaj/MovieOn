@@ -5,7 +5,8 @@
     function movieReviewService($http) {
         var api = {
             "postReview" : postReview,
-            "getReviewForMovie": getReviewForMovie
+            "getReviewForMovie": getReviewForMovie,
+            "getReviewByCritic": getReviewByCritic
         };
         return api;
 
@@ -15,6 +16,10 @@
 
         function getReviewForMovie (movieId) {
             return $http.get("api/movieReview/movie/" + movieId + "/review");
+        }
+
+        function getReviewByCritic (criticId) {
+            return $http.get("api/movieReview/critic/" + criticId);
         }
     }
 })();

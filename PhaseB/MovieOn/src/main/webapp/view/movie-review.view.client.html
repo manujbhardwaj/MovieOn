@@ -77,20 +77,24 @@
     </div>
 </div>
 <div class="container-fluid" id="main">
-    <h5><strong>Favorite Sellers</strong></h5>
+    <h5><strong>Reviews</strong></h5>
     <div ng-show="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
     <div ng-show="model.message" class="alert alert-success" role="alert">
         {{model.message}}
     </div>
-    <div class="media panel panel-primary"  ng-repeat="seller in model.sellerList">
-        <div class="media-body">
-            <h4 class="media-heading buy-button gap hideOverflow">Name: {{seller.seller.firstName}} {{seller.seller.lastName}}</h4>
-            <h5 class="media-heading buy-button gap hideOverflow">Email: {{seller.seller.email}}</h5>
-            <a class="imdb">
-                <i class="fa fa-heart fa-2x red buy-button" style="padding-bottom: 10px" ng-click="model.unfollowSeller(seller.seller.id)"></i>
+    <div class="media panel panel-primary" ng-repeat="review in model.reviewList">
+        <div class="media-left media-middle">
+            <a href="#!/movie/{{review.movie.id}}">
+                <img class="media-object img-max" ng-src="{{review.movie.backdrop_path}}">
             </a>
+        </div>
+        <div class="media-body">
+            <a ng-click="model.getMovieDetails(review.movie.id)" class="text">
+                <h4 class="media-heading buy-button gap hideOverflow">{{review.movie.original_title}}</h4>
+            </a>
+            <p class="text-justify">Review: {{review.review}}</p>
         </div>
     </div>
 </div>
@@ -103,7 +107,7 @@
                 Need help?
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#!/contactAdmin">Contact Admin</a></li>
+                <li><a ng-click="model.contactAdmin()">Contact Admin</a></li>
             </ul>
         </div>
         <div class="dropdown navbar-text pull-right">

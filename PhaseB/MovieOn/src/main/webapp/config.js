@@ -118,6 +118,12 @@
                 controllerAs: "model",
                 resolve: { currentUser: checkLoggedIn}
             })
+            .when("/movieReview", {
+                templateUrl: "view/movie-review.view.client.html",
+                controller: "movieReviewController",
+                controllerAs: "model",
+                resolve: { loggedIn: checkLoggedIn}
+            })
             .when("/buyerReview", {
                 templateUrl: "view/buyer-review.view.client.html",
                 controller: "buyerReviewController",

@@ -36,4 +36,11 @@ public class MovieReviewController {
 
     }
 
+    @GetMapping("critic/{criticId}")
+    public List<MovieReviewEntity> getReviewByCritic(@PathVariable int criticId){
+
+        return movieReviewService.getReviewByCritic(criticId);
+
+    }
+
 }

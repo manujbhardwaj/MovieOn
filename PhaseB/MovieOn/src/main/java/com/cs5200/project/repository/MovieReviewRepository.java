@@ -8,4 +8,6 @@ import java.util.List;
 public interface MovieReviewRepository extends CrudRepository<MovieReviewEntity, Integer> {
 
     List<MovieReviewEntity> findAllByMovieId(int movieId);
+
+    List<MovieReviewEntity> findByCriticId(int criticId);
 }

@@ -62,6 +62,12 @@
             <span><i class="fa fa-user-circle-o"></i></span>
         </a>
     </div>
+    <div ng-show="model.user.type == 'Critic'">
+        <a href="#!/movieReview">
+            Reviews
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+    </div>
     <div ng-show="!model.userId">
         <a href="#!/login">Login</a>
         <a href="#!/register">Register</a>
@@ -98,10 +104,10 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-        <p class="copyright hidden-xs">© MANUJ BHARDWAJ 2017</p>
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
         <div class="dropdown navbar-text pull-left" ng-if="model.user.type != 'Admin'">
             <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-flag"></span>
+                Need help?
             </a>
             <ul class="dropdown-menu">
                 <li><a href="#!/contactAdmin">Contact Admin</a></li>

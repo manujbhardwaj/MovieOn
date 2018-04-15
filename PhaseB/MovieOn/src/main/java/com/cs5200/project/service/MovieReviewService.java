@@ -23,4 +23,8 @@ public class MovieReviewService {
         return movieReviewRepository.findAllByMovieId(movieId);
     }
 
+    public List<MovieReviewEntity> getReviewByCritic(int criticId) {
+        return movieReviewRepository.findByCriticId(criticId);
+    }
+
 }
