@@ -1,10 +1,9 @@
 (function () {
     angular
         .module("MovieOn")
-        .controller("userReviewController", userReviewController);
-    function userReviewController (userService, sellerReviewService, $location, $routeParams, currentUser) {
+        .controller("sellerReviewController", sellerReviewController);
+    function sellerReviewController (userService, sellerReviewService, $location, $routeParams, currentUser) {
         var vm = this;
-        vm.sellerId = $routeParams['srid'];
         if(currentUser){
             vm.userId = currentUser.id;
             vm.user = currentUser;
@@ -49,7 +48,7 @@
 
         function getSellerReview(){
             sellerReviewService
-                .getSellerReview (vm.sellerId)
+                .getSellerReview (vm.userId)
                 .then(function (response) {
                     vm.sellerReviews = response.data;
                 });

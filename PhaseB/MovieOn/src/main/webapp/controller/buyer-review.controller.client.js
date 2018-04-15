@@ -1,10 +1,9 @@
 (function () {
     angular
         .module("MovieOn")
-        .controller("userReviewController", userReviewController);
-    function userReviewController (userService, sellerReviewService, $location, $routeParams, currentUser) {
+        .controller("buyerReviewController", buyerReviewController);
+    function buyerReviewController (userService, sellerReviewService, $location, $routeParams, currentUser) {
         var vm = this;
-        vm.sellerId = $routeParams['srid'];
         if(currentUser){
             vm.userId = currentUser.id;
             vm.user = currentUser;
@@ -24,7 +23,7 @@
         }
 
         function init() {
-            getSellerReview();
+            getBuyerReview();
             openNav();
             $(window).width(function() {
                 if ($(this).width() <= 768) {
@@ -47,11 +46,11 @@
                 });
         }
 
-        function getSellerReview(){
+        function getBuyerReview(){
             sellerReviewService
-                .getSellerReview (vm.sellerId)
+                .getBuyerReview (vm.userId)
                 .then(function (response) {
-                    vm.sellerReviews = response.data;
+                    vm.buyerReviews = response.data;
                 });
         }
 

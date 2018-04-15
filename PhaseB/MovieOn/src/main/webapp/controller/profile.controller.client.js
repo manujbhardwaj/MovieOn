@@ -39,7 +39,6 @@
                 .then(function (value) {
                     vm.phones = value.data;
                 }, function (reason) {
-                    console.log(reason);
                 });
         }
         init();

@@ -8,4 +8,6 @@ import java.util.List;
 public interface SellerReviewRepository extends CrudRepository<SellerReviewEntity, Integer> {
 
     List<SellerReviewEntity> findAllBySellerId(int sellerId);
+
+    List<SellerReviewEntity> findAllByBuyerId(int buyerId);
 }

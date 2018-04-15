@@ -22,4 +22,8 @@ public class SellerReviewService {
         return sellerReviewRepository.findAllBySellerId(sellerId);
     }
 
+    public List<SellerReviewEntity> getBuyerReview (int buyerId) {
+        return sellerReviewRepository.findAllByBuyerId(buyerId);
+    }
+
 }

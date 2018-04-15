@@ -5,7 +5,8 @@
     function sellerReviewService($http) {
         var api = {
             "postSellerReview" : postSellerReview,
-            "getSellerReview": getSellerReview
+            "getSellerReview": getSellerReview,
+            "getBuyerReview": getBuyerReview
         };
         return api;
 
@@ -15,6 +16,10 @@
 
         function getSellerReview (sellerId) {
             return $http.get("api/sellerReview/seller/" + sellerId);
+        }
+
+        function getBuyerReview (buyerId) {
+            return $http.get("api/sellerReview/buyer/" + buyerId);
         }
     }
 })();

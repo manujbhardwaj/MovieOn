@@ -108,7 +108,19 @@
             })
             .when("/sellerReview/:srid", {
                 templateUrl: "view/user-review.view.client.html",
+                controller: "userReviewController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
+            .when("/sellerReview", {
+                templateUrl: "view/seller-review.view.client.html",
                 controller: "sellerReviewController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
+            .when("/buyerReview", {
+                templateUrl: "view/buyer-review.view.client.html",
+                controller: "buyerReviewController",
                 controllerAs: "model",
                 resolve: { currentUser: checkLoggedIn}
             })

@@ -35,4 +35,11 @@ public class SellerReviewController {
 
     }
 
+    @GetMapping("buyer/{buyerId}")
+    public List<SellerReviewEntity> getBuyerReview(@PathVariable int buyerId){
+
+        return sellerReviewService.getBuyerReview(buyerId);
+
+    }
+
 }
