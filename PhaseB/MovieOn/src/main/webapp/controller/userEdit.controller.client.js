@@ -2,7 +2,7 @@
     angular
         .module("MovieOn")
         .controller("userEditController", userEditController);
-    function userEditController($routeParams, NgTableParams, currentUser, $location, userService, adminService, $modal) {
+    function userEditController($routeParams, NgTableParams, currentUser, $location, userService, adminService, $uibModal) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
@@ -24,7 +24,7 @@
             var modalHtml = '<div class="modal-body">' + message + '</div>';
             modalHtml += '<div class="modal-footer"><button class="btn btn-primary btn-md" ng-click="ok()">Remove</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>';
 
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 template: modalHtml,
                 controller: ModalInstanceCtrl
             });
