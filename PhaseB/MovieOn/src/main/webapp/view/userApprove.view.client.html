@@ -61,6 +61,10 @@
             Approve Users
             <span><i class="fa fa-user-circle-o"></i></span>
         </a>
+        <a href="#!/userEdit">
+            Edit Users
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
     </div>
     <div ng-show="model.user.type == 'Critic'">
         <a href="#!/movieReview">
@@ -115,7 +119,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
-        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'Admin'">
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.type != 'Admin'">
             <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
                 Need help?
             </a>
