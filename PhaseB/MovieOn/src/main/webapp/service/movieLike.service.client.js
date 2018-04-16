@@ -29,7 +29,7 @@
         }
 
         function getMovieLike(movieId) {
-            return $http.get("api/movieLike/movie" + movieId);
+            return $http.get("api/movieLike/movie/" + movieId);
         }
     }
 })();

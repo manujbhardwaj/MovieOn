@@ -31,7 +31,7 @@
         function init() {
             openNav();
             movieLikeService
-                .getMovieLike(vm.movie)
+                .getMovieLike(vm.movieId)
                 .then(function (res) {
                     vm.likes = res.data;
                 });
