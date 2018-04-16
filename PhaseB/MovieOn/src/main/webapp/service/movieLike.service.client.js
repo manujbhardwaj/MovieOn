@@ -7,7 +7,8 @@
             "likeMovie" : likeMovie,
             "unlikeMovie" : unlikeMovie,
             "hasUserLikedMovie" : hasUserLikedMovie,
-            "getUserLike": getUserLike
+            "getUserLike": getUserLike,
+            "getMovieLike": getMovieLike
         };
         return api;
 
@@ -25,6 +26,10 @@
 
         function unlikeMovie(userId, movieId) {
             return $http.put("api/movieLike/" + movieId + "/user/" + userId + "/unlike");
+        }
+
+        function getMovieLike(movieId) {
+            return $http.get("api/movieLike/movie" + movieId);
         }
     }
 })();

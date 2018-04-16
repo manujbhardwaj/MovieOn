@@ -50,6 +50,13 @@ public class MovieLikeController {
 
     }
 
+    @GetMapping("movie/{movieId}")
+    public int getMovieLike(@PathVariable int movieId){
+
+        return movieLikeService.getLikeCountForMovie(movieId);
+
+    }
+
 
     @GetMapping("user/{userId}/like")
     public List<MovieLikeEntity> getUserLike(@PathVariable int userId){

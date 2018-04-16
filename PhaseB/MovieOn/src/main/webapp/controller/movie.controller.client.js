@@ -29,6 +29,12 @@
         });
 
         function init() {
+            openNav();
+            movieLikeService
+                .getMovieLike(vm.movie)
+                .then(function (res) {
+                    vm.likes = res.data;
+                });
             if(vm.user && vm.user.type === 'Buyer'){
                 hasUserLikedMovie();
                 hasUserWishlistMovie();
