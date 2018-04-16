@@ -108,13 +108,13 @@
         }
     }
 
-    var ModalInstanceCtrl = function($scope, $modalInstance) {
+    var ModalInstanceCtrl = function($scope, $uibModalInstance) {
         $scope.ok = function() {
-            $modalInstance.close();
+            $uibModalInstance.close();
         };
 
         $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     };
 })();
