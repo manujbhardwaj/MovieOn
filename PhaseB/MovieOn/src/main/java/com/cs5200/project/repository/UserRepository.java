@@ -17,4 +17,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
     @Query("select u from UserEntity u where type =?1 or type =?2")
     List<UserEntity> findByType(String type1, String type2);
 
+    @Query("select u from UserEntity u where type <> ?1")
+    List<UserEntity> findAllExceptAdmin(String type);
+
 }

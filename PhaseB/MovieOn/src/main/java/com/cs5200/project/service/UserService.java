@@ -30,11 +30,15 @@ public class UserService {
     }
 
     public List<UserEntity> getAllUsers() {
-        return (List<UserEntity>)userRepository.findAll();
+        return userRepository.findAllExceptAdmin("admin");
     }
 
     public UserEntity approveRejectProf(UserEntity seller) {
         return userRepository.save(seller);
+    }
+
+    public void deleteUser(int userId) {
+        userRepository.deleteById(userId);
     }
 
     public UserEntity updateUser(UserEntity user) {return userRepository.save(user);}

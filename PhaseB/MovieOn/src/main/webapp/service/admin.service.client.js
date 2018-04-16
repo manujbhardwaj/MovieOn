@@ -7,7 +7,8 @@
             "contactAdmin": contactAdmin,
             "approveOrReject": approveOrReject,
             "findAllSeller": findAllSeller,
-            "getAllUsers": getAllUsers
+            "getAllUsers": getAllUsers,
+            "deleteUser": deleteUser
         };
         return api;
 
@@ -25,6 +26,10 @@
 
         function getAllUsers() {
             return $http.get("/api/admin/user");
+        }
+
+        function deleteUser(userId) {
+            return $http.delete("/api/admin/user/" + userId);
         }
     }
 })();

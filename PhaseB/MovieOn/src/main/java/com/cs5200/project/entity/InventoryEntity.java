@@ -1,6 +1,8 @@
 package com.cs5200.project.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -19,6 +21,7 @@ public class InventoryEntity {
     private int id;
     @Column(name = "copies")
     private int copies;
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, fetch=FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "seller_inventory_association"))
     private UserEntity seller;

@@ -102,11 +102,10 @@
             <td data-title="'Type'" filter="{ 'type': 'text'}" sortable="'type'" class="center">
                 {{row.type}}
             </td>
-            <td data-title="'Approve/Reject'" class="center">
-                <label class="switch">
-                    <input type="checkbox" ng-model="row.approved" ng-click="model.approveOrReject(row)">
-                    <span class="slider round"></span>
-                </label>
+            <td data-title="'Delete User'" class="center">
+                <button type="button" class="btn btn-primary btn-s shift-up-btn" ng-click="model.deleteUser(row.id)">
+                    <span class="glyphicon glyphicon-user"></span> Delete User
+                </button>
             </td>
         </tr>
     </table>

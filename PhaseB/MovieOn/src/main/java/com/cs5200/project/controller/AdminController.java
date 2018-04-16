@@ -31,6 +31,14 @@ public class AdminController {
 
     }
 
+    @DeleteMapping("user/{userId}")
+    public List<UserEntity> deleteUser(@PathVariable int userId){
+        userService.deleteUser(userId);
+
+        return userService.getAllUsers();
+
+    }
+
     @PutMapping("approve/seller")
     public UserEntity approveRejectProf(@RequestBody UserEntity seller) {
 

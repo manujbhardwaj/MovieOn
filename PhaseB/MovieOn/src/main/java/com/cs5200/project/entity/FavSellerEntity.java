@@ -1,5 +1,8 @@
 package com.cs5200.project.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 /**
@@ -13,8 +16,11 @@ public class FavSellerEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @Column(name = "buyerId")
-    private int buyerId;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(optional = false, fetch=FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "buyer_favSeller_association"))
+    private UserEntity buyer;
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, fetch=FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "seller_favSeller_association"))
     private UserEntity seller;
@@ -22,8 +28,8 @@ public class FavSellerEntity {
     public FavSellerEntity() {
     }
 
-    public FavSellerEntity(int buyerId, UserEntity seller) {
-        this.buyerId = buyerId;
+    public FavSellerEntity(UserEntity buyer, UserEntity seller) {
+        this.buyer = buyer;
         this.seller = seller;
     }
 
@@ -31,7 +37,7 @@ public class FavSellerEntity {
     public String toString() {
         return "FavSellerEntity{" +
                 "id=" + id +
-                ", buyerId=" + buyerId +
+                ", buyer=" + buyer +
                 ", seller=" + seller +
                 '}';
     }
@@ -44,12 +50,12 @@ public class FavSellerEntity {
         this.id = id;
     }
 
-    public int getBuyerId() {
-        return buyerId;
+    public UserEntity getBuyer() {
+        return buyer;
     }
 
-    public void setBuyerId(int buyerId) {
-        this.buyerId = buyerId;
+    public void setBuyer(UserEntity buyer) {
+        this.buyer = buyer;
     }
 
     public UserEntity getSeller() {

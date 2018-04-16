@@ -1,6 +1,8 @@
 package com.cs5200.project.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,9 +17,11 @@ public class TransactionEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int id;
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, fetch=FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "buyer_transaction_association"))
     private UserEntity buyer;
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, fetch=FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey(name = "seller_transaction_association"))
     private UserEntity seller;

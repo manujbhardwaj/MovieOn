@@ -130,6 +130,12 @@
                 controllerAs: "model",
                 resolve: { currentUser: checkLoggedIn}
             })
+            .when("/userEdit", {
+                templateUrl: "view/userEdit.view.client.html",
+                controller: "userEditController",
+                controllerAs: "model",
+                resolve: { currentUser: checkLoggedIn}
+            })
             .otherwise({redirectTo:"/home"});
 
         function checkCurrentUser($q, userService, $location) {

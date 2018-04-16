@@ -389,4 +389,6 @@ md-dialog.fullscreen-dialog {
     height: 70%;
     border-radius: 0;
 }
-
+.shift-up-btn{
+    margin: 5px;
+}

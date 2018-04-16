@@ -3,6 +3,7 @@ package com.cs5200.project.controller;
 import com.cs5200.project.entity.FavSellerEntity;
 import com.cs5200.project.entity.UserEntity;
 import com.cs5200.project.service.FavSellerService;
+import com.cs5200.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ public class FavSellerController {
 
     @Autowired
     private FavSellerService favSellerService;
+
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("user/{userId}/fav")
@@ -37,7 +41,7 @@ public class FavSellerController {
     @PostMapping("user/{userId}/seller/fav")
     public FavSellerEntity favSeller(@PathVariable int userId, @RequestBody UserEntity seller){
 
-        return favSellerService.favSeller(userId, seller);
+        return favSellerService.favSeller(userService.getUserById(userId), seller);
     }
 
 }

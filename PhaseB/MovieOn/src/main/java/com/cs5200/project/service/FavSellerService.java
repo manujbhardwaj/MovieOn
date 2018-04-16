@@ -14,8 +14,8 @@ public class FavSellerService {
     @Autowired
     private FavSellerRepository favSellerRepository;
 
-    public FavSellerEntity favSeller(int userId, UserEntity seller) {
-        return favSellerRepository.save(new FavSellerEntity(userId, seller));
+    public FavSellerEntity favSeller(UserEntity buyer, UserEntity seller) {
+        return favSellerRepository.save(new FavSellerEntity(buyer, seller));
     }
 
     public void unfavSeller(int userId, int sellerId) {
