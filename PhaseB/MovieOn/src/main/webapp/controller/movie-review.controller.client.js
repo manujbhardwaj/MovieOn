@@ -44,7 +44,6 @@
                     }
                     vm.reviewList = value.data;
                 }, function (reason) {
-                    console.log(reason);
                     vm.error = "Failed to retrieve liked movies"
                 });
         }

@@ -31,11 +31,25 @@ public class AdminController {
 
     }
 
+    @GetMapping("note")
+    public List<AdminNoteEntity> getAllNote(){
+        return adminNoteService.getAllNote();
+
+    }
+
     @DeleteMapping("user/{userId}")
     public List<UserEntity> deleteUser(@PathVariable int userId){
         userService.deleteUser(userId);
 
         return userService.getAllUsers();
+
+    }
+
+    @DeleteMapping("note/{noteId}")
+    public List<AdminNoteEntity> deleteNote(@PathVariable int noteId){
+        adminNoteService.deleteNote(noteId);
+
+        return adminNoteService.getAllNote();
 
     }
 

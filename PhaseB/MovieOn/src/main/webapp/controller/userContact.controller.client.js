@@ -1,8 +1,8 @@
 (function () {
     angular
         .module("MovieOn")
-        .controller("userEditController", userEditController);
-    function userEditController($routeParams, NgTableParams, currentUser, $location, userService, adminService, $uibModal) {
+        .controller("userContactController", userContactController);
+    function userContactController($routeParams, NgTableParams, currentUser, $location, userService, adminService, $uibModal) {
         var vm = this;
         if(currentUser){
             vm.userId = currentUser.id;
@@ -13,9 +13,9 @@
         vm.openNav = openNav;
         vm.closeNav = closeNav;
         vm.logout = logout;
-        vm.deleteUser = deleteUser;
+        vm.deleteNote = deleteNote;
 
-        function deleteUser(id) {
+        function deleteNote(id) {
             var message = "Are you sure you want to remove?";
 
             var modalHtml = '<div class="modal-body">' + message + '</div>';
@@ -26,28 +26,30 @@
                 controller: ModalInstanceCtrl
             });
 
-            modalInstance.result.then(function() {
-                adminService
-                    .deleteUser(id)
-                    .then(function (value) {
-                        if(value.data.length == 0) {
-                            vm.message = "No Users";
-                        }
-                        var data = value.data;
-                        vm.tableParams = new NgTableParams({
-                            page: 1,
-                            count: 10
-                        }, {
-                            filterDelay: 0,
-                            counts: [],
-                            dataset: data
+            modalInstance
+                .result
+                .then(function() {
+                    adminService
+                        .deleteNote(id)
+                        .then(function (value) {
+                            if(value.data.length == 0) {
+                                vm.message = "No contact notes";
+                            }
+                            var data = value.data;
+                            vm.tableParams = new NgTableParams({
+                                page: 1,
+                                count: 10
+                            }, {
+                                filterDelay: 0,
+                                counts: [],
+                                dataset: data
+                            });
+                        }, function (err) {
+                            vm.error = err.data.message;
                         });
-                    }, function (err) {
-                        vm.error = err.data.message;
-                    });
-            }, function (reason) {
+                }, function (reason) {
 
-            });
+                });
         }
 
         function logout() {
@@ -61,10 +63,10 @@
 
         function init() {
             adminService
-                .getAllUsers()
+                .getAllNote()
                 .then(function (value) {
                     if(value.data.length == 0) {
-                        vm.message = "No Users";
+                        vm.message = "No contact notes";
                     }
                     var data = value.data;
                     vm.tableParams = new NgTableParams({

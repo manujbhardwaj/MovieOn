@@ -19,4 +19,12 @@ public class AdminNoteService {
         return adminNoteRepository.save(note);
     }
 
+    public List<AdminNoteEntity> getAllNote() {
+        return (List<AdminNoteEntity>) adminNoteRepository.findAll();
+    }
+
+    public void deleteNote(int noteId) {
+        adminNoteRepository.deleteById(noteId);
+    }
+
 }

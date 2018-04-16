@@ -8,7 +8,9 @@
             "approveOrReject": approveOrReject,
             "findAllSeller": findAllSeller,
             "getAllUsers": getAllUsers,
-            "deleteUser": deleteUser
+            "deleteUser": deleteUser,
+            "getAllNote": getAllNote,
+            "deleteNote": deleteNote
         };
         return api;
 
@@ -28,8 +30,16 @@
             return $http.get("/api/admin/user");
         }
 
+        function getAllNote() {
+            return $http.get("/api/admin/note");
+        }
+
         function deleteUser(userId) {
             return $http.delete("/api/admin/user/" + userId);
+        }
+
+        function deleteNote(noteId) {
+            return $http.delete("/api/admin/note/" + noteId);
         }
     }
 })();
