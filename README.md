@@ -8,6 +8,10 @@ The project video can be found at the following link:
 
 [Project video](https://youtu.be/70mQxQ06naQ)
 
+The link to test the project is:
+
+https://github.com/manujbhardwaj/MovieOn/wiki/Testing
+
 ## CS5200
 This repository is for Northeastern's coursework **CS5200 Database Management System**
 
