@@ -21,16 +21,15 @@ The project is hosted on AWS and the link for the project is as follows:
 4. mvn spring-boot:run (run this command on directory where the pom file is: PhaseB/MovieOn/pom.xml)
 5. Goto [Project(MovieOn)](http://localhost:8080/#)
 
+## Project
 
-The team is building a project utilizing:
+The team built a project utilizing:
 
 * [AngularJs](https://angularjs.org/)
 * [Boostrap](https://getbootstrap.com/)
 * [Spring Data JPA](https://projects.spring.io/spring-data-jpa/)
 
-## Project
-
-The team is building a e-commerce application allowing users to buy DVD copies from sellers.
+The team is built an e-commerce application allowing users to buy DVD copies from sellers.
 
 We have five different types of user in our application.
 
