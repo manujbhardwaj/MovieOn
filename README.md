@@ -12,9 +12,6 @@ The wiki page link to test the project is:
 
 [Testing wiki page](https://github.com/manujbhardwaj/MovieOn/wiki/Testing)
 
-## CS5200
-This repository is for Northeastern's coursework **CS5200 Database Management System**
-
 
 ## Team
 The repository belongs to:
