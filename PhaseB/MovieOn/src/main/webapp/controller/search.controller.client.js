@@ -14,8 +14,10 @@
         vm.openNav = openNav;
         vm.closeNav = closeNav;
         vm.logout = logout;
+        vm.searchTitle = searchTitle;
 
-        function init() {
+        function searchTitle(searchTitle) {
+            vm.searchTerm = searchTitle;
             apiService
                 .searchTitle(vm.searchTerm)
                 .then(function (response) {
@@ -31,6 +33,10 @@
                     }
                     vm.movies = response.data.results;
                 });
+        }
+
+        function init() {
+            searchTitle(vm.searchTerm);
             openNav();
         }
         init();
