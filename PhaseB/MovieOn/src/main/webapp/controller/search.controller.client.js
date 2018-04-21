@@ -17,6 +17,7 @@
         vm.searchTitle = searchTitle;
 
         function searchTitle(searchTitle) {
+            vm.error = null;
             vm.searchTerm = searchTitle;
             apiService
                 .searchTitle(vm.searchTerm)
