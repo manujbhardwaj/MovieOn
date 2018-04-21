@@ -1,5 +1,16 @@
-## CS5200
-This repository is for Northeastern's coursework **CS5200 Database Management System**
+## Important Links
+
+The project is hosted on AWS and the link for the project is as follows:
+
+[Project (MovieOn)](http://ec2-18-221-163-240.us-east-2.compute.amazonaws.com:8080/#!/home)
+
+The project video can be found at the following link:
+
+[Project video](https://youtu.be/70mQxQ06naQ)
+
+The wiki page to test the project is as follows:
+
+[Testing wiki page](https://github.com/manujbhardwaj/MovieOn/wiki/Testing)
 
 
 ## Team
@@ -8,18 +19,12 @@ The repository belongs to:
 * Manuj Bhardwaj
 * Aditya Kumar
 
-The project is hosted on AWS and the link for the project is as follows:
-
-[Project (MovieOn)](http://ec2-18-221-163-240.us-east-2.compute.amazonaws.com:8080/#!/home)
-
-
-## Instructions to run(not required)
+## Instructions to run (not required)
 
 1. Download the project as zip or tar file
 2. Unzip it
-3. mvn clean install (run this command on directory where the pom file is: PhaseB/MovieOn/pom.xml)
-4. mvn spring-boot:run (run this command on directory where the pom file is: PhaseB/MovieOn/pom.xml)
-5. Goto [Project(MovieOn)](http://localhost:8080/#)
+3. mvn spring-boot:run (run this command on directory where the pom file is: PhaseB/MovieOn/pom.xml)
+4. Goto [Project(MovieOn)](http://localhost:8080/#)
 
 ## Project
 
