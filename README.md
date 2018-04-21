@@ -18,13 +18,12 @@ The repository belongs to:
 * Manuj Bhardwaj
 * Aditya Kumar
 
-## Instructions to run(not required)
+## Instructions to run (not required)
 
 1. Download the project as zip or tar file
 2. Unzip it
-3. mvn clean install (run this command on directory where the pom file is: PhaseB/MovieOn/pom.xml)
-4. mvn spring-boot:run (run this command on directory where the pom file is: PhaseB/MovieOn/pom.xml)
-5. Goto [Project(MovieOn)](http://localhost:8080/#)
+3. mvn spring-boot:run (run this command on directory where the pom file is: PhaseB/MovieOn/pom.xml)
+4. Goto [Project(MovieOn)](http://localhost:8080/#)
 
 ## Project
 
