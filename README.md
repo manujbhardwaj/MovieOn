@@ -8,7 +8,7 @@ The project video can be found at the following link:
 
 [Project video](https://youtu.be/70mQxQ06naQ)
 
-The wiki page link to test the project is:
+The wiki page to test the project is as follows:
 
 [Testing wiki page](https://github.com/manujbhardwaj/MovieOn/wiki/Testing)
 
