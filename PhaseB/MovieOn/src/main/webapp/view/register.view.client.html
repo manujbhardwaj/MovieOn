@@ -58,6 +58,20 @@
             Approve Users
             <span><i class="fa fa-user-circle-o"></i></span>
         </a>
+        <a href="#!/userEdit">
+            Delete Users
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+        <a href="#!/userContact">
+            Contact Notes
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
+    </div>
+    <div ng-show="model.user.type == 'Critic'">
+        <a href="#!/movieReview">
+            Reviews
+            <span><i class="fa fa-user-circle-o"></i></span>
+        </a>
     </div>
     <div ng-show="!model.userId">
         <a href="#!/login">Login</a>
@@ -67,6 +81,7 @@
         <a ng-click="model.logout()">Logout</a>
     </div>
 </div>
+
 <div class="form-center2">
     <div class="container-fluid panel panel-default" id="main">
         <div ng-show="model.error" class="alert alert-danger" role="alert">
