@@ -29,7 +29,7 @@ The team built a project utilizing:
 * [Boostrap](https://getbootstrap.com/)
 * [Spring Data JPA](https://projects.spring.io/spring-data-jpa/)
 
-The team is built an e-commerce application allowing users to buy DVD copies from sellers.
+The team built an e-commerce application allowing users to buy DVD copies from sellers.
 
 We have five different types of user in our application.
 
