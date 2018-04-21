@@ -1,3 +1,11 @@
+The project is hosted on AWS and the link for the project is as follows:
+
+[Project (MovieOn)](http://ec2-18-221-163-240.us-east-2.compute.amazonaws.com:8080/#!/home)
+
+The project video can be found at the following link:
+
+[Project video](https://youtu.be/70mQxQ06naQ)
+
 ## CS5200
 This repository is for Northeastern's coursework **CS5200 Database Management System**
 
@@ -7,11 +15,6 @@ The repository belongs to:
 
 * Manuj Bhardwaj
 * Aditya Kumar
-
-The project is hosted on AWS and the link for the project is as follows:
-
-[Project (MovieOn)](http://ec2-18-221-163-240.us-east-2.compute.amazonaws.com:8080/#!/home)
-
 
 ## Instructions to run(not required)
 
